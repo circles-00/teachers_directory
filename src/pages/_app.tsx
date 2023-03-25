@@ -5,6 +5,8 @@ import { api } from '~/utils/api'
 import '~/styles/globals.css'
 import { Public_Sans } from 'next/font/google'
 import Head from 'next/head'
+import { Navigation } from '@components/common'
+
 const publicSans = Public_Sans({ subsets: ['latin'] })
 
 const MyApp: AppType = ({ Component, pageProps }) => {
@@ -16,6 +18,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={publicSans.className}>
+        <Navigation />
         <Component {...pageProps} />
       </div>
     </>
