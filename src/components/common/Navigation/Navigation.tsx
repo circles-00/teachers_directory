@@ -51,7 +51,7 @@ export const Navigation: FC<INavigationProps> = () => {
         <button className="rounded-lg bg-primary py-[6px] px-[16px] text-white">
           <b>Register</b>
         </button>
-        <Link href="/search">
+        <Link className="sm:block md:hidden" href="/search">
           <MagnifyingGlassIcon className="ml-4 h-6 w-6 text-primary" />
         </Link>
       </div>
