@@ -3,6 +3,9 @@ const config = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      screens: {
+        md: '769px'
+      },
       colors: {
         primary: '#00AB55',
         primaryTransparent: {
@@ -10,7 +13,7 @@ const config = {
           28: 'rgba(0, 171, 85, 0.28)',
         },
         colorText: '#212B36'
-      }
+      },
     },
   },
   plugins: [],

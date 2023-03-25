@@ -1,6 +1,7 @@
 import { type FC } from 'react'
 import { Logo } from '@components/svgs'
 import Link from 'next/link'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 interface INavigationProps {}
 
@@ -26,11 +27,11 @@ const navigationItems = [
 export const Navigation: FC<INavigationProps> = () => {
   return (
     <div className="flex justify-between border-b-[1px] border-primaryTransparent-16">
-      <div className="ml-52 flex h-16 items-center">
+      <div className="ml-8 flex h-16 items-center md:ml-52">
         <Link href="/">
           <Logo />
         </Link>
-        <ul className="ml-8 flex items-center gap-10">
+        <ul className="ml-8 hidden items-center gap-10 md:flex">
           {navigationItems.map((item, idx) => (
             <li key={idx}>
               <Link
@@ -43,13 +44,16 @@ export const Navigation: FC<INavigationProps> = () => {
           ))}
         </ul>
       </div>
-      <div className="mr-52 flex items-center text-sm">
-        <button className="mr-4 rounded-lg border-[1px] border-primaryTransparent-28 py-[6px] px-[16px] text-primary">
+      <div className="mr-6 flex items-center text-sm md:mr-52">
+        <button className="mr-4 hidden rounded-lg border-[1px] border-primaryTransparent-28 py-[6px] px-[16px] text-primary md:block">
           <b>Login</b>
         </button>
         <button className="rounded-lg bg-primary py-[6px] px-[16px] text-white">
           <b>Register</b>
         </button>
+        <Link href="/search">
+          <MagnifyingGlassIcon className="ml-4 h-6 w-6 text-primary" />
+        </Link>
       </div>
     </div>
   )

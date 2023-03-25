@@ -2,7 +2,6 @@ import { type NextPage } from 'next'
 import Link from 'next/link'
 
 import { api } from '~/utils/api'
-import { Navigation } from '../components'
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: 'from tRPC' })
