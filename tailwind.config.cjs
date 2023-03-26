@@ -16,7 +16,17 @@ const config = {
       },
     },
   },
-  plugins: [],
+  daisyui: {
+    styled: true,
+    themes: false,
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+    prefix: "",
+    darkTheme: "dark",
+  },
+  plugins: [require("daisyui")],
 }
 
 module.exports = config

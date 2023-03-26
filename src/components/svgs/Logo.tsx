@@ -30,8 +30,8 @@ export const Logo: FC = () => {
           y2="11.4588"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.00212779" stop-color="#FFAB00" />
-          <stop offset="1" stop-color="#00AB55" />
+          <stop offset="0.00212779" stopColor="#FFAB00" />
+          <stop offset="1" stopColor="#00AB55" />
         </linearGradient>
       </defs>
     </svg>

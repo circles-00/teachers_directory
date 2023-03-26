@@ -1,50 +1,23 @@
-import { type FC } from 'react'
+import { useEffect, type FC } from 'react'
 import { Logo } from '@components/svgs'
 import Link from 'next/link'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { HamburgerIcon } from './components/HamburgerIcon'
+import { NavigationItems } from './components/NavigationItems'
 
 interface INavigationProps {}
-
-const navigationItems = [
-  {
-    title: 'Home',
-    href: '/',
-  },
-  {
-    title: 'Search',
-    href: '/search',
-  },
-  {
-    title: 'How it works',
-    href: '/how-it-works',
-  },
-  {
-    title: 'About us',
-    href: '/about-us',
-  },
-]
 
 export const Navigation: FC<INavigationProps> = () => {
   return (
     <div className="flex justify-between border-b-[1px] border-primaryTransparent-16">
-      <div className="ml-8 flex h-16 items-center md:ml-52">
+      <div className="ml-4 flex h-16 items-center md:ml-52">
+        <HamburgerIcon />
         <Link href="/">
           <Logo />
         </Link>
-        <ul className="ml-8 hidden items-center gap-10 md:flex">
-          {navigationItems.map((item, idx) => (
-            <li key={idx}>
-              <Link
-                className="text-base text-colorText hover:text-primary"
-                href={item.href}
-              >
-                {item.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <NavigationItems className="ml-8 hidden items-center gap-10 md:flex" />
       </div>
-      <div className="mr-6 flex items-center text-sm md:mr-52">
+      <div className="mr-4 flex items-center text-sm md:mr-52">
         <button className="mr-4 hidden rounded-lg border-[1px] border-primaryTransparent-28 py-[6px] px-[16px] text-primary md:block">
           <b>Login</b>
         </button>

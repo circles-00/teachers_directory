@@ -5,11 +5,14 @@ import { api } from '~/utils/api'
 import '~/styles/globals.css'
 import { Public_Sans } from 'next/font/google'
 import Head from 'next/head'
-import { Navigation } from '@components/common'
+import { MobileDrawer, Navigation } from '@components/common'
+import { useCommonStore } from '../store'
 
 const publicSans = Public_Sans({ subsets: ['latin'] })
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+  const { isMobileDrawerOpen } = useCommonStore()
+
   return (
     <>
       <Head>
@@ -19,6 +22,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       </Head>
       <div className={publicSans.className}>
         <Navigation />
+        {isMobileDrawerOpen && <MobileDrawer />}
         <Component {...pageProps} />
       </div>
     </>
