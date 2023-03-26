@@ -5,7 +5,7 @@ import { api } from '~/utils/api'
 import '~/styles/globals.css'
 import { Public_Sans } from 'next/font/google'
 import Head from 'next/head'
-import { Footer, MobileDrawer, Navigation } from '@components/common'
+import { BackToTop, Footer, MobileDrawer, Navigation } from '@components/common'
 import { useCommonStore } from '../store'
 
 const publicSans = Public_Sans({ subsets: ['latin'] })
@@ -25,6 +25,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         {isMobileDrawerOpen && <MobileDrawer />}
         {!isMobileDrawerOpen && <Component {...pageProps} />}
         {!isMobileDrawerOpen && <Footer />}
+        <BackToTop />
       </div>
     </>
   )

@@ -17,7 +17,6 @@ const teachers = [
     subjects: ['Social Studies', 'Arts', 'Drama'],
     position: 'Humanity Teacher',
     type: 'Full-Time',
-    color: '#919EAB1F',
   },
   {
     image: Teacher2,
@@ -29,7 +28,6 @@ const teachers = [
     subjects: ['Social Studies', 'Arts', 'Drama'],
     position: 'Math Teacher',
     type: 'Full-Time',
-    color: '#919EAB1F',
   },
   {
     image: Teacher3,
@@ -41,7 +39,6 @@ const teachers = [
     subjects: ['Social Studies', 'Arts', 'Drama'],
     position: 'Humanity Teacher',
     type: 'Full-Time',
-    color: '#919EAB1F',
   },
   {
     image: Teacher4,
@@ -53,7 +50,6 @@ const teachers = [
     subjects: ['Social Studies', 'Arts', 'Drama'],
     position: 'Humanity Teacher',
     type: 'Full-Time',
-    color: '#919EAB1F',
   },
 ]
 
