@@ -1,13 +1,6 @@
 import { type FC } from 'react'
 import Image from 'next/image'
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  TwitterIcon,
-} from '@components/svgs'
-import Link from 'next/link'
-import { SocialIcons } from '../../../../../../components'
+import { SocialIcons } from '@components/common'
 
 interface ISchoolTeacherProps {
   name: string
