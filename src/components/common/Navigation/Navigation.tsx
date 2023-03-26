@@ -1,4 +1,4 @@
-import { useEffect, type FC } from 'react'
+import { type FC } from 'react'
 import { Logo } from '@components/svgs'
 import Link from 'next/link'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
