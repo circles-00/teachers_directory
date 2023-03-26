@@ -11,7 +11,6 @@ interface ITeacherProps {
   subjects: string[]
   position: string
   type: string
-  color: string
 }
 
 export const Teacher: FC<ITeacherProps> = ({
@@ -23,12 +22,11 @@ export const Teacher: FC<ITeacherProps> = ({
   subjects,
   position,
   type,
-  color,
 }) => {
   return (
     <div>
       <div
-        className={`flex w-[90%] flex-col items-center rounded-t-2xl bg-[${color}] py-4`}
+        className={`flex w-[90%] flex-col items-center rounded-t-2xl bg-[#919EAB1F] py-4`}
       >
         <Image
           className="rounded-full"
