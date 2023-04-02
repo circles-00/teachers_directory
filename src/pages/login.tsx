@@ -2,6 +2,7 @@ import { type NextPage } from 'next'
 import { ButtonContained, Input, RoundedContainer } from '../components'
 import { useLabels } from '../utils'
 import { ThirdPartyLogin } from '../domains/auth'
+import Link from 'next/link'
 
 const LoginPage: NextPage = () => {
   const { labels } = useLabels()
@@ -11,9 +12,9 @@ const LoginPage: NextPage = () => {
       <h1 className="text-3xl font-bold">Sign in</h1>
       <p className="text-sm">
         {labels.newUser}{' '}
-        <span className="cursor-pointer font-bold text-primary">
+        <Link href="/sign-up" className="cursor-pointer font-bold text-primary">
           {labels.createAccount}
-        </span>
+        </Link>
       </p>
       <Input className="mt-3" placeholder="Username" />
       <Input placeholder={labels.password} />
