@@ -17,6 +17,10 @@ export const Navigation: FC<INavigationProps> = () => {
     router.push('/login').catch((err) => console.error(err))
   }
 
+  const onHandleSignUpClick = () => {
+    router.push('/sign-up').catch((err) => console.error(err))
+  }
+
   return (
     <div className="flex justify-between border-b-[1px] border-[#d5e0d5]">
       <div className="ml-4 flex h-16 items-center md:ml-52">
@@ -35,7 +39,10 @@ export const Navigation: FC<INavigationProps> = () => {
         >
           <b>{labels.login}</b>
         </button>
-        <button className="rounded-md bg-primary py-[10px] px-[20px] text-base text-white">
+        <button
+          onClick={onHandleSignUpClick}
+          className="rounded-md bg-primary py-[10px] px-[20px] text-base text-white"
+        >
           <b>{labels.signUp}</b>
         </button>
         <Link className="sm:block md:hidden" href="/search">

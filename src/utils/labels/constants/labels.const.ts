@@ -13,4 +13,8 @@ export const ELabels = {
   appUrl: 'teachersdirectory.co.uk',
   location: 'Location',
   searchRadius: 'Search radius',
+  firstName: 'First name',
+  surname: 'Surname',
+  email: 'Email address',
+  password: 'Password',
 } as const
