@@ -1,4 +1,5 @@
 export * from './FacebookIcon'
+export * from './GoogleIcon'
 export * from './InstagramIcon'
 export * from './LinkedInIcon'
 export * from './TwitterIcon'

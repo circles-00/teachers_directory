@@ -3,33 +3,13 @@ import { type FC } from 'react'
 import { Logo } from '../../svgs'
 import { SocialIcons } from '../SocialIcons'
 import { VerticalList } from './components'
+import { useFooterData } from './hooks'
 
 interface IFooterProps {}
 
-const homeLinks = [
-  { title: 'Search', href: '/search' },
-  { title: 'About us', href: '/about-us' },
-  { title: 'Contact us', href: '/contact-us' },
-]
-
-const legalLinks = [
-  { title: 'Search Teachers', href: '/search' },
-  { title: 'Job Search', href: '/search-jobs' },
-]
-
-const contactLinks = [
-  {
-    title: 'support@qualifiedteachers.co.uk',
-    href: 'mailto:support@qualifiedteachers.co.uk',
-    isEmail: true,
-  },
-  {
-    title: 'Location',
-    href: '/location',
-  },
-]
-
 export const Footer: FC<IFooterProps> = () => {
+  const { homeLinks, legalLinks, contactLinks } = useFooterData()
+
   return (
     <div className="w-full bg-primaryTransparent-16">
       <div className="container mx-auto flex flex-col px-4 py-14 md:flex-row">

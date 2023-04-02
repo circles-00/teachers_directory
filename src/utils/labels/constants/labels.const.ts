@@ -1,0 +1,15 @@
+export const ELabels = {
+  newUser: 'New user?',
+  createAccount: 'Create an account',
+  forgotPassword: 'Forgot password?',
+  login: 'Login',
+  register: 'Register',
+  or: 'OR',
+  search: 'Search',
+  aboutUs: 'About us',
+  contactUs: 'Contact us',
+  searchTeachers: 'Search teachers',
+  jobSearch: 'Job Search',
+  appUrl: 'support@qualifiedteachers.co.uk',
+  location: 'Location',
+} as const

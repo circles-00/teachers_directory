@@ -21,7 +21,8 @@
       "~/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@domains/*": ["./src/domains/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@utils": ["./src/utils/index.ts"]
     }
   },
   "include": [

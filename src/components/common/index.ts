@@ -1,4 +1,6 @@
 export * from './BackToTop'
+export * from './Buttons'
 export * from './Footer'
+export * from './Inputs'
 export * from './Navigation'
 export * from './SocialIcons'
