@@ -5,6 +5,7 @@ import SchoolTeacher1 from '@assets/school-teachers/portrait-1.png'
 import SchoolTeacher2 from '@assets/school-teachers/portrait-2.png'
 import SchoolTeacher3 from '@assets/school-teachers/portrait-3.png'
 import SchoolTeacher4 from '@assets/school-teachers/portrait-4.png'
+import { playfairDisplay } from '@utils'
 
 interface SchoolShowcaseProps {}
 
@@ -38,7 +39,9 @@ export const SchoolShowcase: FC<SchoolShowcaseProps> = () => {
         <h6 className="text-center text-xs font-bold text-primary">
           Find the best talent
         </h6>
-        <h1 className="text-5xl font-bold text-colorText md:text-center">
+        <h1
+          className={`${playfairDisplay.className} text-5xl font-bold text-colorText md:text-center`}
+        >
           For Schools
         </h1>
         <p className="text-base text-colorText md:text-center">

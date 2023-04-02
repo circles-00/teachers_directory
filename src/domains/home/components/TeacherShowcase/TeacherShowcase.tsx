@@ -5,6 +5,7 @@ import Teacher1 from '@assets/teachers/portrait-1.png'
 import Teacher2 from '@assets/teachers/portrait-2.png'
 import Teacher3 from '@assets/teachers/portrait-3.png'
 import Teacher4 from '@assets/teachers/portrait-4.png'
+import { playfairDisplay } from '@utils'
 
 const teachers = [
   {
@@ -61,7 +62,9 @@ export const TeacherShowcase: FC<ITeacherShowcaseProps> = () => {
       <div className="flex flex-row justify-between">
         <div className="flex flex-col gap-2">
           <h6 className="text-sm font-bold text-primary">Find great work</h6>
-          <h1 className="text-5xl font-bold">For Teachers</h1>
+          <h1 className={`text-5xl font-bold ${playfairDisplay.className}`}>
+            For Teachers
+          </h1>
           <p className="text-base">
             Discover new exciting opportunities to work with and take your
             career to new heights.

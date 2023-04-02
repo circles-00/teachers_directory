@@ -3,6 +3,7 @@ import { type FC } from 'react'
 import Image1 from '@assets/who-we-are/img-1.png'
 import Image2 from '@assets/who-we-are/img-2.png'
 import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
+import { playfairDisplay } from '@utils'
 
 interface IWhoWeAreProps {}
 
@@ -25,7 +26,11 @@ export const WhoWeAre: FC<IWhoWeAreProps> = () => {
         ))}
       </div>
       <div className="mt-10 flex w-full flex-col gap-10 md:mt-0 md:w-2/6">
-        <h1 className="text-5xl font-bold">Who We Are</h1>
+        <h1
+          className={`text-5xl font-bold text-black ${playfairDisplay.className}`}
+        >
+          Who We Are
+        </h1>
         <p className="text-base text-[#637381]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
           diam justo, lobortis sit amet nisi eu, vestibulum volutpat tellus.

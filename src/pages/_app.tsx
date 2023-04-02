@@ -3,12 +3,10 @@ import { type AppType } from 'next/app'
 import { api } from '~/utils/api'
 
 import '~/styles/globals.css'
-import { Public_Sans } from 'next/font/google'
 import Head from 'next/head'
 import { BackToTop, Footer, MobileDrawer, Navigation } from '@components/common'
 import { useCommonStore } from '../store'
-
-const publicSans = Public_Sans({ subsets: ['latin'] })
+import { openSans } from '@utils'
 
 const TeachersDirectory: AppType = ({ Component, pageProps }) => {
   const { isMobileDrawerOpen } = useCommonStore()
@@ -20,7 +18,7 @@ const TeachersDirectory: AppType = ({ Component, pageProps }) => {
         <meta name="description" content="Teachers Directory" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={publicSans.className}>
+      <div className={openSans.className}>
         <Navigation />
         {isMobileDrawerOpen && <MobileDrawer />}
         {!isMobileDrawerOpen && <Component {...pageProps} />}

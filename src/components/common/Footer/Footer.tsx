@@ -4,11 +4,13 @@ import { Logo } from '../../svgs'
 import { SocialIcons } from '../SocialIcons'
 import { VerticalList } from './components'
 import { useFooterData } from './hooks'
+import { useLabels } from '@utils'
 
 interface IFooterProps {}
 
 export const Footer: FC<IFooterProps> = () => {
   const { homeLinks, legalLinks, contactLinks } = useFooterData()
+  const { labels } = useLabels()
 
   return (
     <div className="w-full bg-primaryTransparent-16">
@@ -19,12 +21,8 @@ export const Footer: FC<IFooterProps> = () => {
           </Link>
           <p className="text-sm font-bold">
             © All rights reserved made by{' '}
-            <Link
-              href="https://qualifiedteachers.co.uk"
-              target="_blank"
-              className="text-primary"
-            >
-              qualifiedteachers.co.uk
+            <Link href={labels.appUrl} target="_blank" className="text-primary">
+              {labels.appUrl}
             </Link>
           </p>
           <SocialIcons className="ml-[-15px] flex justify-start" />
