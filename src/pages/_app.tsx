@@ -10,7 +10,7 @@ import { useCommonStore } from '../store'
 
 const publicSans = Public_Sans({ subsets: ['latin'] })
 
-const MyApp: AppType = ({ Component, pageProps }) => {
+const TeachersDirectory: AppType = ({ Component, pageProps }) => {
   const { isMobileDrawerOpen } = useCommonStore()
 
   return (
@@ -31,4 +31,4 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   )
 }
 
-export default api.withTRPC(MyApp)
+export default api.withTRPC(TeachersDirectory)
