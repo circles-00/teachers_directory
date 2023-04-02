@@ -11,7 +11,7 @@ const SignUp: NextPage = () => {
   return (
     <div className="md:ml-52">
       <div className="my-12 flex flex-col md:ml-10 md:flex-row">
-        <div className="ml-14 flex flex-col gap-4">
+        <div className="ml-14 flex flex-col gap-4 md:mt-32">
           <Logo />
           <h1 className="text-5xl font-bold">
             Get started <br /> absolutely <br />{' '}
