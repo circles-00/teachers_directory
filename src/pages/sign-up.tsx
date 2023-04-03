@@ -26,7 +26,7 @@ const SignUp: NextPage = () => {
           </p>
         </div>
         <div className="md:w-3/5">
-          <RoundedContainer className="m-5 mt-10 w-full gap-5 px-6 py-10 md:w-6/12">
+          <RoundedContainer className="m-5 mx-auto mt-10 w-full gap-5 px-6 py-10 md:w-6/12">
             <h1 className="text-center text-xl font-bold text-black">
               Join the Teachers&apos; Directory Community
             </h1>
