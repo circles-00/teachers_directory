@@ -17,6 +17,9 @@ const config = {
         },
         colorText: '#212B36'
       },
+      fontFamily: {
+        graphik: ['var(--font-graphik)']
+      }
     },
   },
   daisyui: {
