@@ -17,11 +17,11 @@ export const Input: FC<IInputProps> = ({
   labelClassName = '',
 }) => {
   const defaultClassName =
-    'h-12 w-full rounded-md border-[1px] border-[#0000004D] p-2 focus:outline-slate-400'
+    'h-12 rounded-md border-[1px] border-[#0000004D] p-2 focus:outline-slate-400'
   const labelDefaultClassName = 'pb-2'
 
   return (
-    <div className="flex flex-col">
+    <div className="flex w-full flex-col">
       {label && (
         <label
           className={mergeClassNames([labelDefaultClassName, labelClassName])}
