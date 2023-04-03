@@ -21,7 +21,9 @@ const LoginPage: NextPage = () => {
       <Link href="/forgot-password" className="text-end text-sm">
         <u>{labels.forgotPassword}</u>
       </Link>
-      <ButtonContained className="text-white">{labels.login}</ButtonContained>
+      <ButtonContained className="py-3 text-white">
+        {labels.login}
+      </ButtonContained>
       <ThirdPartyLogin />
     </RoundedContainer>
   )
