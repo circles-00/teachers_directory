@@ -12,7 +12,7 @@ export const HamburgerIcon: FC<IHamburgerIconProps> = () => {
 
   // Close mobile drawer when route changes
   useEffect(() => {
-    router.events.on('routeChangeStart', () => {
+    router.events.on('routeChangeComplete', () => {
       if (isMobileDrawerOpen) {
         setIsMobileDrawerOpen(false)
       }
@@ -21,7 +21,7 @@ export const HamburgerIcon: FC<IHamburgerIconProps> = () => {
 
   return (
     <div className="mt-2">
-      <label className="swap-rotate swap mr-3 sm:visible md:invisible">
+      <label className="swap swap-rotate mr-3 sm:visible md:invisible">
         <input
           id="drawer"
           type="checkbox"

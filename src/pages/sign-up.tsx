@@ -30,7 +30,7 @@ const SignUp: NextPage = () => {
             <h1 className="text-center text-xl font-bold text-black">
               Join the Teachers&apos; Directory Community
             </h1>
-            <div className="flex w-full justify-between gap-2">
+            <div className="flex flex-col gap-6 md:flex-row md:justify-between md:gap-2">
               <Input placeholder={labels.firstName} />
               <Input placeholder={labels.surname} />
             </div>

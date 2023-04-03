@@ -21,7 +21,7 @@ export const Input: FC<IInputProps> = ({
   const labelDefaultClassName = 'pb-2'
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full min-w-0 flex-col">
       {label && (
         <label
           className={mergeClassNames([labelDefaultClassName, labelClassName])}
