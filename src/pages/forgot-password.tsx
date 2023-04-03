@@ -9,14 +9,14 @@ const ForgotPassword: NextPage = () => {
   const { labels } = useLabels()
   return (
     <div className="my-20 flex flex-col">
-      <div className="mx-auto flex w-full flex-col items-center gap-4 md:w-2/6">
+      <div className="flex w-full flex-col items-center gap-4 px-4 md:mx-auto md:w-2/6">
         <ForgotPasswordIcon />
         <h1 className="mt-4 text-center text-3xl font-bold">
           Forgot your Password?
         </h1>
         <p className="text-center">
-          Please enter the email address associated with your <br /> account,
-          and we&apos;ll email you a link to reset your <br /> password.
+          Please enter the email address associated with your account, and
+          we&apos;ll email you a link to reset your password.
         </p>
         <Input className="mx-auto w-4/5 md:w-4/6" placeholder={labels.email} />
         <ButtonContained className="mx-auto w-4/5 py-3 text-white md:w-4/6">
