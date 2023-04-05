@@ -6,7 +6,7 @@ import '~/styles/globals.css'
 import Head from 'next/head'
 import { BackToTop, Footer, MobileDrawer, Navigation } from '@components/common'
 import { useCommonStore } from '../store'
-import { openSans } from '@utils'
+import { inter } from '@utils'
 
 const TeachersDirectory: AppType = ({ Component, pageProps }) => {
   const { isMobileDrawerOpen } = useCommonStore()
@@ -18,7 +18,7 @@ const TeachersDirectory: AppType = ({ Component, pageProps }) => {
         <meta name="description" content="Teachers Directory" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={openSans.className}>
+      <div className={inter.className}>
         <Navigation />
         {isMobileDrawerOpen && <MobileDrawer />}
         {!isMobileDrawerOpen && <Component {...pageProps} />}

@@ -1,8 +1,10 @@
-import { Open_Sans, Playfair_Display } from 'next/font/google'
+import { Open_Sans, Playfair_Display, Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 
 const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
 const openSans = Open_Sans({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] })
+
 const graphik = localFont({
   src: [
     {
@@ -13,4 +15,4 @@ const graphik = localFont({
   variable: '--font-graphik',
 })
 
-export { playfairDisplay, openSans, graphik }
+export { playfairDisplay, openSans, graphik, inter }
