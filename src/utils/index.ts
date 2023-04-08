@@ -1,4 +1,5 @@
 export * from './api'
 export * from './fonts.util'
+export * from './general-functions.util'
 export * from './labels'
 export * from './merge-classnames'
