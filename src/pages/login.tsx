@@ -17,7 +17,7 @@ const LoginPage: NextPage = () => {
         </Link>
       </p>
       <Input className="mt-3" placeholder="Username" />
-      <Input placeholder={labels.password} />
+      <Input type="password" placeholder={labels.password} />
       <Link href="/forgot-password" className="text-end text-sm">
         <u>{labels.forgotPassword}</u>
       </Link>
