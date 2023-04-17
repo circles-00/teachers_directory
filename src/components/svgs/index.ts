@@ -1,3 +1,4 @@
+export * from './Arrows'
 export * from './EmailInboxIcon'
 export * from './ForgotPasswordIcon'
 export * from './HeroBg'

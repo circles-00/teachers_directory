@@ -1,8 +1,8 @@
 import { type NextPage } from 'next'
 import { Logo } from '@components/svgs'
-import { ButtonContained, Input, RoundedContainer } from '../components'
+import { ButtonContained, Input, RoundedContainer } from '../../components'
 import { useLabels } from '@utils'
-import { ThirdPartyLogin } from '../domains/auth'
+import { ThirdPartyLogin } from '../../domains/auth'
 import Link from 'next/link'
 
 const SignUp: NextPage = () => {
