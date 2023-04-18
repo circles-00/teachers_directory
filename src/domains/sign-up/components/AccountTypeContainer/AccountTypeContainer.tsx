@@ -1,14 +1,17 @@
 import { type FC } from 'react'
 import { ArrowBaloonRight, RoundedContainer } from '@components'
+import Link from 'next/link'
 
 interface IAccountTypeContainerProps {
   title: string
   description: string
+  href: string
 }
 
 export const AccountTypeContainer: FC<IAccountTypeContainerProps> = ({
   title,
   description,
+  href,
 }) => {
   return (
     <RoundedContainer className="mt-4 w-full py-6 px-8 md:w-[500px]">
@@ -22,9 +25,12 @@ export const AccountTypeContainer: FC<IAccountTypeContainerProps> = ({
             </p>
           </div>
         </div>
-        <button className="flex h-12 w-16 items-center justify-center rounded-md bg-primary">
+        <Link
+          href={href}
+          className="flex h-12 w-16 items-center justify-center rounded-md bg-primary"
+        >
           <ArrowBaloonRight />
-        </button>
+        </Link>
       </div>
     </RoundedContainer>
   )

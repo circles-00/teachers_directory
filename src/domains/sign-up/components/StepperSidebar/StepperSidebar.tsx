@@ -1,0 +1,48 @@
+import { type FC } from 'react'
+import { LinearProgressBar, RoundedContainer } from '@components'
+import { ChevronRightIcon } from '@heroicons/react/24/outline'
+
+// TODO: Change this hardcoded value
+const PROGRESS = 45
+
+interface IStepperSidebarProps {
+  currentStep: number
+  setCurrentStep: (step: number) => void
+  steps: Array<{ title: string }>
+}
+
+export const StepperSidebar: FC<IStepperSidebarProps> = ({
+  currentStep,
+  setCurrentStep,
+  steps,
+}) => {
+  const isCurrentStep = (index: number) => index === currentStep
+
+  return (
+    <div className="w-94 mr-8">
+      <RoundedContainer className="p-4 md:mx-0 md:w-full">
+        {steps.map((item, index) => (
+          <button
+            key={index}
+            className={`mt-1 flex justify-between rounded-md px-3 py-2 text-start text-sm ${
+              isCurrentStep(index) ? 'bg-[#00AB5526]' : ''
+            }`}
+            onClick={() => setCurrentStep(index)}
+            disabled={isCurrentStep(index)}
+          >
+            <p>{item.title}</p>
+            <ChevronRightIcon width={24} height={24} className="stroke-4" />
+          </button>
+        ))}
+      </RoundedContainer>
+      <RoundedContainer className="mt-4 p-4 md:w-full">
+        <LinearProgressBar progress={PROGRESS} />
+        <h1 className="mt-2 font-bold">Almost there</h1>
+        <p className="text-xs">
+          Your profile is <span className="text-primary">{PROGRESS}%</span>{' '}
+          ready, continue with <br /> the progress
+        </p>
+      </RoundedContainer>
+    </div>
+  )
+}

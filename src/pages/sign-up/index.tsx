@@ -4,9 +4,15 @@ import { ButtonContained, Input, RoundedContainer } from '../../components'
 import { useLabels } from '@utils'
 import { ThirdPartyLogin } from '../../domains/auth'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const SignUp: NextPage = () => {
   const { labels } = useLabels()
+  const router = useRouter()
+
+  const handleOnCreateAccount = () => {
+    router.push('/sign-up/account-type').catch((err) => console.error(err))
+  }
 
   return (
     <div className="md:ml-52">
@@ -36,7 +42,10 @@ const SignUp: NextPage = () => {
             </div>
             <Input placeholder={labels.email} />
             <Input placeholder={labels.password} />
-            <ButtonContained className="py-4 text-white">
+            <ButtonContained
+              onClick={handleOnCreateAccount}
+              className="py-4 text-white"
+            >
               Create account
             </ButtonContained>
             <p className="text-center text-xs">

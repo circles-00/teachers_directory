@@ -5,10 +5,12 @@ const accountTypes = [
   {
     title: 'Teacher/Support staff',
     description: 'A teaching qualification or a\ndegree is required',
+    href: '/sign-up/teachers',
   },
   {
     title: 'School/Organisation',
     description: 'A valid school/organisation email\naddress is required',
+    href: '/sign-up/schools',
   },
 ]
 
@@ -19,11 +21,12 @@ const AccountType = () => {
         <h1 className="mb-4 text-center text-3xl font-bold text-primary">
           Are you looking to register as
         </h1>
-        {accountTypes.map(({ title, description }, idx) => (
+        {accountTypes.map(({ title, description, href }, idx) => (
           <AccountTypeContainer
             key={idx}
             title={title}
             description={description}
+            href={href}
           />
         ))}
         <p className="mt-6 text-center text-sm">
