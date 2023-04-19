@@ -1,5 +1,5 @@
 import { type ReactNode, type MouseEvent, type FC } from 'react'
-import { mergeClassNames } from '../../../../../utils'
+import { mergeClassNames } from '@utils'
 
 interface IButtonOutlinedProps {
   children: ReactNode

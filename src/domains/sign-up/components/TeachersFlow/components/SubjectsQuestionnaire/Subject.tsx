@@ -1,6 +1,6 @@
 import { TrashIcon } from '@components'
 import { type FC } from 'react'
-import { Select } from '../../../../../../components'
+import { Select } from '@components'
 
 const subjects = [
   {

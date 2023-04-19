@@ -23,7 +23,8 @@
       "@components/*": ["./src/components/*"],
       "@domains/*": ["./src/domains/*"],
       "@assets/*": ["./src/assets/*"],
-      "@utils": ["./src/utils/index.ts"]
+      "@utils": ["./src/utils/index.ts"],
+      "@store": ["./src/store/index.ts"]
     }
   },
   "include": [

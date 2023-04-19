@@ -1,5 +1,5 @@
 import { type ForwardRefExoticComponent, type FC, type SVGProps } from 'react'
-import { mergeClassNames } from '../../../../utils'
+import { mergeClassNames } from '@utils'
 
 interface IIconInputProps {
   Icon: ForwardRefExoticComponent<SVGProps<SVGSVGElement>>

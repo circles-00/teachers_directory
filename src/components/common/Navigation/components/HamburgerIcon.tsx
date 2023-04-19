@@ -1,7 +1,7 @@
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
 import { useEffect, type FC } from 'react'
-import { useCommonStore } from '../../../../store'
+import { useCommonStore } from '@store'
 
 interface IHamburgerIconProps {}
 
@@ -21,7 +21,7 @@ export const HamburgerIcon: FC<IHamburgerIconProps> = () => {
 
   return (
     <div className="mt-2">
-      <label className="swap swap-rotate mr-3 sm:visible md:invisible">
+      <label className="swap-rotate swap mr-3 sm:visible md:invisible">
         <input
           id="drawer"
           type="checkbox"

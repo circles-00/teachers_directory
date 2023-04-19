@@ -1,11 +1,7 @@
 import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { type FC } from 'react'
-import {
-  ForgotPasswordIcon,
-  Input,
-  ButtonContained,
-} from '../../../../../../components'
+import { ForgotPasswordIcon, Input, ButtonContained } from '@components'
 import { useLabels } from '@utils'
 
 interface IInitialEmailFormProps {
