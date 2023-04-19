@@ -1,2 +1,2 @@
-export * from './LocationQuestionnaire'
+export * from './Subject'
 export * from './SubjectsQuestionnaire'

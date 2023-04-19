@@ -1,3 +1,5 @@
 export * from './AccountTypeContainer'
+export * from './Header'
 export * from './StepperSidebar'
+export * from './StepsHeader'
 export * from './TeachersFlow'

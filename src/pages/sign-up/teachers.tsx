@@ -1,6 +1,10 @@
 import { type NextPage } from 'next'
-import { LocationQuestionnaire, StepperSidebar } from '@domains/sign-up'
-import { type FC, useState } from 'react'
+import {
+  LocationQuestionnaire,
+  StepperSidebar,
+  SubjectsQuestionnaire,
+} from '@domains/sign-up'
+import { type FC, useState, useMemo } from 'react'
 
 const DummyComponent = () => <p>In Progress...</p>
 
@@ -11,7 +15,7 @@ const steps = [
   },
   {
     title: 'What subjects can you teach?',
-    component: DummyComponent,
+    component: SubjectsQuestionnaire,
   },
   {
     title: 'Your qualifications',
@@ -31,17 +35,19 @@ const steps = [
   },
 ]
 
-// TODO: Little bit hacky, try to find a better way to do this if there is some time
 const CurrentStepComponent: FC<{
   currentStep: number
   totalSteps: number
   setCurrentStep: (step: number) => void
-}> = ({ currentStep, totalSteps, setCurrentStep }) =>
-  steps[currentStep]?.component({
-    currentStep,
-    totalSteps,
-    setCurrentStep,
-  }) ?? <></>
+}> = ({ currentStep, ...props }) => {
+  const CurrentComponent = useMemo(() => {
+    return steps[currentStep]?.component
+  }, [currentStep])
+
+  if (!CurrentComponent) return <></>
+
+  return <CurrentComponent currentStep={currentStep} {...props} />
+}
 
 const TeachersSignUpPage: NextPage = () => {
   const [currentStep, setCurrentStep] = useState(0)

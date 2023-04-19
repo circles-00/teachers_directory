@@ -1,6 +1,8 @@
 import { useState, type FC } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { ButtonContained, IconInput, Input } from '@components'
+import { StepsHeader } from '../../../StepsHeader'
+import { Header } from '../../../Header'
 
 interface ILocationQuestionnaireProps {
   currentStep: number
@@ -17,17 +19,11 @@ export const LocationQuestionnaire: FC<ILocationQuestionnaireProps> = ({
 
   return (
     <div className="flex flex-col">
-      <p className="text-sm text-primary">
-        Step {currentStep + 1} of {totalSteps}
-      </p>
-      <h1 className="mt-2 text-2xl font-bold text-primary">
-        Where do you live?
-      </h1>
-      <p>
-        This won&apos;t be displayed but we use your postcode to calculate
-        distances to <br /> potential schools. Also, if you add your mobile
-        number, we can text you if you have <br /> a job application.
-      </p>
+      <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+      <Header
+        title="Where do you live?"
+        description={`This won't be displayed but we use your postcode to calculate distances to \npotential schools. Also, if you add your mobile number, we can text you if you have \na job application.`}
+      />
       <div className="flex w-5/6 flex-col">
         <IconInput
           className="mt-6"

@@ -25,7 +25,7 @@ export const StepperSidebar: FC<IStepperSidebarProps> = ({
           <button
             key={index}
             className={`mt-1 flex justify-between rounded-md px-3 py-2 text-start text-sm ${
-              isCurrentStep(index) ? 'bg-[#00AB5526]' : ''
+              isCurrentStep(index) ? 'bg-primaryTransparent-16' : ''
             }`}
             onClick={() => setCurrentStep(index)}
             disabled={isCurrentStep(index)}
