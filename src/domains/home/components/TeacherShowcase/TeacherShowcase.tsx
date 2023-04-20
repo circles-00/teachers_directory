@@ -26,7 +26,7 @@ interface ITeacherShowcaseProps {}
 
 export const TeacherShowcase: FC<ITeacherShowcaseProps> = () => {
   return (
-    <div className="flex flex-col justify-center md:mt-20 md:flex-row">
+    <div className="mt-10 flex flex-col justify-center md:mt-20 md:flex-row">
       <div className="w-full bg-[#f0f8f2] pl-6 pt-6 md:w-1/3">
         <h3 className="text-[32px] font-bold">For teachers</h3>
         <h1
