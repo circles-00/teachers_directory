@@ -1,12 +1,9 @@
 import { useState, type FC } from 'react'
 import { StepsHeader, Header, Subject } from '@domains/sign-up'
 import { ButtonContained, ButtonOutlined } from '@components'
+import { type StepProps } from '../../types'
 
-interface ISubjectsQuestionnaireProps {
-  currentStep: number
-  totalSteps: number
-  setCurrentStep: (step: number) => void
-}
+interface ISubjectsQuestionnaireProps extends StepProps {}
 
 export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
   currentStep,

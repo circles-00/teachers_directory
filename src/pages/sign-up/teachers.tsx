@@ -3,6 +3,8 @@ import {
   LocationQuestionnaire,
   StepperSidebar,
   SubjectsQuestionnaire,
+  type StepProps,
+  QualificationsQuestionnaire,
 } from '@domains/sign-up'
 import { type FC, useState, useMemo } from 'react'
 
@@ -19,7 +21,7 @@ const steps = [
   },
   {
     title: 'Your qualifications',
-    component: DummyComponent,
+    component: QualificationsQuestionnaire,
   },
   {
     title: 'Your teaching life',
@@ -35,11 +37,7 @@ const steps = [
   },
 ]
 
-const CurrentStepComponent: FC<{
-  currentStep: number
-  totalSteps: number
-  setCurrentStep: (step: number) => void
-}> = ({ currentStep, ...props }) => {
+const CurrentStepComponent: FC<StepProps> = ({ currentStep, ...props }) => {
   const CurrentComponent = useMemo(() => {
     return steps[currentStep]?.component
   }, [currentStep])

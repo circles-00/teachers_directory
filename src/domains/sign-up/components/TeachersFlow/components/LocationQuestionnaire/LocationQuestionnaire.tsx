@@ -3,12 +3,9 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { ButtonContained, IconInput, Input } from '@components'
 import { StepsHeader } from '../../../StepsHeader'
 import { Header } from '../../../Header'
+import { type StepProps } from '../../types'
 
-interface ILocationQuestionnaireProps {
-  currentStep: number
-  totalSteps: number
-  setCurrentStep: (step: number) => void
-}
+interface ILocationQuestionnaireProps extends StepProps {}
 
 export const LocationQuestionnaire: FC<ILocationQuestionnaireProps> = ({
   currentStep,
