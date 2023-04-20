@@ -16,8 +16,8 @@ export const useFooterData = () => {
 
   const contactLinks = [
     {
-      title: `support@${labels.appUrl}`,
-      href: `mailto:support@${labels.appUrl}`,
+      title: `hello@${labels.appUrl}`,
+      href: `mailto:hello@${labels.appUrl}`,
       isEmail: true,
     },
     {
