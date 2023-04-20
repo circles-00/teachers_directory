@@ -8,26 +8,27 @@ import {
 } from '../../svgs'
 
 interface ISocialIconsProps {
+  isBw?: boolean
   className?: string
 }
 
-export const SocialIcons: FC<ISocialIconsProps> = ({ className }) => {
+export const SocialIcons: FC<ISocialIconsProps> = ({ isBw, className }) => {
   return (
     <div className={className}>
       <Link href="https://facebook.com" target="_blank">
-        <FacebookIcon />
+        <FacebookIcon isBw={isBw} />
       </Link>
 
       <Link href="https://instagram.com" target="_blank">
-        <InstagramIcon />
+        <InstagramIcon isBw={isBw} />
       </Link>
 
       <Link href="https://linkedin.com" target="_blank">
-        <LinkedInIcon />
+        <LinkedInIcon isBw={isBw} />
       </Link>
 
       <Link href="https://twitter.com" target="_blank">
-        <TwitterIcon />
+        <TwitterIcon isBw={isBw} />
       </Link>
     </div>
   )

@@ -14,11 +14,11 @@ interface VerticalListProps {
 
 export const VerticalList: FC<VerticalListProps> = ({ title, links }) => {
   return (
-    <div className="flex flex-col gap-2">
-      <h1 className="mb-2 text-base font-bold">{title}</h1>
+    <div className="flex flex-col gap-5">
+      <h1 className="mb-1 text-base font-bold">{title}</h1>
       {links.map(({ title, href, isEmail }, idx) => (
         <Link key={idx} href={href}>
-          <p className={`text-sm font-[600] ${isEmail ? 'text-primary' : ''}`}>
+          <p className={`text-sm font-medium ${isEmail ? 'text-primary' : ''}`}>
             {title}
           </p>
         </Link>

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { type FC } from 'react'
 import { NavigationItems } from './NavigationItems'
-import { playfairDisplay, useLabels } from '@utils'
+import { useLabels } from '@utils'
 
 interface IMobileDrawerProps {}
 
@@ -21,7 +21,7 @@ export const MobileDrawer: FC<IMobileDrawerProps> = () => {
 
       <button
         onClick={onHandleLogin}
-        className={`mx-auto w-80 rounded-lg border-[1px] border-primaryTransparent-28 py-[6px] px-[16px] text-primary md:block ${playfairDisplay.className}`}
+        className="mx-auto w-80 rounded-lg border-[1px] border-primaryTransparent-28 py-[6px] px-[16px] text-primary md:block"
       >
         <b>{labels.login}</b>
       </button>

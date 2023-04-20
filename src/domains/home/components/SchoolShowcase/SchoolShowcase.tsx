@@ -1,63 +1,42 @@
 import { type FC } from 'react'
-import { SchoolTeacher } from './components'
-import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
-import SchoolTeacher1 from '@assets/school-teachers/portrait-1.png'
-import SchoolTeacher2 from '@assets/school-teachers/portrait-2.png'
-import SchoolTeacher3 from '@assets/school-teachers/portrait-3.png'
-import SchoolTeacher4 from '@assets/school-teachers/portrait-4.png'
 import { playfairDisplay } from '@utils'
+import { SchoolsFeature } from './components'
 
-interface SchoolShowcaseProps {}
-
-const teachers = [
+const features = [
   {
-    name: 'Jayvion Simon',
-    role: 'Drama Teacher',
-    image: SchoolTeacher1.src,
+    title: 'Post a teaching or\nrelated jobs',
+    description: 'Qualified teachers.',
   },
   {
-    name: 'Lucian Obrien',
-    role: 'Primary Teacher',
-    image: SchoolTeacher2.src,
+    title: 'Browse and find\nteachers.',
+    description: 'By subject or location',
   },
   {
-    name: 'Deja Brady',
-    role: 'German Teacher',
-    image: SchoolTeacher3.src,
-  },
-  {
-    name: 'Maria Rodriguez',
-    role: 'Spanish Teacher',
-    image: SchoolTeacher4.src,
+    title: 'Life after teaching',
+    description: 'Teachers offering other services',
   },
 ]
 
+interface SchoolShowcaseProps {}
+
 export const SchoolShowcase: FC<SchoolShowcaseProps> = () => {
   return (
-    <div className="mt-[-45px] w-full bg-[#F7F8FC] pb-20">
-      <div className="mx-auto flex w-2/5 flex-col items-center justify-center gap-4 pt-24">
-        <h6 className="text-center text-xs font-bold text-primary">
-          Find the best talent
-        </h6>
-        <h1
-          className={`${playfairDisplay.className} text-5xl font-bold text-colorText md:text-center`}
-        >
-          For Schools
-        </h1>
-        <p className="text-base text-colorText md:text-center">
-          Work with the largest network of professionals and get things
-          done—from quick turnarounds to big transformations.
-        </p>
-      </div>
-      <div className="mx-auto mt-10 flex w-4/5 flex-col justify-evenly gap-4 md:flex-row md:gap-0">
-        {teachers.map((teacher, index) => (
-          <SchoolTeacher key={index} {...teacher} />
+    <div className="mt-28 h-full bg-[url('/schools_showcase_bg.png')] bg-cover bg-center bg-no-repeat px-8 py-20 text-white md:px-[21.5rem]">
+      <h3 className="text-3xl font-bold">For Schools</h3>
+      <h1
+        className={`leading-tight ${playfairDisplay.className} mt-2 text-5xl font-bold`}
+      >
+        Find teachers <br /> your way
+      </h1>
+      <p className="mt-12 w-full text-2xl font-bold md:w-2/6">
+        Search the largest network of teachers – for anything from teaching, to
+        delivering CPDS or creating resources. Anything.
+      </p>
+      <div className="mt-20 flex w-full flex-col gap-6 md:flex-row">
+        {features.map((feature, index) => (
+          <SchoolsFeature {...feature} key={index} />
         ))}
       </div>
-      <button className="mx-auto mt-16 flex rounded-lg border-[1px] border-primaryTransparent-48 p-4 text-base font-bold text-primary">
-        Post a Job and Find the right Teacher
-        <ArrowLongRightIcon className="ml-2 w-6" />
-      </button>
     </div>
   )
 }

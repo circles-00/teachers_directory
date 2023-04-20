@@ -1,4 +1,5 @@
 export * from './Arrows'
+export * from './CheckIcon'
 export * from './EmailInboxIcon'
 export * from './ForgotPasswordIcon'
 export * from './HeroBg'

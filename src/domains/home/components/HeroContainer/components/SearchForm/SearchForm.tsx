@@ -11,28 +11,28 @@ export const SearchForm: FC<ISearchFormProps> = () => {
 
   return (
     <div className="mt-12 flex w-full items-center justify-center">
-      <div className="flex w-5/6 flex-col justify-evenly gap-3 rounded-sm bg-[#F2F7F2] px-4 py-8 md:w-4/6 md:flex-row md:items-center">
-        <div className="flex w-full flex-col md:w-[60%]">
-          <Input
-            label={labels.search}
-            labelClassName="font-bold"
-            placeholder="Enter teacher's name, subject or school"
-            className="h-16 rounded-md border-[1px] border-[#919EAB4D] pl-4 text-[18px]"
-          />
-        </div>
+      <div className="flex w-5/6 flex-col justify-between gap-3 rounded-sm bg-[#F2F7F2] px-4 py-4 md:w-[52.5%] md:flex-row md:items-center">
+        <Input
+          label={labels.search}
+          labelClassName="font-bold"
+          placeholder="Enter teacher's name, subject or school"
+          className="h-13 rounded-md border-[1px] border-[#919EAB4D] pl-4 text-[18px]"
+        />
         <Input
           label={labels.location}
           labelClassName="font-bold"
+          containerClassName="md:w-4/6"
           placeholder="Location or postcode"
-          className="h-16 rounded-md border-[1px] border-[#919EAB4D] pl-4 text-[18px]"
+          className="h-13 rounded-md border-[1px] border-[#919EAB4D] pl-4 text-[18px]"
         />
         <Input
           label={labels.searchRadius}
           labelClassName="font-bold"
           placeholder="Distance"
-          className="h-16 rounded-md border-[1px] border-[#919EAB4D] pl-4 text-[18px]"
+          containerClassName="md:w-5/12"
+          className="h-13 rounded-md border-[1px] border-[#919EAB4D] pl-4 text-[18px]"
         />
-        <button className="mt-8 h-16 rounded-md bg-primary px-6 text-white">
+        <button className="mt-8 h-12 rounded-md bg-primary px-10 font-medium text-white">
           {labels.search}
         </button>
       </div>

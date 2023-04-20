@@ -1,56 +1,24 @@
 import { type FC } from 'react'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import { Teacher } from './components'
-import Teacher1 from '@assets/teachers/portrait-1.png'
-import Teacher2 from '@assets/teachers/portrait-2.png'
-import Teacher3 from '@assets/teachers/portrait-3.png'
-import Teacher4 from '@assets/teachers/portrait-4.png'
+import Image from 'next/image'
 import { playfairDisplay } from '@utils'
+import TeachersShowcaseBg from '@assets/teachers_showcase_bg.png'
+import { Benefit } from './components'
 
-const teachers = [
+const benefits = [
   {
-    image: Teacher1,
-    name: 'Katherine Urman',
+    title: 'Proof of quality',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus eget lectus vitae venenatis. Nam porttitor blandit est sit amet mollis. Integer in ligula non erat efficitur lacinia.',
-    rating: 4.9,
-    ratingCount: 334,
-    subjects: ['Social Studies', 'Arts', 'Drama'],
-    position: 'Humanity Teacher',
-    type: 'Full-Time',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque diam justo, lobortis sit amet nisi eu, vestibulum volutpat tellus. ',
   },
   {
-    image: Teacher2,
-    name: 'Damian Phils',
+    title: 'No cost until you hire',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus eget lectus vitae venenatis. Nam porttitor blandit est sit amet mollis. Integer in ligula non erat efficitur lacinia.',
-    rating: 4.4,
-    ratingCount: 212,
-    subjects: ['Social Studies', 'Arts', 'Drama'],
-    position: 'Math Teacher',
-    type: 'Full-Time',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque diam justo, lobortis sit amet nisi eu, vestibulum volutpat tellus. ',
   },
   {
-    image: Teacher3,
-    name: 'Damian Rotherhire',
+    title: 'No cost until you hire',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus eget lectus vitae venenatis. Nam porttitor blandit est sit amet mollis. Integer in ligula non erat efficitur lacinia.',
-    rating: 4.1,
-    ratingCount: 324,
-    subjects: ['Social Studies', 'Arts', 'Drama'],
-    position: 'Humanity Teacher',
-    type: 'Full-Time',
-  },
-  {
-    image: Teacher4,
-    name: 'Anna Shultz',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus eget lectus vitae venenatis. Nam porttitor blandit est sit amet mollis. Integer in ligula non erat efficitur lacinia.',
-    rating: 4.9,
-    ratingCount: 334,
-    subjects: ['Social Studies', 'Arts', 'Drama'],
-    position: 'Humanity Teacher',
-    type: 'Full-Time',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque diam justo, lobortis sit amet nisi eu, vestibulum volutpat tellus. ',
   },
 ]
 
@@ -58,27 +26,27 @@ interface ITeacherShowcaseProps {}
 
 export const TeacherShowcase: FC<ITeacherShowcaseProps> = () => {
   return (
-    <div className="mx-auto flex w-4/5 flex-col py-24">
-      <div className="flex flex-row justify-between">
-        <div className="flex flex-col gap-2">
-          <h6 className="text-sm font-bold text-primary">Find great work</h6>
-          <h1 className={`text-5xl font-bold ${playfairDisplay.className}`}>
-            For Teachers
-          </h1>
-          <p className="text-base">
-            Discover new exciting opportunities to work with and take your
-            career to new heights.
-          </p>
-        </div>
-        <div className="mt-6 mr-8 flex h-16 items-center gap-4 border-[1px] border-[#919EAB3D] px-4">
-          <ChevronLeftIcon className="w-6 cursor-pointer text-[#637381]" />
-          <ChevronRightIcon className="w-6 cursor-pointer text-[#637381]" />
+    <div className="flex flex-col justify-center md:mt-20 md:flex-row">
+      <div className="w-full bg-[#f0f8f2] pl-6 pt-6 md:w-1/3">
+        <h3 className="text-[32px] font-bold">For teachers</h3>
+        <h1
+          className={`${playfairDisplay.className} mt-1 text-5xl font-extrabold leading-tight text-primary`}
+        >
+          Let the world find you. <br /> New opportunities.
+        </h1>
+        <div className="mt-10 mb-8 flex flex-col gap-10 md:mb-0">
+          {benefits.map((benefit, index) => (
+            <Benefit key={index} {...benefit} />
+          ))}
         </div>
       </div>
-      <div className="mx-auto mt-10 flex w-full flex-col justify-evenly gap-4 md:flex-row">
-        {teachers.map((teacher, index) => (
-          <Teacher key={index} {...teacher} />
-        ))}
+      <div>
+        <Image
+          src={TeachersShowcaseBg.src}
+          width={TeachersShowcaseBg.width}
+          height={TeachersShowcaseBg.height}
+          alt="Teachers Showcase"
+        />
       </div>
     </div>
   )

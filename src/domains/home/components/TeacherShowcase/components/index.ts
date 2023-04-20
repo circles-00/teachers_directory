@@ -1,1 +1,1 @@
-export * from './Teacher'
+export * from './Benefit'

@@ -30,20 +30,18 @@ export const Navigation: FC<INavigationProps> = () => {
         </Link>
         <NavigationItems className="ml-8 hidden items-center gap-10 md:flex" />
       </div>
-      <div
-        className={`mr-4 flex items-center text-sm md:mr-52 ${playfairDisplay.className}`}
-      >
+      <div className={`mr-4 flex items-center text-sm md:mr-52`}>
         <button
           onClick={onHandleLoginClick}
-          className="mr-4 hidden rounded-lg py-[6px] px-[12px] text-base text-black md:block"
+          className="mr-4 hidden rounded-lg py-[6px] px-[12px] text-base font-bold text-black md:block"
         >
-          <b>{labels.login}</b>
+          {labels.login}
         </button>
         <button
           onClick={onHandleSignUpClick}
-          className="rounded-md bg-primary py-[10px] px-[20px] text-base text-white"
+          className="rounded-md bg-primary py-[8px] px-[24px] text-base font-medium text-white"
         >
-          <b>{labels.signUp}</b>
+          {labels.signUp}
         </button>
         <Link className="sm:block md:hidden" href="/search">
           <MagnifyingGlassIcon className="ml-4 h-6 w-6 text-primary" />

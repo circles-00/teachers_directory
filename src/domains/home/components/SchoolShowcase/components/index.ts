@@ -1,1 +1,1 @@
-export * from './SchoolTeacher'
+export * from './SchoolsFeature'

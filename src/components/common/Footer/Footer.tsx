@@ -4,7 +4,7 @@ import { Logo } from '../../svgs'
 import { SocialIcons } from '../SocialIcons'
 import { VerticalList } from './components'
 import { useFooterData } from './hooks'
-import { useLabels } from '@utils'
+import { useLabels, playfairDisplay } from '@utils'
 
 interface IFooterProps {}
 
@@ -13,19 +13,19 @@ export const Footer: FC<IFooterProps> = () => {
   const { labels } = useLabels()
 
   return (
-    <div className="w-full bg-primaryTransparent-16">
-      <div className="container mx-auto flex flex-col px-4 py-14 md:flex-row">
+    <div className={`w-full bg-[#F2F7F2] ${playfairDisplay.className}`}>
+      <div className="container mx-auto flex flex-col py-14 px-10 md:flex-row md:px-0 md:pl-40">
         <div className="flex flex-col gap-6">
           <Link href="/">
             <Logo color="#F99012" />
           </Link>
-          <p className="text-sm font-bold">
+          <p className="text-sm font-semibold">
             © All rights reserved made by{' '}
             <Link href={labels.appUrl} target="_blank" className="text-primary">
               {labels.appUrl}
             </Link>
           </p>
-          <SocialIcons className="ml-[-15px] flex justify-start" />
+          <SocialIcons isBw className="ml-[-15px] flex justify-start md:mt-6" />
         </div>
         <div className="mt-10 flex flex-col gap-10 md:mt-0 md:ml-60 md:flex-row md:gap-32">
           <VerticalList links={homeLinks} title="HOME" />
