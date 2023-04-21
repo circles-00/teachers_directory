@@ -1,10 +1,8 @@
-import { useState, type FC } from 'react'
+import { type FC } from 'react'
 import { type StepProps } from '../../types'
-import { Header, StepsHeader } from '@domains/sign-up'
-import { Qualification } from './Qualification'
-import { ButtonContained, ButtonOutlined } from '@components'
+import { SaveButton, StepsHeader } from '@domains/sign-up'
+import { Qualifications } from './components'
 
-// !@ Main component
 interface IQualificationsQuestionnaireProps extends StepProps {}
 
 export const QualificationsQuestionnaire: FC<
@@ -24,70 +22,7 @@ export const QualificationsQuestionnaire: FC<
           custom
         />
       </div>
-      <ButtonContained
-        onClick={() => setCurrentStep(currentStep + 1)}
-        className="ml-auto mt-4 w-52 py-3 text-white"
-      >
-        Save and continue
-      </ButtonContained>
-    </div>
-  )
-}
-
-// !@ Sub components, move when getting too messy
-
-interface IQualifications {
-  title: string
-  description: string
-  custom?: boolean
-}
-
-const Qualifications: FC<IQualifications> = ({
-  title,
-  description,
-  custom,
-}) => {
-  const [qualificationForms, setQualificationForms] = useState([
-    {
-      university: '',
-      course: '',
-      grade: '',
-    },
-  ])
-
-  const addQualification = () => {
-    setQualificationForms([
-      ...qualificationForms,
-      { university: '', course: '', grade: '' },
-    ])
-  }
-
-  const removeQualification = (index: number) => {
-    const newQualifications = [...qualificationForms]
-    newQualifications.splice(index, 1)
-    setQualificationForms(newQualifications)
-  }
-
-  return (
-    <div>
-      <Header title={title} description={description} />
-      <div className="mt-10">
-        {qualificationForms.map((subject, index, array) => (
-          <Qualification
-            index={index}
-            onRemove={removeQualification}
-            key={index}
-            numberOfQualifications={array.length}
-            custom={custom}
-          />
-        ))}
-      </div>
-      <ButtonOutlined
-        onClick={addQualification}
-        className="mt-8 mr-auto w-28 text-primary"
-      >
-        Add Item
-      </ButtonOutlined>
+      <SaveButton onClick={() => setCurrentStep(currentStep + 1)} />
     </div>
   )
 }

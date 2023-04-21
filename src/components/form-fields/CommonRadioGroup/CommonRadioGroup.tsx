@@ -23,13 +23,27 @@ export const CommonRadioGroup = <T,>({
           value={option.value}
         >
           {({ checked }) => (
-            <div className="flex items-center gap-4 py-3 px-4">
-              <div className="flex h-5 w-5 items-center justify-center rounded-full border-[1px] border-black">
+            <div
+              className={`${
+                checked ? 'bg-primary' : ''
+              } flex items-center gap-4 py-3 px-4`}
+            >
+              <div
+                className={`flex h-5 w-5 items-center justify-center rounded-full border-[1.5px] ${
+                  checked ? 'border-white' : 'border-black'
+                }`}
+              >
                 {checked && (
-                  <div className="h-3 w-3 rounded-full bg-primary"></div>
+                  <div className="h-3 w-3 rounded-full  bg-white"></div>
                 )}
               </div>
-              <span className="text-[#919EAB]">{option.label}</span>
+              <span
+                className={`${
+                  checked ? 'font-bold text-white' : 'text-[#919EAB]'
+                }`}
+              >
+                {option.label}
+              </span>
             </div>
           )}
         </RadioGroup.Option>

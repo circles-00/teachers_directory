@@ -1,6 +1,7 @@
 import { Listbox, Transition } from '@headlessui/react'
 import { ChevronDownIcon, CheckIcon } from '@heroicons/react/24/outline'
 import { useState, type FC, Fragment } from 'react'
+import { mergeClassNames } from '@utils'
 
 type Option = {
   value: string
@@ -9,18 +10,26 @@ type Option = {
 interface ISelectProps {
   options: Option[]
   placeholder?: string
+  containerClassName?: string
 }
 
 export const Select: FC<ISelectProps> = ({
   options,
   placeholder = 'Select',
+  containerClassName = '',
 }) => {
   const [selected, setSelected] = useState<Option | null>(null)
   const showPlaceholder = !selected?.value
+  const defaultContainerClassName = 'relative mt-1 w-full'
 
   return (
     <Listbox value={selected} onChange={setSelected}>
-      <div className="relative mt-1 w-full">
+      <div
+        className={mergeClassNames([
+          defaultContainerClassName,
+          containerClassName,
+        ])}
+      >
         <Listbox.Button className="relative w-full cursor-default rounded-lg border-[1px] border-[#919EAB52] bg-white py-4 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
           <span
             className={`block truncate ${

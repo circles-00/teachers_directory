@@ -16,7 +16,8 @@ const config = {
           64: 'rgba(0, 171, 85, 0.64)',
           80: 'rgba(0, 171, 85, 0.80)',
         },
-        colorText: '#212B36'
+        colorText: '#212B36',
+        danger: '#FF5630'
       },
       fontFamily: {
         graphik: ['var(--font-graphik)']

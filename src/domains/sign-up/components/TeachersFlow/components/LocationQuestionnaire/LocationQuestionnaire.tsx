@@ -4,6 +4,7 @@ import { ButtonContained, IconInput, Input } from '@components'
 import { StepsHeader } from '../../../StepsHeader'
 import { Header } from '../../../Header'
 import { type StepProps } from '../../types'
+import { SaveButton } from '../SaveButton'
 
 interface ILocationQuestionnaireProps extends StepProps {}
 
@@ -43,12 +44,7 @@ export const LocationQuestionnaire: FC<ILocationQuestionnaireProps> = ({
             <Input className="py-6" placeholder="Postcode" />
           </div>
         )}
-        <ButtonContained
-          onClick={() => setCurrentStep(currentStep + 1)}
-          className="ml-auto mt-4 w-52 py-3 text-white"
-        >
-          Save and continue
-        </ButtonContained>
+        <SaveButton onClick={() => setCurrentStep(currentStep + 1)} />
       </div>
     </div>
   )

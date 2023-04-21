@@ -76,7 +76,10 @@ export const Subject: FC<SubjectProps> = ({
         onClick={() => onRemove(index)}
         className={`min-w-fit ${isDisabled ? 'cursor-not-allowed' : ''}`}
       >
-        <TrashIcon disabled={isDisabled} fillColor={isDisabled ? '' : 'red'} />
+        <TrashIcon
+          disabled={isDisabled}
+          fillColor={isDisabled ? '' : 'fill-danger'}
+        />
       </button>
     </div>
   )

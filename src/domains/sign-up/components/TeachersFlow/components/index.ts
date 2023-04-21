@@ -1,4 +1,6 @@
 export * from './ExperienceQuestionnaire'
 export * from './LocationQuestionnaire'
+export * from './ProfileQuestionnaire'
 export * from './QualificationsQuestionnaire'
+export * from './SaveButton'
 export * from './SubjectsQuestionnaire'
