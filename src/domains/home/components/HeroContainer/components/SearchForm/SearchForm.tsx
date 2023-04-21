@@ -1,5 +1,5 @@
 import { type FC } from 'react'
-import { Input } from '@components/common'
+import { Input } from '@components'
 import { useLabels } from '@utils'
 
 // TODO: Refactor forms when integrating with react-hook-form, for now we just want the looks

@@ -5,7 +5,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { HamburgerIcon } from './components/HamburgerIcon'
 import { NavigationItems } from './components/NavigationItems'
 import { useRouter } from 'next/router'
-import { playfairDisplay, useLabels } from '@utils'
+import { useLabels } from '@utils'
 
 interface INavigationProps {}
 
