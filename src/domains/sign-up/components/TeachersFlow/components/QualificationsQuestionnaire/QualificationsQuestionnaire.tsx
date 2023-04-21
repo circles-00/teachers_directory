@@ -34,6 +34,8 @@ export const QualificationsQuestionnaire: FC<
   )
 }
 
+// !@ Sub components, move when getting too messy
+
 interface IQualifications {
   title: string
   description: string

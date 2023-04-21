@@ -8,16 +8,27 @@ type Option = {
 
 interface ISelectProps {
   options: Option[]
+  placeholder?: string
 }
 
-export const Select: FC<ISelectProps> = ({ options }) => {
+export const Select: FC<ISelectProps> = ({
+  options,
+  placeholder = 'Select',
+}) => {
   const [selected, setSelected] = useState<Option | null>(null)
+  const showPlaceholder = !selected?.value
 
   return (
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative mt-1 w-full">
-        <Listbox.Button className="relative w-full cursor-default rounded-lg border-[1px] border-[#919EAB52] bg-white py-3 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-          <span className="block truncate">{selected?.value ?? 'Select'}</span>
+        <Listbox.Button className="relative w-full cursor-default rounded-lg border-[1px] border-[#919EAB52] bg-white py-4 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+          <span
+            className={`block truncate ${
+              showPlaceholder ? 'text-[#919EAB]' : ''
+            }`}
+          >
+            {selected?.value ?? placeholder}
+          </span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronDownIcon
               className="h-5 w-5 stroke-black text-gray-400"

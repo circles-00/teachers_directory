@@ -5,6 +5,7 @@ import {
   SubjectsQuestionnaire,
   type StepProps,
   QualificationsQuestionnaire,
+  ExperienceQuestionnaire,
 } from '@domains/sign-up'
 import { type FC, useState, useMemo } from 'react'
 
@@ -25,7 +26,7 @@ const steps = [
   },
   {
     title: 'Your teaching life',
-    component: DummyComponent,
+    component: ExperienceQuestionnaire,
   },
   {
     title: 'Your profile',
