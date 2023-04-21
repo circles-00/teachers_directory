@@ -7,7 +7,6 @@ import {
   PencilIcon,
   RichTextEditor,
   RoundedContainer,
-  Select,
   TrashIcon,
 } from '@components'
 import { ProfilePicture, SocialLinkForm } from './components'
