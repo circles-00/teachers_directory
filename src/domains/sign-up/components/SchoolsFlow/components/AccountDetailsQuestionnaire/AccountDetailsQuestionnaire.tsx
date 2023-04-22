@@ -16,8 +16,8 @@ export const AccountDetailsQuestionnaire: FC<
   const [termsAccepted, setTermsAccepted] = useState(false)
 
   return (
-    <div className="flex gap-8">
-      <div className="flex w-5/6 flex-col">
+    <div className="flex flex-col gap-8 md:flex-row">
+      <div className="mb-8 flex flex-col md:mb-0 md:w-5/6">
         <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
         <Header
           title={'Account details'}

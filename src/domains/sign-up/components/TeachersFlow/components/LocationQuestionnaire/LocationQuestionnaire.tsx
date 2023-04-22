@@ -1,7 +1,7 @@
 import { useState, type FC } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { IconInput, Input } from '@components'
-import { StepsHeader } from '../../../StepsHeader'
+import { StepsHeader } from '@domains/sign-up'
 import { Header } from '../../../Header'
 import { type StepProps } from '../../types'
 import { SaveButton } from '../SaveButton'

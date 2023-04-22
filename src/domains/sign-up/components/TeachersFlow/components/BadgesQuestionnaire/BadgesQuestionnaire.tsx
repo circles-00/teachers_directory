@@ -32,7 +32,7 @@ export const BadgesQuestionnaire: FC<IBadgesQuestionnaireProps> = ({
   totalSteps,
 }) => {
   return (
-    <div className="flex w-5/6 flex-col">
+    <div className="flex flex-col md:w-5/6">
       <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
       <Header
         title={'Would you like a badge next to your name?'}
@@ -44,7 +44,7 @@ export const BadgesQuestionnaire: FC<IBadgesQuestionnaireProps> = ({
         ))}
       </div>
 
-      {/* LAST STEP, handler do nothing*/}
+      {/* LAST STEP, handler do nothing */}
       <SaveButton onClick={() => null} />
     </div>
   )

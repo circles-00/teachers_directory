@@ -19,7 +19,7 @@ export const StepperSidebar: FC<IStepperSidebarProps> = ({
   const isCurrentStep = (index: number) => index === currentStep
 
   return (
-    <div className="w-94 mr-8">
+    <div className="w-94 mr-8 hidden md:block">
       <RoundedContainer className="p-4 md:mx-0 md:w-full">
         {steps.map((item, index) => (
           <button

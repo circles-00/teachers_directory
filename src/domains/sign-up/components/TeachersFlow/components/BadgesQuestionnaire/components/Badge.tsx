@@ -17,7 +17,7 @@ export const Badge: FC<IBadgeProps> = ({ title, description }) => {
   return (
     <div className="flex flex-col rounded-lg shadow-md">
       <div
-        className="flex justify-between gap-10 py-6 px-4"
+        className="flex flex-col justify-between gap-10 py-6 px-4 md:flex-row"
         {...getRootProps()}
       >
         <input {...getInputProps()} />
@@ -34,16 +34,19 @@ export const Badge: FC<IBadgeProps> = ({ title, description }) => {
       </div>
 
       {uploadedFiles.length > 0 && (
-        <div className="ml-16 mt-4 flex w-9/12 flex-col gap-2 pb-6">
+        <div className="mt-4 flex w-full flex-col gap-2 pb-6 md:ml-16 md:w-9/12">
           {uploadedFiles.map((file, index) => (
             <div
               className="flex items-center justify-between rounded-lg bg-[#00AB550D] py-4 px-4"
               key={index}
             >
-              <div className="flex w-4/12 items-center gap-4">
+              <div className="flex items-center gap-4">
                 <FileIcon fileType={file.type} />
                 <div className="tooltip" data-tip={file.name}>
-                  <p>{formatLongString(file.name, 20)}</p>
+                  <p className="hidden md:block">
+                    {formatLongString(file.name, 20)}
+                  </p>
+                  <p className="md:hidden">{formatLongString(file.name, 10)}</p>
                 </div>
               </div>
               <button className="mr-2" onClick={() => onRemoveFile(index)}>

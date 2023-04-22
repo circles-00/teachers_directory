@@ -1,6 +1,7 @@
 import { Input, TrashIcon } from '@components'
 import { type FC } from 'react'
 import { Select } from '@components'
+import { TrashButton } from '@domains/sign-up'
 
 const subjects = [
   {
@@ -69,7 +70,7 @@ export const Qualification: FC<QualificationProps> = ({
   const isDisabled = numberOfQualifications === 1
 
   return (
-    <div className="mt-4 flex items-center justify-between gap-2">
+    <div className="mt-4 flex flex-col items-center justify-between gap-2 md:flex-row">
       {!custom && (
         <>
           <Select options={subjects} />
@@ -84,16 +85,7 @@ export const Qualification: FC<QualificationProps> = ({
           <Input placeholder="Grade" />
         </>
       )}
-      <button
-        disabled={isDisabled}
-        onClick={() => onRemove(index)}
-        className={`min-w-fit ${isDisabled ? 'cursor-not-allowed' : ''}`}
-      >
-        <TrashIcon
-          disabled={isDisabled}
-          fillColor={isDisabled ? '' : 'fill-danger'}
-        />
-      </button>
+      <TrashButton index={index} onRemove={onRemove} isDisabled={isDisabled} />
     </div>
   )
 }

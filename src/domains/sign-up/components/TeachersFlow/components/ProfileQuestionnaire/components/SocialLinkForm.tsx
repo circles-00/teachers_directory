@@ -1,5 +1,6 @@
 import { type FC } from 'react'
 import { Select, Input, TrashIcon } from '@components'
+import { TrashButton } from '@domains/sign-up'
 
 interface ISocialLinkFormProps {
   onRemove: (index: number) => void
@@ -13,7 +14,7 @@ export const SocialLinkForm: FC<ISocialLinkFormProps> = ({
   isDisabled,
 }) => {
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex flex-col items-center gap-5 md:flex-row">
       <Select
         containerClassName="w-1/2"
         options={[
@@ -27,17 +28,7 @@ export const SocialLinkForm: FC<ISocialLinkFormProps> = ({
         className="py-[1.65rem]"
         containerClassName="mt-1"
       />
-      <button
-        disabled={isDisabled}
-        onClick={() => onRemove(index)}
-        className={isDisabled ? 'cursor-not-allowed' : ''}
-      >
-        <TrashIcon
-          disabled={isDisabled}
-          fillColor={isDisabled ? '' : 'fill-danger'}
-          size={{ width: 30, height: 30 }}
-        />
-      </button>
+      <TrashButton index={index} onRemove={onRemove} isDisabled={isDisabled} />
     </div>
   )
 }

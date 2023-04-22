@@ -12,10 +12,9 @@ interface IAddressQuestionnaireProps extends StepProps {}
 export const AddressQuestionnaire: FC<IAddressQuestionnaireProps> = ({
   totalSteps,
   currentStep,
-  setCurrentStep,
 }) => {
   return (
-    <div className="flex w-5/6 flex-col">
+    <div className="flex flex-col md:w-5/6">
       <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
       <Header
         title={'Address and information'}
@@ -23,14 +22,14 @@ export const AddressQuestionnaire: FC<IAddressQuestionnaireProps> = ({
       />
       <div className="mt-8 flex flex-col gap-5">
         <Input placeholder={'School / Organisation name'} />
-        <div className="flex gap-4">
+        <div className="flex flex-col gap-4 md:flex-row">
           <Input placeholder={'Address'} />
           <Input placeholder={'Post code'} />
-          <ButtonOutlined className="w-72 px-2 text-primary">
+          <ButtonOutlined className="px-2 text-primary md:w-72">
             Add manually
           </ButtonOutlined>
         </div>
-        <Input placeholder={'Phone number'} />
+        <Input containerClassName="mt-4 md:mt-0" placeholder={'Phone number'} />
       </div>
 
       <div className="mt-4">

@@ -30,7 +30,7 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
   }
 
   return (
-    <div className="flex w-5/6 flex-col">
+    <div className="flex flex-col md:w-5/6">
       <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
       <Header
         title={'Your Availability'}
@@ -42,7 +42,7 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
           Are you available for work now or in the future?
         </h3>
         <CommonRadioGroup<typeof availability>
-          className="mt-4 w-full"
+          className="mt-4 w-full flex-col md:flex-row"
           options={[
             { value: 'now', label: 'I’m available now' },
             { value: 'future', label: 'I will be available later' },
@@ -58,7 +58,7 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
           </h3>
 
           {/* TODO: Abstract this clickable icon input as a common component */}
-          <div className="mt-2 flex w-1/3 items-center justify-center">
+          <div className="mt-2 flex items-center justify-center md:w-1/3">
             <input
               value={availabilityDate?.toLocaleDateString()}
               placeholder="Select Date"

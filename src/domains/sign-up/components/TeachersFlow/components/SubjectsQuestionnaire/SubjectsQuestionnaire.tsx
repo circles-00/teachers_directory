@@ -32,7 +32,7 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
   }
 
   return (
-    <div className="flex w-5/6 flex-col">
+    <div className="flex flex-col md:w-5/6">
       <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
       <Header
         title="What subject can you teach?"

@@ -15,7 +15,7 @@ export const ExperienceQuestionnaire: FC<IExperienceQuestionnaireProps> = ({
   totalSteps,
 }) => {
   return (
-    <div className="flex w-5/6 flex-col">
+    <div className="flex flex-col md:w-5/6">
       <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
       <Header
         title={'Tell us about your teaching life'}

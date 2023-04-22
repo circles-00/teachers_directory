@@ -1,6 +1,6 @@
-import { TrashIcon } from '@components'
 import { type FC } from 'react'
 import { Select } from '@components'
+import { TrashButton } from '@domains/sign-up'
 
 const subjects = [
   {
@@ -67,20 +67,11 @@ export const Subject: FC<SubjectProps> = ({
   const isDisabled = numberOfSubjects === 1
 
   return (
-    <div className="mt-4 flex items-center justify-between gap-2">
+    <div className="mt-4 flex flex-col items-center justify-between gap-2 md:flex-row">
       <Select options={subjects} />
       <Select options={levels} />
       <Select options={examBoards} />
-      <button
-        disabled={isDisabled}
-        onClick={() => onRemove(index)}
-        className={`min-w-fit ${isDisabled ? 'cursor-not-allowed' : ''}`}
-      >
-        <TrashIcon
-          disabled={isDisabled}
-          fillColor={isDisabled ? '' : 'fill-danger'}
-        />
-      </button>
+      <TrashButton onRemove={onRemove} index={index} isDisabled={isDisabled} />
     </div>
   )
 }

@@ -47,7 +47,7 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
   }
 
   return (
-    <div className="flex w-5/6 flex-col">
+    <div className="flex flex-col md:w-5/6">
       <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
       <Header
         title={'Your Profile'}
@@ -55,7 +55,7 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis at tortor at sagittis. Nullam eleifend, justo vitae consequat blandit, turpis tortor sodales'
         }
       />
-      <div className="mt-8 flex gap-4">
+      <div className="mt-8 flex flex-col gap-4 md:flex-row">
         <ProfilePicture />
         <RoundedContainer className="py-8 px-6 md:w-full">
           <h3 className="text-lg font-bold text-colorText">Deja Brady</h3>
@@ -97,7 +97,7 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
       <div className="mt-8 flex flex-col gap-5">
         <h3 className="text-lg font-bold">Gender</h3>
         <CommonRadioGroup<typeof currentGender>
-          className="w-full"
+          className="w-full flex-col md:flex-row"
           value={currentGender}
           onChange={setCurrentGender}
           options={genders}
@@ -106,7 +106,7 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
 
       <div className="mt-8 flex flex-col gap-5">
         <h3 className="text-lg font-bold">Date of birth</h3>
-        <div className="flex gap-5">
+        <div className="flex flex-col gap-5 md:flex-row">
           <Input placeholder="Day" className="pl-4" />
           <Input placeholder="Month" className="pl-4" />
           <Input placeholder="Year" className="pl-4" />
@@ -129,6 +129,7 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
       >
         Add Item
       </ButtonOutlined>
+
       <SaveButton onClick={() => setCurrentStep(currentStep + 1)} />
     </div>
   )

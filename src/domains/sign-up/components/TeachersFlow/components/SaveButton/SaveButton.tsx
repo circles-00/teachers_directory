@@ -19,8 +19,8 @@ export const SaveButton: FC<ISaveButtonProps> = ({
   className = '',
 }) => {
   const defaultClassName = `${
-    position === 'right' ? 'ml-auto' : 'mr-auto'
-  } mt-4 flex w-52 items-center justify-center py-3 pl-3`
+    position === 'right' ? 'md:ml-auto' : 'md:mr-auto'
+  } mt-4 flex w-52 items-center justify-center mr-auto md:mr-0 py-3 pl-3`
 
   return (
     <ButtonContained

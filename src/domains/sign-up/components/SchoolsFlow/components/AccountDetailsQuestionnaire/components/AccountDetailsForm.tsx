@@ -12,7 +12,7 @@ export const AccountDetailsForm: FC<IAccountDetailsFormProps> = ({
 }) => {
   return (
     <div className="mt-8 flex flex-col gap-6">
-      <div className="flex gap-4">
+      <div className="flex flex-col gap-4 md:flex-row">
         <Input placeholder={'First name'} />
         <Input placeholder={'Surname'} />
       </div>
@@ -20,7 +20,7 @@ export const AccountDetailsForm: FC<IAccountDetailsFormProps> = ({
         <Input placeholder={'Job title'} />
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex flex-col gap-4 md:flex-row">
         <div className="w-full">
           <Input placeholder={'Email Address'} />
           <p className="mt-2 text-sm">
