@@ -19,7 +19,7 @@ export const Input: FC<IInputProps> = ({
   containerClassName = '',
 }) => {
   const defaultClassName =
-    'h-12 rounded-md border-[1px] border-[#0000004D] p-2 focus:outline-slate-400'
+    'h-12 rounded-md border-[1px] border-[#0000004D] p-2 focus:outline-gray-500 focus:outline-1'
   const labelDefaultClassName = 'pb-2'
   const defaultContainerClassName = 'flex w-full min-w-0 flex-col'
 
