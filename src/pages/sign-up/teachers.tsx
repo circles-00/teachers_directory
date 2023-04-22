@@ -3,14 +3,14 @@ import {
   LocationQuestionnaire,
   StepperSidebar,
   SubjectsQuestionnaire,
-  type StepProps,
   QualificationsQuestionnaire,
   ExperienceQuestionnaire,
   ProfileQuestionnaire,
   AvailabilityQuestionnaire,
   BadgesQuestionnaire,
+  CurrentStepComponent,
 } from '@domains/sign-up'
-import { type FC, useState, useMemo } from 'react'
+import { useState } from 'react'
 
 const steps = [
   {
@@ -43,16 +43,6 @@ const steps = [
   },
 ]
 
-const CurrentStepComponent: FC<StepProps> = ({ currentStep, ...props }) => {
-  const CurrentComponent = useMemo(() => {
-    return steps[currentStep]?.component
-  }, [currentStep])
-
-  if (!CurrentComponent) return <></>
-
-  return <CurrentComponent currentStep={currentStep} {...props} />
-}
-
 const TeachersSignUpPage: NextPage = () => {
   const [currentStep, setCurrentStep] = useState(0)
 
@@ -68,6 +58,7 @@ const TeachersSignUpPage: NextPage = () => {
           currentStep={currentStep}
           totalSteps={steps.length}
           setCurrentStep={setCurrentStep}
+          steps={steps}
         />
       </div>
     </div>

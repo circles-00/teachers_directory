@@ -14,6 +14,7 @@ export const MobileDrawer: FC<IMobileDrawerProps> = () => {
   }
 
   return (
+    // DaisyUI drawer component
     <div className="drawer-side flex h-screen flex-col items-start">
       <label htmlFor="my-drawer" className="drawer-overlay"></label>
 

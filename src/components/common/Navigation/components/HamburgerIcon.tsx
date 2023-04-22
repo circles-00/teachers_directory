@@ -21,6 +21,7 @@ export const HamburgerIcon: FC<IHamburgerIconProps> = () => {
 
   return (
     <div className="mt-2">
+      {/* DaisyUI */}
       <label className="swap-rotate swap mr-3 sm:visible md:invisible">
         <input
           id="drawer"

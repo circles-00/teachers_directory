@@ -8,6 +8,7 @@ interface AvailabilityTableProps {}
 export const AvailabilityTable: FC<AvailabilityTableProps> = () => {
   return (
     <div className="mt-7 overflow-x-auto">
+      {/* DaisyUI */}
       <table className="table w-full">
         {/* head */}
         <thead>
