@@ -1,12 +1,11 @@
 import { type NextPage } from 'next'
 import {
   AccountDetailsQuestionnaire,
+  AddressQuestionnaire,
   CurrentStepComponent,
   StepperSidebar,
 } from '@domains/sign-up'
 import { useState } from 'react'
-
-const DummyComponent = () => <></>
 
 const steps = [
   {
@@ -15,7 +14,7 @@ const steps = [
   },
   {
     title: 'Address and information',
-    component: DummyComponent,
+    component: AddressQuestionnaire,
   },
 ]
 

@@ -1,20 +1,34 @@
 import { type FC } from 'react'
 import { ButtonContained } from '@components'
 import { ArrowLongRightIcon } from '@heroicons/react/20/solid'
+import { mergeClassNames } from '@utils'
 
 interface ISaveButtonProps {
-  onClick: () => void
+  onClick?: () => void
   disabled?: boolean
+  position?: 'left' | 'right'
+  label?: string
+  className?: string
 }
 
-export const SaveButton: FC<ISaveButtonProps> = ({ onClick, disabled }) => {
+export const SaveButton: FC<ISaveButtonProps> = ({
+  onClick,
+  disabled,
+  position = 'right',
+  label = 'Save and continue',
+  className = '',
+}) => {
+  const defaultClassName = `${
+    position === 'right' ? 'ml-auto' : 'mr-auto'
+  } mt-4 flex w-52 items-center justify-center py-3 pl-3`
+
   return (
     <ButtonContained
       onClick={onClick}
-      className="ml-auto mt-4 flex w-52 items-center justify-center py-3 pl-3"
+      className={mergeClassNames([defaultClassName, className])}
       disabled={disabled}
     >
-      Save and continue
+      {label}
       <ArrowLongRightIcon className="ml-1 h-6 w-6" />
     </ButtonContained>
   )
