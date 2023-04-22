@@ -8,6 +8,7 @@ import {
   ExperienceQuestionnaire,
   ProfileQuestionnaire,
   AvailabilityQuestionnaire,
+  BadgesQuestionnaire,
 } from '@domains/sign-up'
 import { type FC, useState, useMemo } from 'react'
 
@@ -35,6 +36,10 @@ const steps = [
   {
     title: 'Your availability?',
     component: AvailabilityQuestionnaire,
+  },
+  {
+    title: 'Badges',
+    component: BadgesQuestionnaire,
   },
 ]
 

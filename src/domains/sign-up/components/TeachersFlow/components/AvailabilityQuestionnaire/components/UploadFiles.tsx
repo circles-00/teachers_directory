@@ -1,29 +1,15 @@
-import { type FC, useCallback, useState } from 'react'
+import { type FC } from 'react'
 import { Header } from '@domains/sign-up'
 import IllustrationUpload from '@assets/illustration_upload.png'
 import Image from 'next/image'
-import { useDropzone } from 'react-dropzone'
 import { FilesList } from './FilesList'
+import { useDropZoneUtils } from '~/hooks'
 
 interface IUploadFilesProps {}
 
 export const UploadFiles: FC<IUploadFilesProps> = () => {
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
-
-  const onDrop = useCallback(
-    (files: File[]) => {
-      setUploadedFiles([...uploadedFiles, ...files])
-    },
-    [uploadedFiles]
-  )
-
-  const { getRootProps, getInputProps } = useDropzone({ onDrop })
-
-  const onRemoveFile = (index: number) => {
-    const newUploadedFiles = [...uploadedFiles]
-    newUploadedFiles.splice(index, 1)
-    setUploadedFiles(newUploadedFiles)
-  }
+  const { uploadedFiles, onRemoveFile, getInputProps, getRootProps } =
+    useDropZoneUtils()
 
   return (
     <div className="mt-8">

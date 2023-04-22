@@ -1,16 +1,8 @@
 import { type FC } from 'react'
 import { formatLongString, getFileSizeInMB } from '@utils'
 import { format } from 'date-fns'
-import { DocumentIcon, PhotoIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { PdfIcon, WordIcon } from '@components'
-
-const Icon: FC<{ fileType: string }> = ({ fileType }) => {
-  if (fileType.includes('pdf')) return <PdfIcon />
-  if (fileType.includes('image')) return <PhotoIcon className="h-8 w-8" />
-  if (fileType.includes('word')) return <WordIcon />
-
-  return <DocumentIcon className="h-8 w-8" />
-}
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import { FileIcon } from '@components/common/FileIcon'
 
 interface IFilesListProps {
   uploadedFiles: File[]
@@ -29,7 +21,7 @@ export const FilesList: FC<IFilesListProps> = ({
           key={index}
         >
           <div className="flex w-4/12 items-center gap-4">
-            <Icon fileType={file.type} />
+            <FileIcon fileType={file.type} />
             <div className="tooltip" data-tip={file.name}>
               <p>{formatLongString(file.name, 20)}</p>
             </div>
