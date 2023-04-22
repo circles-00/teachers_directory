@@ -5,7 +5,7 @@ import { api } from '~/utils/api'
 import '~/styles/globals.css'
 import Head from 'next/head'
 import { BackToTop, Footer, MobileDrawer, Navigation } from '@components/common'
-import { useCommonStore } from '../store'
+import { useCommonStore } from '@store'
 import { inter } from '@utils'
 
 const TeachersDirectory: AppType = ({ Component, pageProps }) => {
