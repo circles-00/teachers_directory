@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { type FC, useEffect } from 'react'
 
 interface IHeaderProps {
   title: string
@@ -6,6 +6,10 @@ interface IHeaderProps {
 }
 
 export const Header: FC<IHeaderProps> = ({ title, description }) => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
   return (
     <div>
       <h1 className="mt-2 text-2xl font-bold text-primary">{title}</h1>

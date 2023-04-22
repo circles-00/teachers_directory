@@ -20,14 +20,19 @@ export const FilesList: FC<IFilesListProps> = ({
           className="flex items-center justify-between bg-[#00AB550D] py-4 px-4"
           key={index}
         >
-          <div className="flex w-4/12 items-center gap-4">
+          <div className="flex items-center gap-4">
             <FileIcon fileType={file.type} />
             <div className="tooltip" data-tip={file.name}>
-              <p>{formatLongString(file.name, 20)}</p>
+              <p className="hidden md:block">
+                {formatLongString(file.name, 20)}
+              </p>
+              <p className="md:hidden">{formatLongString(file.name, 10)}</p>
             </div>
           </div>
-          <p className="text-[#637381]">{`${getFileSizeInMB(file)} MB`}</p>
-          <p className="text-[#637381]">
+          <p className="hidden text-[#637381] md:block">{`${getFileSizeInMB(
+            file
+          )} MB`}</p>
+          <p className="hidden text-[#637381] md:block">
             {format(new Date(file.lastModified), 'dd LLL Y')}
           </p>
           <button className="mr-2" onClick={() => onRemoveFile(index)}>

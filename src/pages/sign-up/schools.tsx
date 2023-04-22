@@ -28,7 +28,7 @@ const Schools: NextPage = () => {
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
       />
-      <div className="mt-2 w-3/6">
+      <div className="mt-2 w-5/6 md:w-3/6">
         <CurrentStepComponent
           currentStep={currentStep}
           totalSteps={steps.length}

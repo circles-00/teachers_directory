@@ -19,7 +19,7 @@ export const UploadFiles: FC<IUploadFilesProps> = () => {
       />
       <div
         {...getRootProps()}
-        className="mt-7 flex items-center gap-4 rounded-lg border-[1px] border-dashed border-[#919EAB52] py-10 px-4"
+        className="mt-7 flex flex-col items-center gap-4 rounded-lg border-[1px] border-dashed border-[#919EAB52] py-10 px-4 md:flex-row"
       >
         <Image
           src={IllustrationUpload.src}
