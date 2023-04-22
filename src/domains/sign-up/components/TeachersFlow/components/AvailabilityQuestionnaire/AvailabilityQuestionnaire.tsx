@@ -5,10 +5,7 @@ import {
   type StepProps,
   StepsHeader,
 } from '@domains/sign-up'
-import {
-  AvailabilityTable,
-  UploadFiles,
-} from '@domains/sign-up/components/TeachersFlow/components/AvailabilityQuestionnaire/components'
+import { AvailabilityTable, UploadFiles } from './components'
 import { CommonRadioGroup } from '@components'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
