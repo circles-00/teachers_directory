@@ -7,10 +7,9 @@ import {
   QualificationsQuestionnaire,
   ExperienceQuestionnaire,
   ProfileQuestionnaire,
+  AvailabilityQuestionnaire,
 } from '@domains/sign-up'
 import { type FC, useState, useMemo } from 'react'
-
-const DummyComponent = () => <p>In Progress...</p>
 
 const steps = [
   {
@@ -35,7 +34,7 @@ const steps = [
   },
   {
     title: 'Your availability?',
-    component: DummyComponent,
+    component: AvailabilityQuestionnaire,
   },
 ]
 
