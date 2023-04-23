@@ -27,7 +27,7 @@ export const FilterPanel: FC<IFilterPanelProps> = ({
           !isOpen ? 'rounded-md border-b-[1px]' : 'rounded-t-md border-b-0'
         } flex items-center justify-between border-[1px] border-[#8E9BAF] py-4 px-4`}
       >
-        <h3>Hours</h3>
+        <h3>{filterItem.title}</h3>
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? (
             <ChevronUpIcon className="h-5 w-5 stroke-2" />
