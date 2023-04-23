@@ -21,7 +21,9 @@ const TeachersDirectory: AppType = ({ Component, pageProps }) => {
       <div className={inter.className}>
         <Navigation />
         {isMobileDrawerOpen && <MobileDrawer />}
-        {!isMobileDrawerOpen && <Component {...pageProps} />}
+        <div className={isMobileDrawerOpen ? 'hidden' : 'block'}>
+          <Component {...pageProps} />
+        </div>
         {!isMobileDrawerOpen && <Footer />}
         <BackToTop />
       </div>
