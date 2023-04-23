@@ -21,7 +21,7 @@ export const AccountDetailsQuestionnaire: FC<
         <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
         <Header
           title={'Account details'}
-          description={`After the sign up process, we will send you a link to your email address  to verify your account.`}
+          description={`After the sign up process, we will send you a link to your email address to verify your account.`}
         />
         <AccountDetailsForm
           termsAccepted={termsAccepted}
