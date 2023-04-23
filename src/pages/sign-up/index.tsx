@@ -17,7 +17,7 @@ const SignUp: NextPage = () => {
   return (
     <div className="md:ml-52">
       <div className="my-12 flex flex-col md:ml-10 md:flex-row">
-        <div className="flex flex-col gap-4 md:mt-32">
+        <div className="mx-10 flex flex-col gap-4 md:mx-0 md:mt-32">
           <h1 className="text-5xl font-bold">
             Get started <br /> absolutely <br />{' '}
             <span className="bg-gradient-to-r from-[#FFAB00] via-[#00AB55] to-[#00AB55] bg-clip-text text-transparent">
