@@ -119,7 +119,6 @@ const filterItems: Item[] = [
 
 const Search: NextPage = () => {
   const [selectedFilters, setSelectedFilters] = useState<TFilterItem[]>([])
-  console.log({ selectedFilters })
 
   const addFilter = (item: TFilterItem) => {
     if (selectedFilters) {
