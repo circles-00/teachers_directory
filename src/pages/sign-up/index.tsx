@@ -70,7 +70,7 @@ const SignUp: NextPage = () => {
                 />
               </div>
             ) : (
-              <SignUpForm onSubmit={onSubmit} isLoading={isLoading} />
+              <SignUpForm isLoading={isLoading} />
             )}
           </div>
         </div>

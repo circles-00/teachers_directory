@@ -6,7 +6,12 @@ const ForgotPassword: NextPage = () => {
   const [isCodeConfirmation, setIsCodeConfirmation] = useState(false)
 
   return isCodeConfirmation ? (
-    <CodeConfirmation isForgotPassword />
+    <CodeConfirmation
+      onSubmit={() => {
+        console.log()
+      }}
+      isForgotPassword
+    />
   ) : (
     <InitialEmailForm setIsCodeConfirmation={setIsCodeConfirmation} />
   )

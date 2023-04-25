@@ -18,12 +18,12 @@ export class Mailer {
 
   createTransporter() {
     return (this.transporter = nodemailer.createTransport({
-      host: env.SMTP_HOST as string,
-      port: parseInt(env.SMTP_PORT as string),
+      host: env.SMTP_HOST,
+      port: parseInt(env.SMTP_PORT),
       secure: false, // true for 465, false for other ports
       auth: {
-        user: env.SMTP_USER as string,
-        pass: env.SMTP_PASSWORD as string,
+        user: env.SMTP_USER,
+        pass: env.SMTP_PASSWORD,
       },
     }))
   }
@@ -31,7 +31,7 @@ export class Mailer {
   async sendMail(mailOptions: nodemailer.SendMailOptions) {
     return this.transporter?.sendMail({
       ...mailOptions,
-      from: env.SMTP_USER as string,
+      from: env.SMTP_USER,
     })
   }
 }

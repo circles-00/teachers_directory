@@ -1,4 +1,4 @@
-import { type AppProps, type AppType } from 'next/app'
+import { type AppProps } from 'next/app'
 
 import { api } from '~/utils/api'
 

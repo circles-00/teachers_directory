@@ -6,15 +6,14 @@ import {
   TextFormField,
 } from '@components'
 import Link from 'next/link'
-import { ThirdPartyLogin, type TSignUp } from '@domains/auth'
+import { ThirdPartyLogin } from '@domains/auth'
 import { useLabels } from '@utils'
 
 interface ISignUpFormProps {
-  onSubmit: (data: TSignUp) => void
   isLoading: boolean
 }
 
-export const SignUpForm: FC<ISignUpFormProps> = ({ onSubmit, isLoading }) => {
+export const SignUpForm: FC<ISignUpFormProps> = ({ isLoading }) => {
   const { labels } = useLabels()
 
   return (
