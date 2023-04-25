@@ -1,10 +1,5 @@
 import { type NextPage } from 'next'
-import {
-  ButtonContained,
-  RoundedContainer,
-  SuccessAlert,
-  TextFormField,
-} from '@components'
+import { ButtonContained, RoundedContainer, TextFormField } from '@components'
 import { useLabels } from '@utils'
 import {
   LoginSchema,
@@ -16,6 +11,7 @@ import Link from 'next/link'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
+import { SuccessAlert } from '@components/common/Alerts'
 
 const LoginPage: NextPage = () => {
   const { labels } = useLabels()
