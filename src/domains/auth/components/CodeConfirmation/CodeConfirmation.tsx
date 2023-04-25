@@ -1,16 +1,23 @@
-import { useState, type FC } from 'react'
+import { type FC } from 'react'
 import { EmailInboxIcon } from '@components'
 import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import { CodeConfirmationForm } from './CodeConfirmationForm'
+import { CodeConfirmationForm } from '@domains/auth'
 import { PasswordConfirmation } from './PasswordConfirmation'
 
-interface ICodeConfirmationProps {}
+interface ICodeConfirmationProps {
+  isForgotPassword?: boolean
+  onSubmit: (code: string) => void
+  isCodeCorrect?: boolean
+  error?: string
+}
 
-export const CodeConfirmation: FC<ICodeConfirmationProps> = () => {
-  // TODO: Refactor, call API to check code
-  const [isCodeCorrect, setIsCodeCorrect] = useState(false)
-
+export const CodeConfirmation: FC<ICodeConfirmationProps> = ({
+  isForgotPassword,
+  onSubmit,
+  isCodeCorrect,
+  error,
+}) => {
   return (
     <div className="my-20 flex flex-col">
       <div className="flex w-full flex-col items-center gap-4 px-4 md:mx-auto md:w-2/6">
@@ -24,9 +31,10 @@ export const CodeConfirmation: FC<ICodeConfirmationProps> = () => {
         </p>
         <CodeConfirmationForm
           isCodeCorrect={isCodeCorrect}
-          onSubmit={() => setIsCodeCorrect(true)}
+          onSubmit={onSubmit}
         />
-        {isCodeCorrect && <PasswordConfirmation />}
+        {isForgotPassword && isCodeCorrect && <PasswordConfirmation />}
+        {!!error && <p className="text-sm text-danger">{error}</p>}
         {!isCodeCorrect && (
           <p className="text-sm">
             Dont&apos;t have a code?{' '}
@@ -35,12 +43,14 @@ export const CodeConfirmation: FC<ICodeConfirmationProps> = () => {
             </span>
           </p>
         )}
-        <div className="flex items-center gap-2">
-          <ChevronLeftIcon className="h-4 w-4" />
-          <Link href="/login" className="text-sm text-black">
-            Return to sign in
-          </Link>
-        </div>
+        {isForgotPassword && (
+          <div className="flex items-center gap-2">
+            <ChevronLeftIcon className="h-4 w-4" />
+            <Link href="/src/pages/login" className="text-sm text-black">
+              Return to sign in
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   )

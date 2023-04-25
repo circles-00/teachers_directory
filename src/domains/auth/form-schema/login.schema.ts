@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const LoginFormSchema = z.object({
+export const LoginSchema = z.object({
   username: z
     .string({
       required_error: 'Username is required',
@@ -19,4 +19,4 @@ export const LoginFormSchema = z.object({
     }),
 })
 
-export type TLoginForm = z.infer<typeof LoginFormSchema>
+export type TLoginForm = z.infer<typeof LoginSchema>

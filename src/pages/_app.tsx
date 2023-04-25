@@ -1,4 +1,4 @@
-import { type AppType } from 'next/app'
+import { type AppProps, type AppType } from 'next/app'
 
 import { api } from '~/utils/api'
 
@@ -7,12 +7,14 @@ import Head from 'next/head'
 import { BackToTop, Footer, MobileDrawer, Navigation } from '@components/common'
 import { useCommonStore } from '@store'
 import { inter } from '@utils'
+import { SessionProvider } from 'next-auth/react'
 
-const TeachersDirectory: AppType = ({ Component, pageProps }) => {
+const TeachersDirectory = ({ Component, pageProps }: AppProps) => {
   const { isMobileDrawerOpen } = useCommonStore()
 
   return (
-    <>
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
+    <SessionProvider session={pageProps.session}>
       <Head>
         <title>Teachers Directory</title>
         <meta name="description" content="Teachers Directory" />
@@ -27,7 +29,7 @@ const TeachersDirectory: AppType = ({ Component, pageProps }) => {
         {!isMobileDrawerOpen && <Footer />}
         <BackToTop />
       </div>
-    </>
+    </SessionProvider>
   )
 }
 

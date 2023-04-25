@@ -3,7 +3,7 @@ import { generateArray } from '@utils'
 import isEmpty from 'lodash.isempty'
 
 interface ICodeConfirmationFormProps {
-  onSubmit: () => void
+  onSubmit: (code: string) => void
   isCodeCorrect?: boolean
 }
 
@@ -20,7 +20,7 @@ export const CodeConfirmationForm: FC<ICodeConfirmationFormProps> = ({
   useEffect(() => {
     if (confirmationCode.every((code) => code !== -1)) {
       inputRefs.current.map((ref) => ref?.blur())
-      onSubmit()
+      onSubmit(confirmationCode.join(''))
     }
   }, [confirmationCode, onSubmit])
 
