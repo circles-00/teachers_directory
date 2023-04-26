@@ -18,6 +18,6 @@ const config = {
     locales: ['en'],
     defaultLocale: 'en',
   },
-  standalone: true,
+  output: "standalone",
 }
 export default config
