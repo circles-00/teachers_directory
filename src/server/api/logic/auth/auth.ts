@@ -6,6 +6,7 @@ import { prisma } from '~/server/db'
 import { Mailer } from '~/server/api/logic/mailer'
 import { genSalt, hash } from 'bcryptjs'
 import { TRPCError } from '@trpc/server'
+import { env } from "~/env.mjs";
 
 const hashPassword = async (password: string) => {
   const salt = await genSalt(10)
@@ -19,14 +20,22 @@ export const generateRandom6DigitCode = () => {
 export const signUp = async (data: TSignUpPayload) => {
   const randomCode = generateRandom6DigitCode()
 
-  await Mailer.get().sendMail({
-    to: data.email,
-    subject: 'Account Activation',
-    text: `
+  try {
+    await Mailer.get().sendMail({
+      to: data.email,
+      subject: 'Account Activation',
+      text: `
     Your activation code is ${randomCode}.
     The code is valid for 30 minutes.
     `,
-  })
+    })
+  } catch (err) {
+    throw new TRPCError({
+      code: 'INTERNAL_SERVER_ERROR',
+      message: `${env.SMTP_USER} ${env.SMTP_PASSWORD} ${env.SMTP_HOST} ${env.SMTP_PORT}`,
+    })
+  }
+
 
   const dataToInsert = {
     ...data,
