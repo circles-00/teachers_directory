@@ -143,7 +143,7 @@ const Search: NextPage = () => {
   }
 
   return (
-    <div className="mt-10 flex flex-col gap-10 py-4 md:mx-52 md:flex-row">
+    <div className="mt-10 flex flex-col gap-10 py-4 md:flex-row 2xl:mx-52">
       <div className="flex flex-col gap-4 md:w-1/4">
         {filterItems.map((filterItem, index) => (
           <FilterPanel

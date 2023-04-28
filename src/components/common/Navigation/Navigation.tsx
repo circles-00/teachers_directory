@@ -22,15 +22,15 @@ export const Navigation: FC<INavigationProps> = () => {
   }
 
   return (
-    <div className="flex justify-between border-b-[1px] border-[#d5e0d5]">
-      <div className="ml-4 flex h-16 items-center md:ml-52">
+    <div className="flex justify-between border-b-[1px] border-[#d5e0d5] 2xl:px-52">
+      <div className="ml-4 flex h-16 items-center md:ml-0">
         <HamburgerIcon />
         <Link href="/">
           <Logo />
         </Link>
         <NavigationItems className="ml-8 hidden items-center gap-10 md:flex" />
       </div>
-      <div className={`mr-4 flex items-center text-sm md:mr-52`}>
+      <div className={`mr-4 flex items-center text-sm`}>
         <button
           onClick={onHandleLoginClick}
           className="mr-4 hidden rounded-lg py-[6px] px-[12px] text-base font-bold text-black md:block"

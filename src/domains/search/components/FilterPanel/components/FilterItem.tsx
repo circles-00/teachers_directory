@@ -20,7 +20,7 @@ export const FilterItem: FC<IFilterItemProps> = ({
         type="checkbox"
         checked={isSelected}
       />
-      <p className="text-[#1A1A2B]">
+      <p className="truncate text-[#1A1A2B]">
         {item.title}{' '}
         <span
           className={`text-[#797995] ${!!item.count ? 'visible' : 'invisible'}`}

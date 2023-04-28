@@ -14,7 +14,7 @@ export const Footer: FC<IFooterProps> = () => {
 
   return (
     <div className={`w-full bg-[#F2F7F2] ${playfairDisplay.className}`}>
-      <div className="container mx-auto flex flex-col py-14 px-10 md:flex-row md:px-0 md:pl-40">
+      <div className="flex flex-col py-14 px-10 md:flex-row 2xl:mx-60 2xl:pl-0">
         <div className="flex flex-col gap-6">
           <Link href="/">
             <Logo color="#F99012" />
