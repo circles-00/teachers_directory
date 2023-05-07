@@ -22,7 +22,7 @@ export const Navigation: FC<INavigationProps> = () => {
   }
 
   return (
-    <div className="flex justify-between border-b-[1px] border-[#d5e0d5] 2xl:px-52">
+    <div className="flex justify-between border-b-[1px] border-[#d5e0d5] 2xl:px-8">
       <div className="ml-4 flex h-16 items-center md:ml-0">
         <HamburgerIcon />
         <Link href="/">
@@ -33,13 +33,13 @@ export const Navigation: FC<INavigationProps> = () => {
       <div className={`mr-4 flex items-center text-sm`}>
         <button
           onClick={onHandleLoginClick}
-          className="mr-4 hidden rounded-lg py-[6px] px-[12px] text-base font-bold text-black md:block"
+          className="mr-4 hidden rounded-lg py-[6px] px-[12px] text-base font-bold text-primary md:block"
         >
           {labels.login}
         </button>
         <button
           onClick={onHandleSignUpClick}
-          className="rounded-md bg-primary py-[8px] px-[24px] text-base font-medium text-white"
+          className="rounded-md bg-buttonPrimary py-[8px] px-[24px] text-base font-medium text-white"
         >
           {labels.signUp}
         </button>

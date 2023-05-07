@@ -8,6 +8,7 @@ const config = {
       },
       colors: {
         primary: '#108A00',
+        buttonPrimary: '#14A800',
         primaryTransparent: {
           16: 'rgba(0, 171, 85, 0.16)',
           26: 'rgba(0, 171, 85, 0.26)',

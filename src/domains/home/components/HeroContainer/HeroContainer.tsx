@@ -14,7 +14,7 @@ export const HeroContainer: FC<IHeroContainerProps> = () => {
         >
           The UK&apos;s First <br /> Teachers&apos; Directory.
         </h1>
-        <p className="mt-8 text-xl md:text-center md:text-2xl">
+        <p className="mt-8 text-xl md:text-center md:text-xl">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
           finibus eget lectus vitae venenatis. Nam porttitor blandit est sit
           amet mollis. Integer in ligula non erat efficitur lacinia.
