@@ -35,7 +35,7 @@ export const FilterPanel: FC<IFilterPanelProps> = ({
         </div>
         <div
           className={`mx-auto w-11/12 border-t-2 ${
-            isOpen ? 'border-primary' : 'border-[#8E9BAF]'
+            isOpen ? 'border-primary' : 'border-[#E5E7EB]'
           }`}
         ></div>
       </button>
