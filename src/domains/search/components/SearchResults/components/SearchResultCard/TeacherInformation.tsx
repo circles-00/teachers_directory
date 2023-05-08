@@ -1,5 +1,8 @@
 import { type FC } from 'react'
 import { ButtonContained } from '@components'
+import { Service } from './Service'
+
+const services = ['Proof reading', 'Tutoring', 'Editing']
 
 interface ITeacherInformationProps {}
 
@@ -27,6 +30,7 @@ export const TeacherInformation: FC<ITeacherInformationProps> = () => {
         </div>
       </div>
       <hr className="ml-4 mt-7 fill-[#D6DFE5]" />
+      <p className="pl-4 text-sm font-bold">About me</p>
       <p className="mt-2 pl-4 text-sm md:pr-40">
         Maecenas tempus, ligula eget dapibus viverra, tellus risus fringilla
         lacus, a pellentesque lorem quam vitae dolor. Ut ut sapien quis tortor
@@ -34,6 +38,12 @@ export const TeacherInformation: FC<ITeacherInformationProps> = () => {
         rhoncus, gravida tempor dolor varius. Cras vitae sapien et neque
         tristique vehicula volutpat vitae ante. Ut convallis id dui nec...
       </p>
+      <p className="mt-10 pl-4 text-sm font-bold">Services I offer</p>
+      <div className="mt-1 flex gap-2 pl-3  ">
+        {services.map((service, index) => (
+          <Service key={index} service={service} />
+        ))}
+      </div>
     </div>
   )
 }

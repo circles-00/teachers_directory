@@ -10,6 +10,7 @@ const config = {
         primary: '#108A00',
         buttonPrimary: '#14A800',
         primaryTransparent: {
+          8: 'rgba(0, 171, 85, 0.8)',
           16: 'rgba(0, 171, 85, 0.16)',
           26: 'rgba(0, 171, 85, 0.26)',
           28: 'rgba(0, 171, 85, 0.28)',
