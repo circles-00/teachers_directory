@@ -14,3 +14,30 @@
   height: 0;
   pointer-events: none;
 }
+
+/* CSS Animation for the Home Hero Infinite Scroller */
+@keyframes scroll-right {
+  0% {
+   right: 0;
+  }
+  100% {
+    right: -100%;
+  }
+}
+
+.animate-right {
+  animation: scroll-right 120s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+.animate-left {
+  animation: scroll-left 120s linear infinite;
+}
