@@ -21,6 +21,8 @@ export const SocialLinkForm: FC<ISocialLinkFormProps> = ({
           { value: 'Facebook' },
           { value: 'Instagram' },
           { value: 'Twitter' },
+          { value: 'LinkedIn' },
+          { value: 'My website' },
         ]}
       />
       <Input

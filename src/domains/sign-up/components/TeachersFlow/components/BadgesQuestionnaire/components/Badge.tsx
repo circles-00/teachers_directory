@@ -1,8 +1,7 @@
 import { type FC } from 'react'
-import { StarIcon } from '@components'
+import { CircledXIcon, StarIcon } from '@components'
 import { useDropZoneUtils } from '~/hooks'
 import { formatLongString } from '@utils'
-import { XMarkIcon } from '@heroicons/react/24/outline'
 import { FileIcon } from '@components/common/FileIcon'
 
 interface IBadgeProps {
@@ -50,7 +49,11 @@ export const Badge: FC<IBadgeProps> = ({ title, description }) => {
                 </div>
               </div>
               <button className="mr-2" onClick={() => onRemoveFile(index)}>
-                <XMarkIcon className="h-5 w-5" />
+                <CircledXIcon
+                  fillColor="#000000"
+                  opacity={1}
+                  size={{ width: 25, height: 25 }}
+                />
               </button>
             </div>
           ))}

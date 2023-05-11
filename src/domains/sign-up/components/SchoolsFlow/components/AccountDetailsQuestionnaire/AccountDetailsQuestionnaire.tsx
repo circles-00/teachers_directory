@@ -3,10 +3,10 @@ import {
   AccountDetailsForm,
   Header,
   NextSteps,
-  SaveButton,
   type StepProps,
   StepsHeader,
 } from '@domains/sign-up'
+import { SaveButton } from '@domains/sign-up/components/TeachersFlow/components/ActionButtons/components/SaveButton'
 
 interface IAccountDetailsQuestionnaireProps extends StepProps {}
 

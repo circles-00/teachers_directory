@@ -1,4 +1,4 @@
-import { type FC, Fragment, type ReactNode } from 'react'
+import { type FC, Fragment, type ReactNode, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
 interface ICommonDialogProps {
@@ -12,6 +12,21 @@ export const CommonDialog: FC<ICommonDialogProps> = ({
   onClose,
   children,
 }) => {
+  useEffect(() => {
+    const keyListener = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        // Workaround, for some reason dialog was closing itself
+        event.preventDefault()
+      }
+    }
+
+    window.addEventListener('keydown', keyListener)
+
+    return () => {
+      window.removeEventListener('keydown', keyListener)
+    }
+  }, [onClose])
+
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog
@@ -20,7 +35,7 @@ export const CommonDialog: FC<ICommonDialogProps> = ({
         onClose={onClose}
       >
         <Transition.Child
-          as={Fragment}
+          as={'div'}
           enter="ease-out duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"
@@ -28,7 +43,11 @@ export const CommonDialog: FC<ICommonDialogProps> = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
+          <div
+            onClick={onClose}
+            className="fixed inset-0 bg-black bg-opacity-25"
+          />{' '}
+          {/*  backdrop */}
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">

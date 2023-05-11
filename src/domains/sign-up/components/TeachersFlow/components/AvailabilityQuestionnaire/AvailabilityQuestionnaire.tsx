@@ -1,16 +1,12 @@
 import { type FC, useState } from 'react'
-import {
-  Header,
-  SaveButton,
-  type StepProps,
-  StepsHeader,
-} from '@domains/sign-up'
+import { Header, type StepProps, StepsHeader } from '@domains/sign-up'
 import { AvailabilityTable, UploadFiles } from './components'
-import { CommonRadioGroup } from '@components'
+import { CommonRadioGroup, InfoBox } from '@components'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
 import { CalendarIcon } from '@heroicons/react/24/outline'
 import { CommonDialog } from '@components/common/CommonDialog'
+import { ActionButtons } from '@domains/sign-up'
 interface IAvailabilityQuestionnaireProps extends StepProps {}
 
 export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
@@ -38,9 +34,18 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
       />
       <AvailabilityTable />
       <div className="mt-5">
-        <h3 className="text-lg font-bold">
-          Are you available for work now or in the future?
-        </h3>
+        <div>
+          <div className="flex items-center gap-1">
+            <h3 className="text-lg font-bold">
+              Are you available for work now or in the future?
+            </h3>
+            <InfoBox
+              content={'Are you available for work now or in the future?'}
+            />
+          </div>
+
+          <p className="text-sm">Some paragraph here</p>
+        </div>
         <CommonRadioGroup<typeof availability>
           className="mt-4 w-full flex-col md:flex-row"
           options={[
@@ -93,7 +98,11 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
       )}
 
       <UploadFiles />
-      <SaveButton onClick={() => setCurrentStep(currentStep + 1)} />
+      <ActionButtons
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        totalSteps={totalSteps}
+      />
     </div>
   )
 }

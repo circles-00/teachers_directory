@@ -1,11 +1,7 @@
 import { type FC } from 'react'
-import {
-  Header,
-  SaveButton,
-  type StepProps,
-  StepsHeader,
-} from '@domains/sign-up'
+import { Header, type StepProps, StepsHeader } from '@domains/sign-up'
 import { Badge } from '@domains/sign-up/components/TeachersFlow/components/BadgesQuestionnaire/components'
+import { ActionButtons } from '@domains/sign-up'
 
 const badges = [
   {
@@ -23,6 +19,11 @@ const badges = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan ligula id ante mollis molestie. Donec non velit ut velit dignissim ultrices ut mattis erat. Suspendisse aliquet non turpis vitae consectetur.',
   },
+  {
+    title: 'DBS',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan ligula id ante mollis molestie. Donec non velit ut velit dignissim ultrices ut mattis erat. Suspendisse aliquet non turpis vitae consectetur.',
+  },
 ]
 
 interface IBadgesQuestionnaireProps extends StepProps {}
@@ -30,6 +31,7 @@ interface IBadgesQuestionnaireProps extends StepProps {}
 export const BadgesQuestionnaire: FC<IBadgesQuestionnaireProps> = ({
   currentStep,
   totalSteps,
+  setCurrentStep,
 }) => {
   return (
     <div className="flex flex-col md:w-5/6">
@@ -44,8 +46,11 @@ export const BadgesQuestionnaire: FC<IBadgesQuestionnaireProps> = ({
         ))}
       </div>
 
-      {/* LAST STEP, handler do nothing */}
-      <SaveButton onClick={() => null} />
+      <ActionButtons
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        totalSteps={totalSteps}
+      />
     </div>
   )
 }

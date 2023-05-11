@@ -1,5 +1,5 @@
 import { type FC } from 'react'
-import { Select } from '@components'
+import { AutoComplete, Select } from '@components'
 import { TrashButton } from '@domains/sign-up'
 
 const subjects = [
@@ -68,7 +68,7 @@ export const Subject: FC<SubjectProps> = ({
 
   return (
     <div className="mt-4 flex flex-col items-center justify-between gap-2 md:flex-row">
-      <Select options={subjects} />
+      <AutoComplete options={subjects} />
       <Select options={levels} />
       <Select options={examBoards} />
       <TrashButton onRemove={onRemove} index={index} isDisabled={isDisabled} />

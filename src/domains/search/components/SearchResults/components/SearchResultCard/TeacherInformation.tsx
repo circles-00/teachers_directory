@@ -25,8 +25,10 @@ export const TeacherInformation: FC<ITeacherInformationProps> = () => {
         </div>
 
         <div className="mr-auto ml-auto mt-6 md:mr-0 md:mt-0">
-          <ButtonContained className="h-14 px-10">Contact now</ButtonContained>
-          <h1 className="mt-2 text-center text-sm font-bold">Available now</h1>
+          <ButtonContained className="h-14 px-10">Get in touch</ButtonContained>
+          <h1 className="mt-2 text-center text-sm font-bold text-[#DF1642]">
+            Available now
+          </h1>
         </div>
       </div>
       <hr className="ml-4 mt-7 fill-[#D6DFE5]" />
