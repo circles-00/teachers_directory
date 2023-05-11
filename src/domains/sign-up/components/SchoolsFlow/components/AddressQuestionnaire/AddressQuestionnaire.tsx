@@ -1,6 +1,6 @@
 import { type FC } from 'react'
 import { Header, type StepProps, StepsHeader } from '@domains/sign-up'
-import { ButtonOutlined, Input } from '@components'
+import { Input } from '@components'
 import { SaveButton } from '@domains/sign-up/components/TeachersFlow/components/ActionButtons/components/SaveButton'
 
 interface IAddressQuestionnaireProps extends StepProps {}
