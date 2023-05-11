@@ -21,9 +21,7 @@ export const AddressQuestionnaire: FC<IAddressQuestionnaireProps> = ({
         <div className="flex flex-col gap-4 md:flex-row">
           <Input placeholder={'Address'} />
           <Input placeholder={'Post code'} />
-          <ButtonOutlined className="px-2 text-primary md:w-72">
-            Add manually
-          </ButtonOutlined>
+          <button className="min-w-fit text-xs">Add manually</button>
         </div>
         <Input containerClassName="mt-4 md:mt-0" placeholder={'Phone number'} />
       </div>

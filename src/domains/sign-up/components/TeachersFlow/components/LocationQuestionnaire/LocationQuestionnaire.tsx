@@ -31,7 +31,7 @@ export const LocationQuestionnaire: FC<ILocationQuestionnaireProps> = ({
         />
         <button
           onClick={() => setIsManualLocation(!isManualLocation)}
-          className="mt-4 ml-auto text-primary"
+          className="mt-4 ml-auto"
         >
           {!isManualLocation ? 'Add manually' : 'Hide'}
         </button>
