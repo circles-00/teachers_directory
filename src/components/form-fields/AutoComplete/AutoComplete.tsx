@@ -11,12 +11,14 @@ interface IAutoCompleteProps {
   options: Option[]
   placeholder?: string
   containerClassName?: string
+  label?: string
 }
 
 export const AutoComplete: FC<IAutoCompleteProps> = ({
   options,
   placeholder = 'Select',
   containerClassName = '',
+  label,
 }) => {
   const [selected, setSelected] = useState<Option | null>(null)
   const [query, setQuery] = useState('')
@@ -41,6 +43,9 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
       ])}
     >
       <Combobox value={selected} onChange={setSelected}>
+        <p className="absolute top-[-3px] left-2 z-10 rounded-lg bg-white px-1 text-[10px] text-[#919EAB] group-hover:bg-gray-50">
+          {label}
+        </p>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input

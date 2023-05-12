@@ -13,6 +13,7 @@ interface ISelectProps {
   placeholder?: string
   containerClassName?: string
   onChange?: (value: SelectOption) => void
+  label?: string
 }
 
 export const Select: FC<ISelectProps> = ({
@@ -20,10 +21,11 @@ export const Select: FC<ISelectProps> = ({
   placeholder = 'Select',
   containerClassName = '',
   onChange,
+  label,
 }) => {
   const [selected, setSelected] = useState<SelectOption | null>(null)
   const showPlaceholder = !selected?.value
-  const defaultContainerClassName = 'relative mt-1 w-full'
+  const defaultContainerClassName = 'group relative mt-1 w-full'
 
   const onSelectChange = (value: SelectOption | null) => {
     setSelected(value)
@@ -38,7 +40,10 @@ export const Select: FC<ISelectProps> = ({
           containerClassName,
         ])}
       >
-        <Listbox.Button className="relative w-full cursor-default rounded-lg border-[1px] border-[#919EAB52] bg-white py-4 pl-3 pr-10 text-left hover:bg-gray-50 focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+        <Listbox.Button className="relative w-full cursor-default rounded-lg border-[1px] border-[#919EAB52] bg-white py-4 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 group-hover:bg-gray-50 sm:text-sm">
+          <p className="absolute top-[-11px] left-2 rounded-lg bg-white px-1 text-[10px] text-[#919EAB] group-hover:bg-gray-50">
+            {label}
+          </p>
           <span
             className={`block truncate ${
               showPlaceholder ? 'text-[#919EAB]' : ''

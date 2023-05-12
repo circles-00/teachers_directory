@@ -72,9 +72,9 @@ export const Qualification: FC<QualificationProps> = ({
     <div className="mt-4 flex flex-col items-center justify-between gap-2 md:flex-row">
       {!custom && (
         <>
-          <AutoComplete options={subjects} />
-          <Select options={levels} />
-          <Select options={examBoards} />
+          <AutoComplete label="University" options={subjects} />
+          <Select label="Course" options={levels} />
+          <Select label="Grade" options={examBoards} />
         </>
       )}
       {custom && (
