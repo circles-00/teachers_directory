@@ -6,7 +6,7 @@ import { join } from 'path'
 
 export class Mailer {
   static instance: Mailer | null = null
-  transporter: nodemailer.Transporter
+  transporter?: nodemailer.Transporter
 
   constructor() {
     this.transporter = this.createTransporter()
