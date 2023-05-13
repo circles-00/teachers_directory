@@ -1,36 +1,49 @@
 import { Listbox, Transition } from '@headlessui/react'
-import { ChevronDownIcon, CheckIcon } from '@heroicons/react/24/outline'
+import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { useState, type FC, Fragment } from 'react'
 import { mergeClassNames } from '@utils'
 
-type Option = {
+export type SelectOption = {
   value: string
+  id?: string
 }
 
 interface ISelectProps {
-  options: Option[]
+  options: SelectOption[]
   placeholder?: string
   containerClassName?: string
+  onChange?: (value: SelectOption) => void
+  label?: string
 }
 
 export const Select: FC<ISelectProps> = ({
   options,
   placeholder = 'Select',
   containerClassName = '',
+  onChange,
+  label,
 }) => {
-  const [selected, setSelected] = useState<Option | null>(null)
+  const [selected, setSelected] = useState<SelectOption | null>(null)
   const showPlaceholder = !selected?.value
-  const defaultContainerClassName = 'relative mt-1 w-full'
+  const defaultContainerClassName = 'group relative mt-1 w-full'
+
+  const onSelectChange = (value: SelectOption | null) => {
+    setSelected(value)
+    if (value && onChange) onChange(value)
+  }
 
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox value={selected} onChange={onSelectChange}>
       <div
         className={mergeClassNames([
           defaultContainerClassName,
           containerClassName,
         ])}
       >
-        <Listbox.Button className="relative w-full cursor-default rounded-lg border-[1px] border-[#919EAB52] bg-white py-4 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+        <Listbox.Button className="relative w-full cursor-default rounded-lg border-[1px] border-[#919EAB52] bg-white py-4 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 group-hover:bg-gray-50 sm:text-sm">
+          <p className="absolute top-[-11px] left-2 rounded-lg bg-white px-1 text-[10px] text-[#919EAB] group-hover:bg-gray-50">
+            {label}
+          </p>
           <span
             className={`block truncate ${
               showPlaceholder ? 'text-[#919EAB]' : ''
@@ -57,7 +70,7 @@ export const Select: FC<ISelectProps> = ({
               <Listbox.Option
                 key={optionIdx}
                 className={({ active }) =>
-                  `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                  `relative cursor-default select-none py-2 pl-4 pr-4 ${
                     active ? 'bg-primaryTransparent-16' : ''
                   }`
                 }
@@ -72,11 +85,6 @@ export const Select: FC<ISelectProps> = ({
                     >
                       {option.value}
                     </span>
-                    {selected ? (
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                        <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                      </span>
-                    ) : null}
                   </>
                 )}
               </Listbox.Option>

@@ -17,7 +17,7 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ isLoading }) => {
   const { labels } = useLabels()
 
   return (
-    <div className="md:w-3/5">
+    <div className="md:w-5/6">
       <RoundedContainer className="m-5 mx-auto mt-10 w-full gap-5 px-8 py-12 md:w-6/12">
         <h1 className="text-center text-xl font-bold text-black">
           Join the Teachers&apos; Directory Community
@@ -42,11 +42,11 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ isLoading }) => {
         </ButtonContained>
         <p className="text-center text-xs">
           By signing up, I agree to{' '}
-          <Link href="#">
+          <Link className="text-primary" href="#">
             <u>Terms of Use</u>
           </Link>{' '}
           and
-          <Link href="#">
+          <Link className="text-primary" href="#">
             <u> Privacy Policy</u>
           </Link>
           .

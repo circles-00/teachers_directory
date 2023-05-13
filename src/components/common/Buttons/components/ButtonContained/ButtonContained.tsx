@@ -17,7 +17,7 @@ export const ButtonContained: FC<ButtonContainedProps> = ({
   const defaultClassName = `rounded-md ${
     disabled
       ? 'bg-[#919EAB3D] text-[#919EABCC] cursor-not-allowed'
-      : 'bg-primary text-white cursor-pointer'
+      : 'bg-buttonPrimary text-white cursor-pointer'
   } p-2 font-bold children-white`
 
   return (

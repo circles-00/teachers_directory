@@ -19,7 +19,7 @@ export const CommonRadioGroup = <T,>({
       {options.map((option, index) => (
         <RadioGroup.Option
           key={index}
-          className="w-full cursor-pointer rounded-md border-[1px] border-[#0000004D]"
+          className="w-full cursor-pointer rounded-md border-[1px] border-[#0000004D] hover:bg-primaryTransparent-2"
           value={option.value}
         >
           {({ checked }) => (

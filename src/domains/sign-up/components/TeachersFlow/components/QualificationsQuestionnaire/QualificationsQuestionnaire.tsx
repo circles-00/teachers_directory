@@ -1,7 +1,8 @@
 import { type FC } from 'react'
 import { type StepProps } from '../../types'
-import { SaveButton, StepsHeader } from '@domains/sign-up'
+import { StepsHeader } from '@domains/sign-up'
 import { Qualifications } from './components'
+import { ActionButtons } from '@domains/sign-up'
 
 interface IQualificationsQuestionnaireProps extends StepProps {}
 
@@ -22,7 +23,12 @@ export const QualificationsQuestionnaire: FC<
           custom
         />
       </div>
-      <SaveButton onClick={() => setCurrentStep(currentStep + 1)} />
+
+      <ActionButtons
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        totalSteps={totalSteps}
+      />
     </div>
   )
 }

@@ -8,7 +8,10 @@ const config = {
       },
       colors: {
         primary: '#108A00',
+        buttonPrimary: '#14A800',
         primaryTransparent: {
+          2: 'rgba(0, 171, 85, 0.2)',
+          8: 'rgba(0, 171, 85, 0.8)',
           16: 'rgba(0, 171, 85, 0.16)',
           26: 'rgba(0, 171, 85, 0.26)',
           28: 'rgba(0, 171, 85, 0.28)',
@@ -17,7 +20,7 @@ const config = {
           80: 'rgba(0, 171, 85, 0.80)',
         },
         colorText: '#212B36',
-        danger: '#FF5630'
+        danger: '#dc1841'
       },
       fontFamily: {
         graphik: ['var(--font-graphik)']

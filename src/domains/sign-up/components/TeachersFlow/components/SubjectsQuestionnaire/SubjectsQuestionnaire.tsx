@@ -1,7 +1,8 @@
 import { useState, type FC } from 'react'
-import { StepsHeader, Header, Subject, SaveButton } from '@domains/sign-up'
+import { StepsHeader, Header, Subject } from '@domains/sign-up'
 import { ButtonOutlined } from '@components'
 import { type StepProps } from '../../types'
+import { ActionButtons } from '@domains/sign-up'
 
 interface ISubjectsQuestionnaireProps extends StepProps {}
 
@@ -53,7 +54,11 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
         Add Item
       </ButtonOutlined>
 
-      <SaveButton onClick={() => setCurrentStep(currentStep + 1)} />
+      <ActionButtons
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        totalSteps={totalSteps}
+      />
     </div>
   )
 }

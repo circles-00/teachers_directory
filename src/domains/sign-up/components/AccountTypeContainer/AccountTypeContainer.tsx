@@ -14,7 +14,7 @@ export const AccountTypeContainer: FC<IAccountTypeContainerProps> = ({
   href,
 }) => {
   return (
-    <RoundedContainer className="mt-4 w-full py-6 px-8 md:w-[500px]">
+    <RoundedContainer className="mt-4 w-full py-6 px-8 md:w-[470px]">
       <div className="flex items-center justify-between">
         <div className="flex flex-col">
           <h1 className="text-xl font-bold">{title}</h1>

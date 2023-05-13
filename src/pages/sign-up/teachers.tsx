@@ -9,6 +9,7 @@ import {
   AvailabilityQuestionnaire,
   BadgesQuestionnaire,
   CurrentStepComponent,
+  OtherServicesQuestionnaire,
 } from '@domains/sign-up'
 import { useState } from 'react'
 
@@ -36,6 +37,10 @@ const steps = [
   {
     title: 'Your availability?',
     component: AvailabilityQuestionnaire,
+  },
+  {
+    title: 'Other services I offer',
+    component: OtherServicesQuestionnaire,
   },
   {
     title: 'Badges',

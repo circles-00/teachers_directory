@@ -16,11 +16,14 @@ export const SocialLinkForm: FC<ISocialLinkFormProps> = ({
   return (
     <div className="flex flex-col items-center gap-5 md:flex-row">
       <Select
+        label="Platform"
         containerClassName="w-1/2"
         options={[
           { value: 'Facebook' },
           { value: 'Instagram' },
           { value: 'Twitter' },
+          { value: 'LinkedIn' },
+          { value: 'My website' },
         ]}
       />
       <Input

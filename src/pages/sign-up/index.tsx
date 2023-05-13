@@ -1,5 +1,5 @@
 import { type NextPage } from 'next'
-import { api } from '@utils'
+import {api, playfairDisplay} from '@utils'
 import {
   CodeConfirmation,
   SignUpForm,
@@ -50,13 +50,15 @@ const SignUp: NextPage = () => {
         <div className="md:ml-52">
           <div className="my-12 flex flex-col md:ml-10 md:flex-row">
             <div className="mx-10 flex flex-col gap-4 md:mx-0 md:mt-32">
-              <h1 className="text-5xl font-bold">
+              <h1
+                  className={`text-5xl font-bold text-primary ${playfairDisplay.className}`}
+              >
                 Get started <br /> absolutely <br />{' '}
                 <span className="bg-gradient-to-r from-[#FFAB00] via-[#00AB55] to-[#00AB55] bg-clip-text text-transparent">
-                  for free
-                </span>
+              for free
+            </span>
               </h1>
-              <p className="text-2xl text-primary">
+              <p className="text-2xl">
                 Whether you are <b>a teacher</b> <br /> or a{' '}
                 <b>school representative</b>, get the best <br /> out of
                 Teachers Directory

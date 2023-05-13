@@ -1,5 +1,5 @@
 import { type FC } from 'react'
-import { Input, Select } from '@components'
+import { AutoComplete, Input, Select } from '@components'
 import { TrashButton } from '@domains/sign-up'
 
 const subjects = [
@@ -22,14 +22,13 @@ const subjects = [
 
 const levels = [
   {
-    value: 'KS1 5-7 yrs',
+    value: 'Early Years (0-5 yrs)',
   },
   {
-    value: 'KS2 7-11 yrs',
+    value: 'Primary (5-11 yrs)',
   },
-  { value: 'KS3 11-14 yrs' },
-  { value: 'KS4 14-16 yrs' },
-  { value: 'KS5 16-18 yrs' },
+  { value: 'Secondary (11-18 yrs)' },
+  { value: 'Higher (18+ yrs)' },
 ]
 
 const examBoards = [
@@ -72,9 +71,9 @@ export const Qualification: FC<QualificationProps> = ({
     <div className="mt-4 flex flex-col items-center justify-between gap-2 md:flex-row">
       {!custom && (
         <>
-          <Select options={subjects} />
-          <Select options={levels} />
-          <Select options={examBoards} />
+          <AutoComplete label="University" options={subjects} />
+          <Select label="Course" options={levels} />
+          <Select label="Grade" options={examBoards} />
         </>
       )}
       {custom && (

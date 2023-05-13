@@ -27,27 +27,30 @@ interface ITeacherShowcaseProps {}
 export const TeacherShowcase: FC<ITeacherShowcaseProps> = () => {
   return (
     <div className="mt-10 flex flex-col justify-center md:mt-20 md:flex-row">
-      <div className="w-full bg-[#f0f8f2] pl-6 pt-6 md:w-1/3">
-        <h3 className="text-[32px] font-bold">For teachers</h3>
-        <h1
-          className={`${playfairDisplay.className} mt-1 text-5xl font-extrabold leading-tight text-primary`}
-        >
-          Let the world find you. <br /> New opportunities.
-        </h1>
-        <div className="mt-10 mb-8 flex flex-col gap-10 md:mb-0">
-          {benefits.map((benefit, index) => (
-            <Benefit key={index} {...benefit} />
-          ))}
+      <div className="w-full bg-[#f0f8f2] py-6 pl-6 md:w-7/12">
+        <div className="xl:pl-32">
+          <h3 className="text-[32px] font-bold">For teachers</h3>
+          <h1
+            className={`${playfairDisplay.className} mt-1 text-5xl font-extrabold leading-tight text-primary`}
+          >
+            Let the world find you. <br /> New opportunities.
+          </h1>
+          <div className="mt-10 mb-8 flex flex-col gap-10 md:mb-0">
+            {benefits.map((benefit, index) => (
+              <Benefit key={index} {...benefit} />
+            ))}
+          </div>
         </div>
       </div>
-      <div>
-        <Image
-          src={TeachersShowcaseBg.src}
-          width={TeachersShowcaseBg.width}
-          height={TeachersShowcaseBg.height}
-          alt="Teachers Showcase"
-        />
-      </div>
+
+      <Image
+        className="h-auto w-full md:w-2/5"
+        width={0}
+        height={0}
+        src={TeachersShowcaseBg.src}
+        sizes="100vw"
+        alt="Teachers Showcase"
+      />
     </div>
   )
 }

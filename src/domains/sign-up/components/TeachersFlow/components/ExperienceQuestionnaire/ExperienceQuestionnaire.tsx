@@ -1,11 +1,7 @@
 import { type FC } from 'react'
-import {
-  Header,
-  StepsHeader,
-  type StepProps,
-  SaveButton,
-} from '@domains/sign-up'
+import { Header, StepsHeader, type StepProps } from '@domains/sign-up'
 import { ExperienceQuestionnaireForm } from './components'
+import { ActionButtons } from '@domains/sign-up'
 
 interface IExperienceQuestionnaireProps extends StepProps {}
 
@@ -25,7 +21,11 @@ export const ExperienceQuestionnaire: FC<IExperienceQuestionnaireProps> = ({
       />
       <ExperienceQuestionnaireForm />
       <div className="flex w-11/12">
-        <SaveButton onClick={() => setCurrentStep(currentStep + 1)} />
+        <ActionButtons
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+          totalSteps={totalSteps}
+        />
       </div>
     </div>
   )

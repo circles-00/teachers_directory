@@ -1,13 +1,11 @@
-import { type FC, useState } from 'react'
-import { Select, CommonRadioGroup } from '@components'
+import { type FC, useMemo, useState } from 'react'
+import { Select, CommonRadioGroup, type SelectOption } from '@components'
+import { filterItems } from '@domains/search'
 
-const roles = [
-  { value: 'Role #1' },
-  { value: 'Role #2' },
-  { value: 'Role #3' },
-  { value: 'Role #4' },
-  { value: 'Role #5' },
-]
+const roles = filterItems[1]?.items.map((item) => ({
+  value: item.title,
+  id: item.value,
+}))
 
 const dates = [
   { value: 'Date #1' },
@@ -27,14 +25,39 @@ export const ExperienceQuestionnaireForm: FC<
   >(null)
   const [degree, setDegree] = useState<boolean | null>(null)
   const [examiner, setExaminer] = useState<boolean | null>(null)
+  const [role, setRole] = useState<SelectOption | null>(null)
+
+  const subCategories = useMemo(() => {
+    const category = filterItems[1]?.items.find(
+      (item) => item.value === role?.id
+    )
+
+    return category?.subItems?.map((item) => ({
+      value: item.title,
+      id: item.value,
+    }))
+  }, [role])
 
   return (
     <>
-      <h2 className="mt-8 text-lg font-bold text-primary">About your role</h2>
+      <h2 className="mt-8 text-lg font-bold text-primary">
+        About your position
+      </h2>
       <div className="mt-4 w-11/12">
-        <Select options={roles} placeholder="Type of role" />
+        <Select
+          options={roles ?? []}
+          placeholder="Type of role"
+          onChange={(value: SelectOption) => setRole(value)}
+        />
       </div>
-
+      {!!role && (
+        <div className="mt-4 w-11/12">
+          <Select
+            options={subCategories ?? []}
+            placeholder="Choose a sub-category"
+          />
+        </div>
+      )}
       <hr className="my-8 w-11/12" />
 
       <h2 className="text-lg font-bold">

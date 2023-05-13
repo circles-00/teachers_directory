@@ -20,15 +20,19 @@ const TeachersDirectory = ({ Component, pageProps }: AppProps) => {
         <meta name="description" content="Teachers Directory" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={inter.className}>
-        <Navigation />
-        {isMobileDrawerOpen && <MobileDrawer />}
-        <div className={isMobileDrawerOpen ? 'hidden' : 'block'}>
-          <Component {...pageProps} />
+      <main
+        className={`${inter.className} flex w-full justify-center overflow-hidden`}
+      >
+        <div className="w-full">
+          <Navigation />
+          {isMobileDrawerOpen && <MobileDrawer />}
+          <div className={isMobileDrawerOpen ? 'hidden' : 'block'}>
+            <Component {...pageProps} />
+          </div>
+          {!isMobileDrawerOpen && <Footer />}
+          <BackToTop />
         </div>
-        {!isMobileDrawerOpen && <Footer />}
-        <BackToTop />
-      </div>
+      </main>
     </SessionProvider>
   )
 }

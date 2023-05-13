@@ -12,6 +12,11 @@ const accountTypes = [
     description: 'A valid school/organisation email\naddress is required',
     href: '/sign-up/schools',
   },
+  {
+    title: 'General User',
+    description: `A general user that is neither a qualified \nteacher, nor a school/organisation`,
+    href: '/sign-up/general',
+  },
 ]
 
 const AccountType = () => {
@@ -21,14 +26,16 @@ const AccountType = () => {
         <h1 className="mb-4 text-center text-3xl font-bold text-primary">
           Are you looking to register as
         </h1>
-        {accountTypes.map(({ title, description, href }, idx) => (
-          <AccountTypeContainer
-            key={idx}
-            title={title}
-            description={description}
-            href={href}
-          />
-        ))}
+        <div className="flex flex-col gap-2 xl:flex-row">
+          {accountTypes.map(({ title, description, href }, idx) => (
+            <AccountTypeContainer
+              key={idx}
+              title={title}
+              description={description}
+              href={href}
+            />
+          ))}
+        </div>
         <p className="mt-6 text-center text-sm">
           Not a school or a teacher? Register{' '}
           <Link className="font-bold text-primary" href="#">

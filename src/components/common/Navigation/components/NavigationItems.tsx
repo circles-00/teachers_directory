@@ -30,7 +30,7 @@ export const NavigationItems: FC<INavigationItemsProps> = ({ className }) => {
       {navigationItems.map((item, idx) => (
         <li key={idx}>
           <Link
-            className="text-[18px] font-semibold text-colorText hover:text-primary"
+            className="font-semibold text-colorText hover:text-primary"
             href={item.href}
           >
             {item.title}

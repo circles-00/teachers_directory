@@ -3,6 +3,7 @@ import { StepsHeader, type StepProps, Header } from '@domains/sign-up'
 import {
   ButtonOutlined,
   CommonRadioGroup,
+  InfoBox,
   Input,
   PencilIcon,
   RichTextEditor,
@@ -10,7 +11,7 @@ import {
   TrashIcon,
 } from '@components'
 import { ProfilePicture, SocialLinkForm } from './components'
-import { SaveButton } from '../SaveButton'
+import { ActionButtons } from '@domains/sign-up'
 
 const genders = [
   { value: 'male', label: 'Male' },
@@ -55,6 +56,20 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis at tortor at sagittis. Nullam eleifend, justo vitae consequat blandit, turpis tortor sodales'
         }
       />
+
+      <div className="mt-6">
+        <h1 className="text-lg font-bold text-primary">
+          Write a title for your profile
+        </h1>
+        <Input
+          containerClassName="mt-1"
+          placeholder="e.g English and Drama Teacher"
+          label="You will need to write a short title for your profile page"
+          labelClassName="text-sm"
+          className="border-[#919EAB4D]"
+        />
+      </div>
+
       <div className="mt-8 flex flex-col gap-4 md:flex-row">
         <ProfilePicture />
         <RoundedContainer className="py-8 px-6 md:w-full">
@@ -90,7 +105,11 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
       </div>
 
       <div className="mt-8 flex flex-col gap-5">
-        <h3 className="text-lg font-bold">About you</h3>
+        <div className="flex gap-2">
+          <h3 className="text-lg font-bold">About you</h3>
+          <InfoBox content="Say something about yourself" />
+        </div>
+
         <RichTextEditor />
       </div>
 
@@ -130,7 +149,11 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
         Add Item
       </ButtonOutlined>
 
-      <SaveButton onClick={() => setCurrentStep(currentStep + 1)} />
+      <ActionButtons
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        totalSteps={totalSteps}
+      />
     </div>
   )
 }
