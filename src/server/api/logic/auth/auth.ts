@@ -19,14 +19,21 @@ export const generateRandom6DigitCode = () => {
 export const signUp = async (data: TSignUpPayload) => {
   const randomCode = generateRandom6DigitCode()
 
-  await Mailer.get().sendMail({
-    to: data.email,
-    subject: 'Account Activation',
-    text: `
+  try {
+    await Mailer.get().sendMail({
+      to: data.email,
+      subject: 'Account Activation',
+      text: `
     Your activation code is ${randomCode}.
     The code is valid for 30 minutes.
     `,
-  })
+    })
+  } catch (error) {
+    throw new TRPCError({
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'Failed to send email',
+    })
+  }
 
   const dataToInsert = {
     ...data,
@@ -47,7 +54,6 @@ export const signUp = async (data: TSignUpPayload) => {
     },
   })
 }
-
 export const verifyAccount = async ({ email, code }: TVerifyAccountPayload) => {
   const userFromDb = await prisma.user.findUnique({
     where: {
