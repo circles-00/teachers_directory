@@ -18,7 +18,7 @@ export const Navigation: FC<INavigationProps> = () => {
   }
 
   const onHandleSignUpClick = () => {
-    router.push('/sign-up').catch((err) => console.error(err))
+    router.push('/sign-up/account-type').catch((err) => console.error(err))
   }
 
   return (

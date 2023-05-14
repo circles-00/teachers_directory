@@ -5,12 +5,12 @@ import { api } from '~/utils/api'
 import '~/styles/globals.css'
 import Head from 'next/head'
 import { BackToTop, Footer, MobileDrawer, Navigation } from '@components/common'
-import { useCommonStore } from '@store'
 import { inter } from '@utils'
 import { SessionProvider } from 'next-auth/react'
+import { useCommonState } from '@hooks'
 
 const TeachersDirectory = ({ Component, pageProps }: AppProps) => {
-  const { isMobileDrawerOpen } = useCommonStore()
+  const { isMobileDrawerOpen } = useCommonState()
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access

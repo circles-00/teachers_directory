@@ -34,6 +34,7 @@ specifiers:
   date-fns: 2.29.3
   eslint: 8.36.0
   eslint-config-next: 13.2.4
+  immer: 10.0.2
   lodash.isempty: 4.4.0
   next: 13.2.4
   next-auth: 4.22.1
@@ -75,6 +76,7 @@ dependencies:
   bcryptjs: 2.4.3
   daisyui: 2.51.5_j7yt3jd32cwenjqavrrga47yr4
   date-fns: 2.29.3
+  immer: 10.0.2
   lodash.isempty: 4.4.0
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.22.1_3tbpwx46tlrk4rci3doelizria
@@ -87,7 +89,7 @@ dependencies:
   react-hook-form: 7.43.9_react@18.2.0
   superjson: 1.12.2
   zod: 3.21.4
-  zustand: 4.3.6_react@18.2.0
+  zustand: 4.3.6_immer@10.0.2+react@18.2.0
 
 devDependencies:
   '@types/bcryptjs': 2.4.2
@@ -2089,6 +2091,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immer/10.0.2:
+    resolution: {integrity: sha512-Rx3CqeqQ19sxUtYV9CU911Vhy8/721wRFnJv3REVGWUmoAcIwzifTsdmJte/MV+0/XpM35LZdQMBGkRIoLPwQA==}
+    dev: false
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -3621,7 +3627,7 @@ packages:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false
 
-  /zustand/4.3.6_react@18.2.0:
+  /zustand/4.3.6_immer@10.0.2+react@18.2.0:
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -3633,6 +3639,7 @@ packages:
       react:
         optional: true
     dependencies:
+      immer: 10.0.2
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
