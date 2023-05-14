@@ -7,10 +7,10 @@ import Head from 'next/head'
 import { BackToTop, Footer, MobileDrawer, Navigation } from '@components/common'
 import { inter } from '@utils'
 import { SessionProvider } from 'next-auth/react'
-import { useCommonState } from '@hooks'
+import { useIsMobileDrawerOpen } from '@hooks'
 
 const TeachersDirectory = ({ Component, pageProps }: AppProps) => {
-  const { isMobileDrawerOpen } = useCommonState()
+  const isMobileDrawerOpen = useIsMobileDrawerOpen()
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access

@@ -2,14 +2,16 @@ import create from 'zustand'
 import { devtools, persist, createJSONStorage } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
 import { createCommonSlice, type TCommonSlice } from '~/store/common'
+import { createAuthSlice, type TAuthSlice } from '~/store/auth'
 
-export type TState = TCommonSlice
+export type TState = TCommonSlice & TAuthSlice
 
 export const useStore = create<TState>()(
   devtools(
     persist(
       immer((...libMethods) => ({
         ...createCommonSlice(...libMethods),
+        ...createAuthSlice(...libMethods),
       })),
       {
         storage: createJSONStorage(() => sessionStorage),

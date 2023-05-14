@@ -1,4 +1,4 @@
-import { useStore } from '~/store/store'
+import { useStore } from '@store'
 
 const useCommonStore = useStore
 
@@ -7,7 +7,5 @@ export const useCommonActions = () =>
     ...state.commonActions,
   }))
 
-export const useCommonState = () =>
-  useCommonStore((state) => ({
-    ...state,
-  }))
+export const useIsMobileDrawerOpen = () =>
+  useCommonStore((state) => state.isMobileDrawerOpen)

@@ -1,14 +1,14 @@
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
 import { useEffect, type FC } from 'react'
-import { useCommonActions, useCommonState } from '@hooks'
+import { useCommonActions, useIsMobileDrawerOpen } from '@hooks'
 
 interface IHamburgerIconProps {}
 
 export const HamburgerIcon: FC<IHamburgerIconProps> = () => {
   const router = useRouter()
 
-  const { isMobileDrawerOpen } = useCommonState()
+  const isMobileDrawerOpen = useIsMobileDrawerOpen()
   const { setIsMobileDrawerOpen } = useCommonActions()
 
   // Close mobile drawer when route changes
@@ -23,7 +23,7 @@ export const HamburgerIcon: FC<IHamburgerIconProps> = () => {
   return (
     <div className="mt-2">
       {/* DaisyUI */}
-      <label className="swap swap-rotate mr-3 sm:visible md:invisible">
+      <label className="swap-rotate swap mr-3 sm:visible md:invisible">
         <input
           id="drawer"
           type="checkbox"

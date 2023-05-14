@@ -2,13 +2,14 @@
 
 import { type StateCreator } from 'zustand'
 import { type TCommonSlice, type ICommonState } from './types'
+import { type TState } from '~/store/store'
 
 const initialState: Omit<ICommonState, 'commonActions'> = {
   isMobileDrawerOpen: false,
 }
 
 export const createCommonSlice: StateCreator<
-  ICommonState,
+  TState,
   [
     ['zustand/devtools', never],
     ['zustand/persist', unknown],
