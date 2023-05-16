@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { type TUserRole } from '@shared'
 
 export const SignUpSchema = z.object({
   firstName: z
@@ -18,4 +19,4 @@ export const SignUpSchema = z.object({
     .max(50, { message: 'Password is too long' }),
 })
 
-export type TSignUp = z.infer<typeof SignUpSchema>
+export type TSignUp = z.infer<typeof SignUpSchema> & { role: TUserRole }

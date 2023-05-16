@@ -7,5 +7,8 @@ export const useSignUpActions = () =>
     ...state.authActions,
   }))
 
+export const useSignUpSuccessMessage = () =>
+  useSignUpStore((state) => state.signUpSuccessMessage)
+
 export const useSignUpAccountType = () =>
   useSignUpStore((state) => state.signUpAccountType)

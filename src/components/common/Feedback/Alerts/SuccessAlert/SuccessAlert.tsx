@@ -1,6 +1,6 @@
 import { type FC, useEffect } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/20/solid'
-import { ButtonOutlined } from '~/components'
+import { ButtonOutlined } from '@components'
 
 interface ISuccessAlertProps {
   message: string

@@ -18,7 +18,7 @@ const steps = [
   },
 ]
 
-const Schools: NextPage = () => {
+const School: NextPage = () => {
   const [currentStep, setCurrentStep] = useState(0)
 
   return (
@@ -40,4 +40,4 @@ const Schools: NextPage = () => {
   )
 }
 
-export default Schools
+export default School

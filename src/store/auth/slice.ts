@@ -1,10 +1,7 @@
 import { type StateCreator } from 'zustand'
-import {
-  type IAuthState,
-  type TAuthSlice,
-  type TSignupAccountType,
-} from '~/store/auth/types'
+import { type IAuthState, type TAuthSlice } from '~/store/auth/types'
 import { type TState } from '~/store/store'
+import { type TUserRole } from '@shared'
 
 const initialState: Omit<IAuthState, 'authActions'> = {}
 
@@ -20,7 +17,7 @@ export const createAuthSlice: StateCreator<
 > = (set) => ({
   ...initialState,
   authActions: {
-    setSignUpAccountType: (accountType?: TSignupAccountType) => {
+    setSignUpAccountType: (accountType?: TUserRole) => {
       set(
         (state) => {
           state.signUpAccountType = accountType
@@ -29,10 +26,20 @@ export const createAuthSlice: StateCreator<
         'setSignUpAccountType'
       )
     },
+    setSignUpSuccessMessage: (message: string) => {
+      set(
+        (state) => {
+          state.signUpSuccessMessage = message
+        },
+        false,
+        'setSignUpSuccessMessage'
+      )
+    },
     resetSignUpAccountType: () => {
       set(
         (state) => {
           state.signUpAccountType = undefined
+          state.signUpSuccessMessage = undefined
         },
         false,
         'resetSignUpAccountType'

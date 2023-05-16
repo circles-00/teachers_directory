@@ -1,12 +1,14 @@
-export type TSignupAccountType = 'school' | 'teacher' | 'general'
+import { type TUserRole } from '@shared'
 
 export interface IAuthActions {
-  setSignUpAccountType: (accountType?: TSignupAccountType) => void
+  setSignUpAccountType: (accountType?: TUserRole) => void
+  setSignUpSuccessMessage: (message: string) => void
 }
 
 export interface IAuthState {
   authActions: IAuthActions
-  signUpAccountType?: TSignupAccountType
+  signUpSuccessMessage?: string
+  signUpAccountType?: TUserRole
 }
 
 export type TAuthSlice = IAuthState

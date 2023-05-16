@@ -1,22 +1,22 @@
 import { type NextPage } from 'next'
 import { ButtonContained, RoundedContainer, TextFormField } from '@components'
 import { useLabels } from '@utils'
-import {
-  LoginSchema,
-  ThirdPartyLogin,
-  type TLoginForm,
-  useAuthStore,
-} from '@domains/auth'
+import { LoginSchema, ThirdPartyLogin, type TLoginForm } from '@domains/auth'
 import Link from 'next/link'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
-import { SuccessAlert } from '@components/common/Alerts'
+import { SuccessAlert } from 'src/components/common/Feedback/Alerts'
+import {
+  useSignUpActions,
+  useSignUpSuccessMessage,
+} from '~/hooks/useStore/helperHooks/useSignUpStore'
 
 const LoginPage: NextPage = () => {
   const { labels } = useLabels()
 
-  const { signUpSuccessMessage, setSignUpSuccessMessage } = useAuthStore()
+  const signUpSuccessMessage = useSignUpSuccessMessage()
+  const { setSignUpSuccessMessage } = useSignUpActions()
 
   const methods = useForm<TLoginForm>({
     resolver: zodResolver(LoginSchema),

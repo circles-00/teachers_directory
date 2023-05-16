@@ -26,6 +26,7 @@
       "@utils": ["./src/utils/index.ts"],
       "@store": ["./src/store/index.ts"],
       "@hooks": ["./src/hooks/index.ts"],
+      "@shared": ["./src/shared/index.ts"],
     }
   },
   "include": [

@@ -8,12 +8,14 @@ import {
 import Link from 'next/link'
 import { ThirdPartyLogin } from '@domains/auth'
 import { useLabels } from '@utils'
+import { DissapearingMessage } from '@components/common/Feedback'
 
 interface ISignUpFormProps {
   isLoading: boolean
+  error?: string
 }
 
-export const SignUpForm: FC<ISignUpFormProps> = ({ isLoading }) => {
+export const SignUpForm: FC<ISignUpFormProps> = ({ isLoading, error }) => {
   const { labels } = useLabels()
 
   return (
@@ -32,6 +34,13 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ isLoading }) => {
           type="password"
           placeholder={labels.password}
         />
+        {!!error && (
+          <DissapearingMessage
+            className="my-[-10px]"
+            message={error}
+            type={'error'}
+          />
+        )}
         <ButtonContained
           className={`flex items-center justify-center py-4 text-white ${
             isLoading ? 'pointer-events-none cursor-not-allowed' : ''

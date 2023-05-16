@@ -1,4 +1,5 @@
 import {
+  type TResendVerificationEmailPayload,
   type TSignUpPayload,
   type TVerifyAccountPayload,
 } from '~/server/api/logic'
@@ -17,6 +18,19 @@ export const generateRandom6DigitCode = () => {
 }
 
 export const signUp = async (data: TSignUpPayload) => {
+  const userFromDb = await prisma.user.findUnique({
+    where: {
+      email: data.email,
+    },
+  })
+
+  if (userFromDb && userFromDb.verified) {
+    throw new TRPCError({
+      code: 'BAD_REQUEST',
+      message: 'User already exists',
+    })
+  }
+
   const randomCode = generateRandom6DigitCode()
 
   try {
@@ -54,6 +68,7 @@ export const signUp = async (data: TSignUpPayload) => {
     },
   })
 }
+
 export const verifyAccount = async ({ email, code }: TVerifyAccountPayload) => {
   const userFromDb = await prisma.user.findUnique({
     where: {
@@ -85,6 +100,60 @@ export const verifyAccount = async ({ email, code }: TVerifyAccountPayload) => {
     },
     data: {
       verified: true,
+    },
+  })
+}
+
+export const resendVerificationEmail = async ({
+  email,
+}: TResendVerificationEmailPayload) => {
+  const userFromDb = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  })
+
+  if (!userFromDb) {
+    throw new TRPCError({
+      code: 'BAD_REQUEST',
+      message: 'User not found',
+    })
+  }
+
+  if (userFromDb.verified) {
+    throw new TRPCError({
+      code: 'BAD_REQUEST',
+      message: 'User already verified',
+    })
+  }
+
+  const randomCode = generateRandom6DigitCode()
+
+  try {
+    await Mailer.get().sendMail({
+      to: email,
+      subject: 'Account Activation',
+      text: `
+    Your activation code is ${randomCode}.
+    The code is valid for 30 minutes.
+    `,
+    })
+  } catch (error) {
+    throw new TRPCError({
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'Failed to send email',
+    })
+  }
+
+  return prisma.user.update({
+    where: {
+      email,
+    },
+    data: {
+      verificationCode: randomCode,
+      verificationCodeExpiresAt: new Date(
+        new Date().getTime() + 30 * 60 * 1000
+      ),
     },
   })
 }
