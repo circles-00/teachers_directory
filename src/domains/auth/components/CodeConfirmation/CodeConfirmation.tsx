@@ -1,10 +1,11 @@
 import { type FC, useMemo } from 'react'
-import { DissapearingMessage, EmailInboxIcon } from '@components'
+import { EmailInboxIcon } from '@components'
 import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { CodeConfirmationForm } from '@domains/auth'
 import { PasswordConfirmation } from './PasswordConfirmation'
 import { api } from '@utils'
+import { DissapearingMessage } from '@components/common/Feedback'
 
 interface ICodeConfirmationProps {
   isForgotPassword?: boolean
