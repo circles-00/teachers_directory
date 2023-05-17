@@ -9,7 +9,7 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
 
   let file
   try {
-    file = JSON.parse(await readFile('mails.json', 'utf-8')) as any[]
+    file = JSON.parse(await readFile('mails.json', 'utf-8')) as unknown
   } catch (error) {
     file = []
   }

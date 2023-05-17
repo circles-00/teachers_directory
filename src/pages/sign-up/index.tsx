@@ -9,13 +9,12 @@ import {
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 import {
   useSignUpAccountType,
   useSignUpActions,
 } from '~/hooks/useStore/helperHooks/useSignUpStore'
 import { isString } from 'lodash'
-import { signIn } from 'next-auth/react'
 import { AuthService } from '@services'
 
 const SignUp: NextPage = () => {

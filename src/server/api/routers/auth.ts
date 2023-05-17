@@ -1,6 +1,5 @@
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc'
 import {
-  loginPayload,
   resendVerificationEmailPayload,
   signUpPayload,
   verifyAccountPayload,

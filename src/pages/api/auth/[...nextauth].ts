@@ -1,8 +1,7 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
-import { AuthService, type TLoginPayload } from '~/server/api/logic/auth'
-import { findUserByEmail } from '~/server/api/logic/auth/AuthService'
+import { AuthService } from '~/server/api/logic/auth'
 import { excludeKeysFromObject } from '@utils'
 import { type TUser } from '~/server/api/types'
 
