@@ -5,12 +5,12 @@ import { LoginSchema, ThirdPartyLogin, type TLoginForm } from '@domains/auth'
 import Link from 'next/link'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signIn } from 'next-auth/react'
 import { SuccessAlert } from 'src/components/common/Feedback/Alerts'
 import {
   useSignUpActions,
   useSignUpSuccessMessage,
 } from '~/hooks/useStore/helperHooks/useSignUpStore'
+import { AuthService } from '@services'
 
 const LoginPage: NextPage = () => {
   const { labels } = useLabels()
@@ -23,10 +23,7 @@ const LoginPage: NextPage = () => {
   })
 
   const onSubmit = async (data: TLoginForm) => {
-    await signIn('credentials', {
-      ...data,
-      redirect: false,
-    })
+    await AuthService.signInWithCredentials(data)
   }
 
   const closeSignUpSuccessMessage = () => {

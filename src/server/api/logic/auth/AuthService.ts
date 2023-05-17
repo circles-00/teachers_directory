@@ -1,12 +1,14 @@
 import {
+  type TLoginPayload,
   type TResendVerificationEmailPayload,
   type TSignUpPayload,
   type TVerifyAccountPayload,
 } from '~/server/api/logic'
 import { prisma } from '~/server/db'
 import { Mailer } from '~/server/api/logic/mailer'
-import { genSalt, hash } from 'bcryptjs'
+import { compare, genSalt, hash } from 'bcryptjs'
 import { TRPCError } from '@trpc/server'
+import { excludeKeysFromObject } from '@utils'
 
 const hashPassword = async (password: string) => {
   const salt = await genSalt(10)
@@ -18,11 +20,7 @@ export const generateRandom6DigitCode = () => {
 }
 
 export const signUp = async (data: TSignUpPayload) => {
-  const userFromDb = await prisma.user.findUnique({
-    where: {
-      email: data.email,
-    },
-  })
+  const userFromDb = await findUserByEmail(data.email)
 
   if (userFromDb && userFromDb.verified) {
     throw new TRPCError({
@@ -56,25 +54,24 @@ export const signUp = async (data: TSignUpPayload) => {
     password: await hashPassword(data.password),
   }
 
-  return await prisma.user.upsert({
-    create: {
-      ...dataToInsert,
-    },
-    update: {
-      ...dataToInsert,
-    },
-    where: {
-      email: data.email,
-    },
-  })
+  return excludeKeysFromObject(
+    await prisma.user.upsert({
+      create: {
+        ...dataToInsert,
+      },
+      update: {
+        ...dataToInsert,
+      },
+      where: {
+        email: data.email,
+      },
+    }),
+    ['password']
+  )
 }
 
 export const verifyAccount = async ({ email, code }: TVerifyAccountPayload) => {
-  const userFromDb = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  })
+  const userFromDb = await findUserByEmail(email)
 
   if (!userFromDb) {
     throw new TRPCError({
@@ -107,11 +104,7 @@ export const verifyAccount = async ({ email, code }: TVerifyAccountPayload) => {
 export const resendVerificationEmail = async ({
   email,
 }: TResendVerificationEmailPayload) => {
-  const userFromDb = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  })
+  const userFromDb = await findUserByEmail(email)
 
   if (!userFromDb) {
     throw new TRPCError({
@@ -154,6 +147,35 @@ export const resendVerificationEmail = async ({
       verificationCodeExpiresAt: new Date(
         new Date().getTime() + 30 * 60 * 1000
       ),
+    },
+  })
+}
+
+export const login = async ({ email, password }: TLoginPayload) => {
+  const invalidUserError = new TRPCError({
+    code: 'BAD_REQUEST',
+    message: 'Invalid email or password',
+  })
+
+  const userFromDb = await findUserByEmail(email)
+
+  if (!userFromDb) {
+    throw invalidUserError
+  }
+
+  const isPasswordValid = await compare(password, userFromDb.password)
+
+  if (!isPasswordValid || !userFromDb.verified) {
+    throw invalidUserError
+  }
+
+  return userFromDb
+}
+
+export const findUserByEmail = async (email: string) => {
+  return prisma.user.findUnique({
+    where: {
+      email,
     },
   })
 }

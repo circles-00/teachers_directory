@@ -1,16 +1,15 @@
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc'
 import {
-  resendVerificationEmail,
+  loginPayload,
   resendVerificationEmailPayload,
-  signUp,
   signUpPayload,
-  verifyAccount,
   verifyAccountPayload,
+  AuthService,
 } from '~/server/api/logic'
 
 export const authRouter = createTRPCRouter({
   signUp: publicProcedure.input(signUpPayload).mutation(async ({ input }) => {
-    const user = await signUp(input)
+    const user = await AuthService.signUp(input)
     return {
       user,
     }
@@ -18,11 +17,11 @@ export const authRouter = createTRPCRouter({
   verifyAccount: publicProcedure
     .input(verifyAccountPayload)
     .mutation(async ({ input }) => {
-      return verifyAccount(input)
+      return AuthService.verifyAccount(input)
     }),
   resendVerificationEmail: publicProcedure
     .input(resendVerificationEmailPayload)
     .mutation(async ({ input }) => {
-      return resendVerificationEmail(input)
+      return AuthService.resendVerificationEmail(input)
     }),
 })

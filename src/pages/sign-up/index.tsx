@@ -15,38 +15,42 @@ import {
   useSignUpActions,
 } from '~/hooks/useStore/helperHooks/useSignUpStore'
 import { isString } from 'lodash'
+import { signIn } from 'next-auth/react'
+import { AuthService } from '@services'
 
 const SignUp: NextPage = () => {
   const router = useRouter()
+  const methods = useForm<TSignUp>({ resolver: zodResolver(SignUpSchema) })
+
+  const userEmail = methods.watch('email')
+  const userPassword = methods.watch('password')
 
   const signUpAccountType = useSignUpAccountType()
   const accountTypeRoute = `/sign-up/${signUpAccountType?.toLowerCase() ?? ''}`
 
   const { setSignUpSuccessMessage } = useSignUpActions()
 
-  const [userEmail, setUserEmail] = useState('')
-
   const {
     mutate,
     isSuccess,
     isLoading,
     error: signUpError,
-  } = api.auth.signUp.useMutation({
-    onSuccess: ({ user }) => {
-      setUserEmail(user.email)
-    },
-  })
+  } = api.auth.signUp.useMutation()
+
   const { mutate: confirmCode, error: confirmationError } =
     api.auth.verifyAccount.useMutation({
-      onSuccess: () => {
+      onSuccess: async () => {
+        await AuthService.signInWithCredentials({
+          username: userEmail,
+          password: userPassword,
+        })
+
         setSignUpSuccessMessage(
           'Account created successfully. You may now login!'
         )
         router.push(accountTypeRoute).catch((err) => console.error(err))
       },
     })
-
-  const methods = useForm<TSignUp>({ resolver: zodResolver(SignUpSchema) })
 
   const email = methods.watch('email')
 

@@ -25,3 +25,10 @@ export const resendVerificationEmailPayload = z.object({
 export type TResendVerificationEmailPayload = z.infer<
   typeof resendVerificationEmailPayload
 >
+
+export const loginPayload = z.object({
+  email: z.string().email(),
+  password: z.string(),
+})
+
+export type TLoginPayload = z.infer<typeof loginPayload>

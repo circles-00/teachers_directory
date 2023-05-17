@@ -6,6 +6,7 @@ import { HamburgerIcon } from './components/HamburgerIcon'
 import { NavigationItems } from './components/NavigationItems'
 import { useRouter } from 'next/router'
 import { useLabels } from '@utils'
+import { useUser } from '~/hooks/useAuth'
 
 interface INavigationProps {}
 
@@ -21,6 +22,8 @@ export const Navigation: FC<INavigationProps> = () => {
     router.push('/sign-up/account-type').catch((err) => console.error(err))
   }
 
+  const user = useUser()
+
   return (
     <div className="flex justify-between border-b-[1px] border-[#d5e0d5] 2xl:px-8">
       <div className="ml-4 flex h-16 items-center md:ml-0">
@@ -31,18 +34,22 @@ export const Navigation: FC<INavigationProps> = () => {
         <NavigationItems className="ml-8 hidden items-center gap-10 md:flex" />
       </div>
       <div className={`mr-4 flex items-center text-sm`}>
-        <button
-          onClick={onHandleLoginClick}
-          className="mr-4 hidden rounded-lg py-[6px] px-[12px] text-base font-bold text-primary md:block"
-        >
-          {labels.login}
-        </button>
-        <button
-          onClick={onHandleSignUpClick}
-          className="rounded-md bg-buttonPrimary py-[8px] px-[24px] text-base font-medium text-white"
-        >
-          {labels.signUp}
-        </button>
+        {!user.isSignedIn && (
+          <button
+            onClick={onHandleLoginClick}
+            className="mr-4 hidden rounded-lg py-[6px] px-[12px] text-base font-bold text-primary md:block"
+          >
+            {labels.login}
+          </button>
+        )}
+        {!user.isSignedIn && (
+          <button
+            onClick={onHandleSignUpClick}
+            className="rounded-md bg-buttonPrimary py-[8px] px-[24px] text-base font-medium text-white"
+          >
+            {labels.signUp}
+          </button>
+        )}
         <Link className="sm:block md:hidden" href="/search">
           <MagnifyingGlassIcon className="ml-4 h-6 w-6 text-primary" />
         </Link>
