@@ -27,6 +27,7 @@ const server = z.object({
  */
 const client = z.object({
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
+  NEXT_PUBLIC_GOOGLE_API_KEY: z.string().min(1),
 })
 
 /**
@@ -50,6 +51,7 @@ const processEnv = {
   EMAIL_TRANSPORT_TYPE: process.env.EMAIL_TRANSPORT_TYPE,
   BREVO_API_KEY: process.env.BREVO_API_KEY,
   MAILER_ENV: process.env.MAILER_ENV,
+  NEXT_PUBLIC_GOOGLE_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 }
 

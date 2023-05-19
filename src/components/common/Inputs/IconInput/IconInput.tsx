@@ -1,4 +1,9 @@
-import { type ForwardRefExoticComponent, type FC, type SVGProps } from 'react'
+import {
+  type ForwardRefExoticComponent,
+  type FC,
+  type SVGProps,
+  type ChangeEvent,
+} from 'react'
 import { mergeClassNames } from '@utils'
 
 interface IIconInputProps {
@@ -6,6 +11,8 @@ interface IIconInputProps {
   className?: string
   iconClassName?: string
   placeholder?: string
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  value?: string
 }
 
 export const IconInput: FC<IIconInputProps> = ({
@@ -13,6 +20,8 @@ export const IconInput: FC<IIconInputProps> = ({
   placeholder,
   className = '',
   iconClassName = '',
+  onChange,
+  value,
 }) => {
   const defaultInputClassName =
     'w-full h-12 rounded-md border-[1px] border-[#0000004D] p-2 py-6 focus:outline-slate-400'
@@ -22,6 +31,8 @@ export const IconInput: FC<IIconInputProps> = ({
   return (
     <div className="relative">
       <input
+        onChange={onChange}
+        value={value}
         placeholder={placeholder}
         className={mergeClassNames([defaultInputClassName, className])}
       />
