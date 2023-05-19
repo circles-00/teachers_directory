@@ -9,7 +9,8 @@ interface UseGoogleApiProps {
 
 export const useGoogleApi = ({ libraries }: UseGoogleApiProps) => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: (env.NEXT_PUBLIC_GOOGLE_API_KEY as string) ?? '',
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    googleMapsApiKey: env.NEXT_PUBLIC_GOOGLE_API_KEY ?? '',
     libraries,
   })
 

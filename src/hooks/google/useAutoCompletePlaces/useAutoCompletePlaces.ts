@@ -74,5 +74,6 @@ export const useAutoCompletePlaces = ({
     ready,
     value,
     coordinates: useMemo(() => coordinates, [coordinates]),
+    status,
   }
 }

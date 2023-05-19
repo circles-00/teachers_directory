@@ -1,6 +1,6 @@
-import { useState, type FC, type ChangeEvent } from 'react'
+import { useState, type FC } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-import { AutoComplete, IconInput, Input } from '@components'
+import { AutoComplete, Input } from '@components'
 import { StepsHeader } from '@domains/sign-up'
 import { Header } from '../../../Header'
 import { type StepProps } from '../../types'
