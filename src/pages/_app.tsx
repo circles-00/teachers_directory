@@ -5,15 +5,27 @@ import Head from 'next/head'
 import { BackToTop, Footer, MobileDrawer, Navigation } from '@components/common'
 import { inter } from '@utils'
 import { SessionProvider } from 'next-auth/react'
-import { useIsMobileDrawerOpen } from '@hooks'
+import { useIsMobileDrawerOpen, useIsomorphicLayoutEffect } from "@hooks";
 import { type TeachersDirectoryAppProps } from '~/types/page'
 import { AppLayout } from '@layout'
+import { useCurrentScreenId, usePagesActions } from "~/hooks/useStore/helperHooks/usePagesStore";
 
 const TeachersDirectory = ({
   Component,
   pageProps,
 }: TeachersDirectoryAppProps) => {
   const isMobileDrawerOpen = useIsMobileDrawerOpen()
+  const currentScreenId = useCurrentScreenId()
+
+
+  const {setCurrentScreenId} = usePagesActions()
+
+
+  useIsomorphicLayoutEffect(() => {
+    if(Component.screenId === currentScreenId) {
+      setCurrentScreenId(Component.screenId)
+    }
+  })
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access

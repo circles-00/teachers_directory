@@ -1,7 +1,8 @@
-import { type NextPage } from 'next'
-import { HeroContainer, SchoolShowcase, TeacherShowcase } from '@domains/home'
+import { HeroContainer, SchoolShowcase, TeacherShowcase } from "@domains/home";
+import { type TeachersDirectoryPage } from "~/types/page";
+import { EScreenId } from "@domains/screen";
 
-const Home: NextPage = () => {
+const Home: Pick<TeachersDirectoryPage, 'screenId'> = () => {
   return (
     <div>
       <HeroContainer />
@@ -11,4 +12,5 @@ const Home: NextPage = () => {
   )
 }
 
+Home.screenId = EScreenId.HOME
 export default Home

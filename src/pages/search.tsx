@@ -1,9 +1,10 @@
-import { type NextPage } from 'next'
-import { filterItems, FilterPanel, type TFilterItem } from '@domains/search'
-import { SearchResults } from '@domains/search/components/SearchResults'
-import { useState } from 'react'
+import { filterItems, FilterPanel, type TFilterItem } from "@domains/search";
+import { SearchResults } from "@domains/search/components/SearchResults";
+import { useState } from "react";
+import { type TeachersDirectoryPage } from "~/types/page";
+import { EScreenId } from "@domains/screen";
 
-const Search: NextPage = () => {
+const Search: Pick<TeachersDirectoryPage, 'screenId'>= () => {
   const [selectedFilters, setSelectedFilters] = useState<TFilterItem[]>([])
 
   const addFilter = (item: TFilterItem) => {
@@ -46,5 +47,7 @@ const Search: NextPage = () => {
     </div>
   )
 }
+
+Search.screenId = EScreenId.SEARCH
 
 export default Search

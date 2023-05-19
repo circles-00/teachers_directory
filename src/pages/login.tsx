@@ -1,16 +1,14 @@
-import { ButtonContained, RoundedContainer, TextFormField } from '@components'
-import { useLabels } from '@utils'
-import { LoginSchema, ThirdPartyLogin, type TLoginForm } from '@domains/auth'
-import Link from 'next/link'
-import { FormProvider, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { SuccessAlert } from 'src/components/common/Feedback/Alerts'
-import {
-  useSignUpActions,
-  useSignUpSuccessMessage,
-} from '~/hooks/useStore/helperHooks/useSignUpStore'
-import { AuthService } from '@services'
-import { type TeachersDirectoryPage } from '~/types/page'
+import { ButtonContained, RoundedContainer, TextFormField } from "@components";
+import { useLabels } from "@utils";
+import { LoginSchema, ThirdPartyLogin, type TLoginForm } from "@domains/auth";
+import Link from "next/link";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SuccessAlert } from "src/components/common/Feedback/Alerts";
+import { useSignUpActions, useSignUpSuccessMessage } from "~/hooks/useStore/helperHooks/useSignUpStore";
+import { AuthService } from "@services";
+import { type TeachersDirectoryPage } from "~/types/page";
+import { EScreenId } from "@domains/screen";
 
 const LoginPage: TeachersDirectoryPage = () => {
   const { labels } = useLabels()
@@ -74,4 +72,5 @@ const LoginPage: TeachersDirectoryPage = () => {
 }
 
 LoginPage.pageType = 'PUBLIC'
+LoginPage.screenId = EScreenId.LOGIN
 export default LoginPage

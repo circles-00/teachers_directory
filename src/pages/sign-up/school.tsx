@@ -2,10 +2,11 @@ import {
   AccountDetailsQuestionnaire,
   AddressQuestionnaire,
   CurrentStepComponent,
-  StepperSidebar,
-} from '@domains/sign-up'
-import { useState } from 'react'
-import { type TeachersDirectoryPage } from '~/types/page'
+  StepperSidebar
+} from "@domains/sign-up";
+import { useState } from "react";
+import { type TeachersDirectoryPage } from "~/types/page";
+import { EScreenId } from "@domains/screen";
 
 const steps = [
   {
@@ -41,5 +42,6 @@ const School: TeachersDirectoryPage = () => {
 }
 
 School.pageType = 'PRIVATE'
+School.screenId = EScreenId.SIGN_UP_SCHOOL
 
 export default School

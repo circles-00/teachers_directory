@@ -1,21 +1,14 @@
-import { api, playfairDisplay } from '@utils'
-import {
-  CodeConfirmation,
-  SignUpForm,
-  SignUpSchema,
-  type TSignUp,
-} from '@domains/auth'
-import { FormProvider, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/router'
-import { useCallback } from 'react'
-import {
-  useSignUpAccountType,
-  useSignUpActions,
-} from '~/hooks/useStore/helperHooks/useSignUpStore'
-import { isString } from 'lodash'
-import { AuthService } from '@services'
-import { type TeachersDirectoryPage } from '~/types/page'
+import { api, playfairDisplay } from "@utils";
+import { CodeConfirmation, SignUpForm, SignUpSchema, type TSignUp } from "@domains/auth";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/router";
+import { useCallback } from "react";
+import { useSignUpAccountType, useSignUpActions } from "~/hooks/useStore/helperHooks/useSignUpStore";
+import { isString } from "lodash";
+import { AuthService } from "@services";
+import { type TeachersDirectoryPage } from "~/types/page";
+import { EScreenId } from "@domains/screen";
 
 const SignUp: TeachersDirectoryPage = () => {
   const router = useRouter()
@@ -111,5 +104,5 @@ const SignUp: TeachersDirectoryPage = () => {
 }
 
 SignUp.pageType = 'PUBLIC'
-
+SignUp.screenId= EScreenId.SIGN_UP
 export default SignUp

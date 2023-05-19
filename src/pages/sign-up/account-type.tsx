@@ -1,7 +1,8 @@
-import { AccountTypeContainer } from '@domains/sign-up'
-import Link from 'next/link'
-import { type TUserRole } from '@shared'
-import { type TeachersDirectoryPage } from '~/types/page'
+import { AccountTypeContainer } from "@domains/sign-up";
+import Link from "next/link";
+import { type TUserRole } from "@shared";
+import { type TeachersDirectoryPage } from "~/types/page";
+import { EScreenId } from "@domains/screen";
 
 type AccountType = {
   title: string
@@ -56,5 +57,6 @@ const AccountType: TeachersDirectoryPage = () => {
 }
 
 AccountType.pageType = 'PUBLIC'
+AccountType.screenId = EScreenId.SIGN_UP_ACCOUNT_TYPE
 
 export default AccountType

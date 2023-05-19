@@ -1,17 +1,18 @@
 import {
-  LocationQuestionnaire,
-  StepperSidebar,
-  SubjectsQuestionnaire,
-  QualificationsQuestionnaire,
-  ExperienceQuestionnaire,
-  ProfileQuestionnaire,
   AvailabilityQuestionnaire,
   BadgesQuestionnaire,
   CurrentStepComponent,
+  ExperienceQuestionnaire,
+  LocationQuestionnaire,
   OtherServicesQuestionnaire,
-} from '@domains/sign-up'
-import { useState } from 'react'
-import { type TeachersDirectoryPage } from '~/types/page'
+  ProfileQuestionnaire,
+  QualificationsQuestionnaire,
+  StepperSidebar,
+  SubjectsQuestionnaire
+} from "@domains/sign-up";
+import { useState } from "react";
+import { type TeachersDirectoryPage } from "~/types/page";
+import { EScreenId } from "@domains/screen";
 
 const steps = [
   {
@@ -71,5 +72,6 @@ const TeachersSignUpPage: TeachersDirectoryPage = () => {
 }
 
 TeachersSignUpPage.pageType = 'PRIVATE'
+TeachersSignUpPage.screenId = EScreenId.SIGN_UP_TEACHER
 
 export default TeachersSignUpPage
