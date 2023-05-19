@@ -1,18 +1,26 @@
 import { type FC } from 'react'
 import { ArrowBaloonRight, RoundedContainer } from '@components'
 import Link from 'next/link'
+import { useSignUpActions } from '~/hooks/useStore/helperHooks/useSignUpStore'
+import { type TUserRole } from '@shared'
 
 interface IAccountTypeContainerProps {
   title: string
   description: string
-  href: string
+  accountType: TUserRole
 }
 
 export const AccountTypeContainer: FC<IAccountTypeContainerProps> = ({
   title,
   description,
-  href,
+  accountType,
 }) => {
+  const { setSignUpAccountType } = useSignUpActions()
+
+  const onHandleClick = () => {
+    setSignUpAccountType(accountType)
+  }
+
   return (
     <RoundedContainer className="mt-4 w-full py-6 px-8 md:w-[470px]">
       <div className="flex items-center justify-between">
@@ -26,7 +34,8 @@ export const AccountTypeContainer: FC<IAccountTypeContainerProps> = ({
           </div>
         </div>
         <Link
-          href={href}
+          href={'/sign-up'}
+          onClick={onHandleClick}
           className="flex h-12 w-16 items-center justify-center rounded-md bg-primary"
         >
           <ArrowBaloonRight />

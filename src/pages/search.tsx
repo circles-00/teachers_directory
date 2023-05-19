@@ -1,16 +1,10 @@
 import { type NextPage } from 'next'
-import {
-  filterItems,
-  FilterPanel,
-  type Item,
-  type TFilterItem,
-} from '@domains/search'
+import { filterItems, FilterPanel, type TFilterItem } from '@domains/search'
 import { SearchResults } from '@domains/search/components/SearchResults'
 import { useState } from 'react'
 
 const Search: NextPage = () => {
   const [selectedFilters, setSelectedFilters] = useState<TFilterItem[]>([])
-  console.log({ selectedFilters })
 
   const addFilter = (item: TFilterItem) => {
     if (selectedFilters) {

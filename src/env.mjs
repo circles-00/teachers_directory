@@ -5,8 +5,20 @@ import { z } from 'zod'
  * built with invalid env vars.
  */
 const server = z.object({
-  DATABASE_URL: z.string().url(),
+  POSTGRES_PRISMA_URL: z.string().url(),
+  POSTGRES_URL_NON_POOLING: z.string().url().optional(),
   NODE_ENV: z.enum(['development', 'test', 'production']),
+  NEXTAUTH_URL: z.string().url(),
+  NEXTAUTH_SECRET: z.string().min(1),
+  SMTP_HOST: z.string().min(1).optional(),
+  SMTP_PORT: z.string().min(1).optional(),
+  EMAIL_USER: z.string().min(1).optional(),
+  SMTP_PASSWORD: z.string().min(1).optional(),
+  GOOGLE_CLIENT_ID: z.string().min(1),
+  GOOGLE_CLIENT_SECRET: z.string().min(1),
+  EMAIL_TRANSPORT_TYPE: z.string().min(1),
+  BREVO_API_KEY: z.string().min(1).optional(),
+  MAILER_ENV: z.string().min(1).optional(),
 })
 
 /**
@@ -15,6 +27,7 @@ const server = z.object({
  */
 const client = z.object({
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
+  NEXT_PUBLIC_GOOGLE_API_KEY: z.string().min(1),
 })
 
 /**
@@ -24,8 +37,21 @@ const client = z.object({
  * @type {Record<keyof z.infer<typeof server> | keyof z.infer<typeof client>, string | undefined>}
  */
 const processEnv = {
-  DATABASE_URL: process.env.DATABASE_URL,
+  POSTGRES_PRISMA_URL: process.env.POSTGRES_PRISMA_URL,
+  POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING,
   NODE_ENV: process.env.NODE_ENV,
+  NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+  NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+  SMTP_HOST: process.env.SMTP_HOST,
+  SMTP_PORT: process.env.SMTP_PORT,
+  EMAIL_USER: process.env.EMAIL_USER,
+  SMTP_PASSWORD: process.env.SMTP_PASSWORD,
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  EMAIL_TRANSPORT_TYPE: process.env.EMAIL_TRANSPORT_TYPE,
+  BREVO_API_KEY: process.env.BREVO_API_KEY,
+  MAILER_ENV: process.env.MAILER_ENV,
+  NEXT_PUBLIC_GOOGLE_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 }
 

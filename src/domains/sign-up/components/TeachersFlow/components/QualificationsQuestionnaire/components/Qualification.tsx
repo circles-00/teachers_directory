@@ -1,6 +1,5 @@
-import { AutoComplete, Input, TrashIcon } from '@components'
 import { type FC } from 'react'
-import { Select } from '@components'
+import { AutoComplete, Input, Select } from '@components'
 import { TrashButton } from '@domains/sign-up'
 
 const subjects = [

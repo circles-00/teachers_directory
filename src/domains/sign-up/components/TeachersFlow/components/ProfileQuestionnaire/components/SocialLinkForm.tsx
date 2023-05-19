@@ -1,5 +1,5 @@
 import { type FC } from 'react'
-import { Select, Input, TrashIcon } from '@components'
+import { Select, Input } from '@components'
 import { TrashButton } from '@domains/sign-up'
 
 interface ISocialLinkFormProps {

@@ -1,4 +1,4 @@
-import { FC, Fragment, useRef } from 'react'
+import { type FC, Fragment, useRef } from 'react'
 import InfoIcon from '@assets/info-64.png'
 import Image from 'next/image'
 import { Popover, Transition } from '@headlessui/react'

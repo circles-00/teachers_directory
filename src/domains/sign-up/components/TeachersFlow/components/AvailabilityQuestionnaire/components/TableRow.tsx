@@ -1,4 +1,4 @@
-import { type ChangeEvent, type FC } from 'react'
+import { type FC } from 'react'
 import { generateArray } from '@utils'
 
 interface TableRowProps {

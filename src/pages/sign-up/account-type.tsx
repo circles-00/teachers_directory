@@ -1,25 +1,33 @@
 import { AccountTypeContainer } from '@domains/sign-up'
 import Link from 'next/link'
+import { type TUserRole } from '@shared'
+import { type TeachersDirectoryPage } from '~/types/page'
 
-const accountTypes = [
+type AccountType = {
+  title: string
+  description: string
+  accountType: TUserRole
+}
+
+const accountTypes: AccountType[] = [
   {
     title: 'Teacher/Support staff',
     description: 'A teaching qualification or a\ndegree is required',
-    href: '/sign-up/teachers',
+    accountType: 'TEACHER',
   },
   {
     title: 'School/Organisation',
     description: 'A valid school/organisation email\naddress is required',
-    href: '/sign-up/schools',
+    accountType: 'SCHOOL',
   },
   {
     title: 'General User',
     description: `A general user that is neither a qualified \nteacher, nor a school/organisation`,
-    href: '/sign-up/general',
+    accountType: 'GENERAL',
   },
 ]
 
-const AccountType = () => {
+const AccountType: TeachersDirectoryPage = () => {
   return (
     <div className="my-36 mx-4 flex justify-center md:mx-0">
       <div className="flex flex-col">
@@ -27,12 +35,12 @@ const AccountType = () => {
           Are you looking to register as
         </h1>
         <div className="flex flex-col gap-2 xl:flex-row">
-          {accountTypes.map(({ title, description, href }, idx) => (
+          {accountTypes.map(({ title, description, accountType }, idx) => (
             <AccountTypeContainer
               key={idx}
               title={title}
               description={description}
-              href={href}
+              accountType={accountType}
             />
           ))}
         </div>
@@ -46,5 +54,7 @@ const AccountType = () => {
     </div>
   )
 }
+
+AccountType.pageType = 'PUBLIC'
 
 export default AccountType

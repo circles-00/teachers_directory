@@ -1,76 +1,115 @@
-import { type NextPage } from 'next'
-import { ButtonContained, Input, RoundedContainer } from '@components'
-import { useLabels, playfairDisplay } from '@utils'
-import { ThirdPartyLogin } from '@domains/auth'
-import Link from 'next/link'
+import { api, playfairDisplay } from '@utils'
+import {
+  CodeConfirmation,
+  SignUpForm,
+  SignUpSchema,
+  type TSignUp,
+} from '@domains/auth'
+import { FormProvider, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
+import { useCallback } from 'react'
+import {
+  useSignUpAccountType,
+  useSignUpActions,
+} from '~/hooks/useStore/helperHooks/useSignUpStore'
+import { isString } from 'lodash'
+import { AuthService } from '@services'
+import { type TeachersDirectoryPage } from '~/types/page'
 
-const SignUp: NextPage = () => {
-  const { labels } = useLabels()
+const SignUp: TeachersDirectoryPage = () => {
   const router = useRouter()
+  const methods = useForm<TSignUp>({ resolver: zodResolver(SignUpSchema) })
 
-  const handleOnCreateAccount = () => {
-    router.push('/sign-up/account-type').catch((err) => console.error(err))
+  const userEmail = methods.watch('email')
+  const userPassword = methods.watch('password')
+
+  const signUpAccountType = useSignUpAccountType()
+  const accountTypeRoute = `/sign-up/${signUpAccountType?.toLowerCase() ?? ''}`
+
+  const { setSignUpSuccessMessage } = useSignUpActions()
+
+  const {
+    mutate,
+    isSuccess,
+    isLoading,
+    error: signUpError,
+  } = api.auth.signUp.useMutation()
+
+  const { mutate: confirmCode, error: confirmationError } =
+    api.auth.verifyAccount.useMutation({
+      onSuccess: async () => {
+        await AuthService.signInWithCredentials({
+          username: userEmail,
+          password: userPassword,
+        })
+
+        setSignUpSuccessMessage(
+          'Account created successfully. You may now login!'
+        )
+        router.push(accountTypeRoute).catch((err) => console.error(err))
+      },
+    })
+
+  const email = methods.watch('email')
+
+  const onSubmit = (data: TSignUp) => {
+    let payload = { ...data }
+    if (isString(signUpAccountType)) {
+      payload = {
+        ...data,
+        role: signUpAccountType,
+      }
+    }
+
+    mutate(payload)
   }
 
+  const onCodeConfirmation = useCallback(
+    (code: string) => {
+      confirmCode({ code: parseInt(code), email: userEmail })
+    },
+    [confirmCode, userEmail]
+  )
+
   return (
-    <div className="md:ml-52">
-      <div className="my-12 flex flex-col md:ml-10 md:flex-row">
-        <div className="mx-10 flex flex-col gap-4 md:mx-0 md:mt-32">
-          <h1
-            className={`text-5xl font-bold text-primary ${playfairDisplay.className}`}
-          >
-            Get started <br /> absolutely <br />{' '}
-            <span className="bg-gradient-to-r from-[#FFAB00] via-[#00AB55] to-[#00AB55] bg-clip-text text-transparent">
-              for free
-            </span>
-          </h1>
-          <p className="text-2xl">
-            Whether you are <b>a teacher</b> <br /> or a{' '}
-            <b>school representative</b>, get the best <br /> out of Teachers
-            Directory
-          </p>
-        </div>
-        <div className="md:w-5/6">
-          <RoundedContainer className="m-5 mx-auto mt-10 w-full gap-5 px-8 py-12 md:w-6/12">
-            <h1 className="text-center text-xl font-bold text-black">
-              Join the Teachers&apos; Directory Community
-            </h1>
-            <div className="flex flex-col gap-6 md:flex-row md:justify-between md:gap-2">
-              <Input placeholder={labels.firstName} />
-              <Input placeholder={labels.surname} />
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <div className="md:ml-52">
+          <div className="my-12 flex flex-col md:ml-10 md:flex-row">
+            <div className="mx-10 flex flex-col gap-4 md:mx-0 md:mt-32">
+              <h1
+                className={`text-5xl font-bold text-primary ${playfairDisplay.className}`}
+              >
+                Get started <br /> absolutely <br />{' '}
+                <span className="bg-gradient-to-r from-[#FFAB00] via-[#00AB55] to-[#00AB55] bg-clip-text text-transparent">
+                  for free
+                </span>
+              </h1>
+              <p className="text-2xl">
+                Whether you are <b>a teacher</b> <br /> or a{' '}
+                <b>school representative</b>, get the best <br /> out of
+                Teachers Directory
+              </p>
             </div>
-            <Input placeholder={labels.email} />
-            <Input placeholder={labels.password} />
-            <ButtonContained
-              onClick={handleOnCreateAccount}
-              className="py-4 text-white"
-            >
-              Create account
-            </ButtonContained>
-            <p className="text-center text-xs">
-              By signing up, I agree to{' '}
-              <Link className="text-primary" href="#">
-                <u>Terms of Use</u>
-              </Link>{' '}
-              and
-              <Link className="text-primary" href="#">
-                <u> Privacy Policy</u>
-              </Link>
-              .
-            </p>
-            <ThirdPartyLogin />
-          </RoundedContainer>
-          <p className="text-center text-sm">
-            Already have an account?{' '}
-            <Link href="/login" className="font-bold text-primary">
-              Sign in
-            </Link>
-          </p>
+            {isSuccess ? (
+              <div className="md:w-4/5">
+                <CodeConfirmation
+                  email={email}
+                  error={confirmationError?.message}
+                  onSubmit={onCodeConfirmation}
+                />
+              </div>
+            ) : (
+              <SignUpForm error={signUpError?.message} isLoading={isLoading} />
+            )}
+          </div>
         </div>
-      </div>
-    </div>
+      </form>
+    </FormProvider>
   )
 }
+
+SignUp.pageType = 'PUBLIC'
 
 export default SignUp

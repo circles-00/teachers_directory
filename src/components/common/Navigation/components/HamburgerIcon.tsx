@@ -1,14 +1,15 @@
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
 import { useEffect, type FC } from 'react'
-import { useCommonStore } from '@store'
+import { useCommonActions, useIsMobileDrawerOpen } from '@hooks'
 
 interface IHamburgerIconProps {}
 
 export const HamburgerIcon: FC<IHamburgerIconProps> = () => {
   const router = useRouter()
 
-  const { isMobileDrawerOpen, setIsMobileDrawerOpen } = useCommonStore()
+  const isMobileDrawerOpen = useIsMobileDrawerOpen()
+  const { setIsMobileDrawerOpen } = useCommonActions()
 
   // Close mobile drawer when route changes
   useEffect(() => {

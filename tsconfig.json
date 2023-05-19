@@ -24,7 +24,11 @@
       "@domains/*": ["./src/domains/*"],
       "@assets/*": ["./src/assets/*"],
       "@utils": ["./src/utils/index.ts"],
-      "@store": ["./src/store/index.ts"]
+      "@store": ["./src/store/index.ts"],
+      "@hooks": ["./src/hooks/index.ts"],
+      "@shared": ["./src/shared/index.ts"],
+      "@services": ["./src/services/index.ts"],
+      "@layout": ["./src/layout/index.ts"],
     }
   },
   "include": [
@@ -33,7 +37,8 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.cjs",
-    "**/*.mjs"
+    "**/*.mjs",
+    "src/types/**/*.d.ts"
   ],
   "exclude": ["node_modules"]
 }

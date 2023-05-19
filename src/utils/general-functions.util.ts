@@ -24,3 +24,5 @@ export const getFileSizeInMB = (file: File) => {
 export const formatLongString = (str: string, maxLength: number) => {
   return str.length > maxLength ? `${str.substring(0, maxLength)}...` : str
 }
+
+export const isClient = () => typeof window !== 'undefined'
