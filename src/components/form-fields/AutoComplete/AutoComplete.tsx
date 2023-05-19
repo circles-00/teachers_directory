@@ -20,7 +20,7 @@ interface IAutoCompleteProps {
   placeholder?: string
   containerClassName?: string
   label?: string
-  Icon: ForwardRefExoticComponent<SVGProps<SVGSVGElement>>
+  Icon?: ForwardRefExoticComponent<SVGProps<SVGSVGElement>>
   isAsync?: boolean
   onAsyncSearch?: (event: ChangeEvent<HTMLInputElement>) => void
   asyncOnSelect?: (option: TOption) => void
