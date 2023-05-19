@@ -1,4 +1,3 @@
-import { type NextPage } from 'next'
 import { api, playfairDisplay } from '@utils'
 import {
   CodeConfirmation,
@@ -16,8 +15,9 @@ import {
 } from '~/hooks/useStore/helperHooks/useSignUpStore'
 import { isString } from 'lodash'
 import { AuthService } from '@services'
+import { type TeachersDirectoryPage } from '~/types/page'
 
-const SignUp: NextPage = () => {
+const SignUp: TeachersDirectoryPage = () => {
   const router = useRouter()
   const methods = useForm<TSignUp>({ resolver: zodResolver(SignUpSchema) })
 
@@ -109,5 +109,7 @@ const SignUp: NextPage = () => {
     </FormProvider>
   )
 }
+
+SignUp.pageType = 'PUBLIC'
 
 export default SignUp

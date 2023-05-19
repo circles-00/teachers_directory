@@ -5,6 +5,7 @@ specifiers:
   '@heroicons/react': 2.0.16
   '@hookform/resolvers': 3.1.0
   '@prisma/client': 4.13.0
+  '@rounik/react-custom-hooks': 0.1.13
   '@tanstack/react-query': 4.28.0
   '@tiptap/core': 2.0.3
   '@tiptap/extension-bullet-list': 2.0.3
@@ -20,6 +21,7 @@ specifiers:
   '@trpc/server': 10.18.0
   '@types/bcryptjs': 2.4.2
   '@types/eslint': 8.21.3
+  '@types/google.maps': 3.53.1
   '@types/jsonwebtoken': 9.0.2
   '@types/lodash': 4.14.194
   '@types/lodash.isempty': 4.4.7
@@ -55,6 +57,7 @@ specifiers:
   superjson: 1.12.2
   tailwindcss: 3.2.7
   typescript: 5.0.2
+  use-places-autocomplete: 4.0.0
   zod: 3.21.4
   zustand: 4.3.6
 
@@ -63,6 +66,7 @@ dependencies:
   '@heroicons/react': 2.0.16_react@18.2.0
   '@hookform/resolvers': 3.1.0_react-hook-form@7.43.9
   '@prisma/client': 4.13.0_prisma@4.13.0
+  '@rounik/react-custom-hooks': 0.1.13_odn5rdmyrxuyfnlhepsb7fjnvi
   '@tanstack/react-query': 4.28.0_biqbaboplfbrettd7655fr4n2y
   '@tiptap/core': 2.0.3_@tiptap+pm@2.0.3
   '@tiptap/extension-bullet-list': 2.0.3_@tiptap+core@2.0.3
@@ -92,12 +96,14 @@ dependencies:
   react-dropzone: 14.2.3_react@18.2.0
   react-hook-form: 7.43.9_react@18.2.0
   superjson: 1.12.2
+  use-places-autocomplete: 4.0.0_react@18.2.0
   zod: 3.21.4
   zustand: 4.3.6_immer@9.0.16+react@18.2.0
 
 devDependencies:
   '@types/bcryptjs': 2.4.2
   '@types/eslint': 8.21.3
+  '@types/google.maps': 3.53.1
   '@types/jsonwebtoken': 9.0.2
   '@types/lodash': 4.14.194
   '@types/lodash.isempty': 4.4.7
@@ -432,6 +438,17 @@ packages:
     resolution: {integrity: sha512-7HQbW7k8VxrAtfzs9FxwO6XSDabn8tSFDi1wwzShOnU+cvaYpfxu0ygyTk3TpXsag1hgFKY3ZIlAfB4WVz2LkQ==}
     dependencies:
       type-fest: 2.19.0
+    dev: false
+
+  /@rounik/react-custom-hooks/0.1.13_odn5rdmyrxuyfnlhepsb7fjnvi:
+    resolution: {integrity: sha512-IMED7wKH9wqfQb8yXRbZZirMiDAChmtD2ygABtcKGQ1iF3dAeJKW9fm64lC2nP3mdmKiE2MLxLWWBWtugp4s9Q==}
+    peerDependencies:
+      react: '>=18.2.0'
+      typescript: '>=4.6.4'
+    dependencies:
+      dequal: 2.0.3
+      react: 18.2.0
+      typescript: 5.0.2
     dev: false
 
   /@rushstack/eslint-patch/1.2.0:
@@ -790,6 +807,10 @@ packages:
 
   /@types/estree/1.0.0:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
+    dev: true
+
+  /@types/google.maps/3.53.1:
+    resolution: {integrity: sha512-+7JVpq+kFzTU3TweSz6huYuFedZ4s60WeABaXYU6rDZczdpfoQ5DuZNCDc/eAAcdFJpxMMDpzf3d9YTMNodBFg==}
     dev: true
 
   /@types/json-schema/7.0.11:
@@ -1413,6 +1434,11 @@ packages:
 
   /defined/1.0.1:
     resolution: {integrity: sha512-hsBd2qSVCRE+5PmNdHt1uzyrFu5d3RwmFDKzyNZMFq/EwDNJF7Ee5+D5oEKF0hU6LhtoUF1macFvOe4AskQC1Q==}
+
+  /dequal/2.0.3:
+    resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
+    engines: {node: '>=6'}
+    dev: false
 
   /detective/5.2.1:
     resolution: {integrity: sha512-v9XE1zRnz1wRtgurGu0Bs8uHKFSTdteYZNbIPFVhUZ39L/S79ppMpdmVOZAnoz1jfEFodc48n6MX483Xo3t1yw==}
@@ -3524,7 +3550,6 @@ packages:
     resolution: {integrity: sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==}
     engines: {node: '>=12.20'}
     hasBin: true
-    dev: true
 
   /uc.micro/1.0.6:
     resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}
@@ -3554,6 +3579,14 @@ packages:
     dependencies:
       punycode: 2.3.0
     dev: true
+
+  /use-places-autocomplete/4.0.0_react@18.2.0:
+    resolution: {integrity: sha512-w8jdm1iT3WXN0DPXtgyccJoBlAk/UetCMg466B2pBiWNBfvAIxdRoU6Gt4CzW11rWWuzpqnMG5hLxUOKSZBSgw==}
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /use-sync-external-store/1.2.0_react@18.2.0:
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}

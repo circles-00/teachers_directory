@@ -1,4 +1,3 @@
-import { type NextPage } from 'next'
 import {
   AccountDetailsQuestionnaire,
   AddressQuestionnaire,
@@ -6,6 +5,7 @@ import {
   StepperSidebar,
 } from '@domains/sign-up'
 import { useState } from 'react'
+import { type TeachersDirectoryPage } from '~/types/page'
 
 const steps = [
   {
@@ -18,7 +18,7 @@ const steps = [
   },
 ]
 
-const School: NextPage = () => {
+const School: TeachersDirectoryPage = () => {
   const [currentStep, setCurrentStep] = useState(0)
 
   return (
@@ -39,5 +39,7 @@ const School: NextPage = () => {
     </div>
   )
 }
+
+School.pageType = 'PRIVATE'
 
 export default School

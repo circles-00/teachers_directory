@@ -1,4 +1,3 @@
-import { type NextPage } from 'next'
 import { ButtonContained, RoundedContainer, TextFormField } from '@components'
 import { useLabels } from '@utils'
 import { LoginSchema, ThirdPartyLogin, type TLoginForm } from '@domains/auth'
@@ -11,8 +10,9 @@ import {
   useSignUpSuccessMessage,
 } from '~/hooks/useStore/helperHooks/useSignUpStore'
 import { AuthService } from '@services'
+import { type TeachersDirectoryPage } from '~/types/page'
 
-const LoginPage: NextPage = () => {
+const LoginPage: TeachersDirectoryPage = () => {
   const { labels } = useLabels()
 
   const signUpSuccessMessage = useSignUpSuccessMessage()
@@ -73,4 +73,5 @@ const LoginPage: NextPage = () => {
   )
 }
 
+LoginPage.pageType = 'PUBLIC'
 export default LoginPage

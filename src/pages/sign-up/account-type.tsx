@@ -1,6 +1,7 @@
 import { AccountTypeContainer } from '@domains/sign-up'
 import Link from 'next/link'
 import { type TUserRole } from '@shared'
+import { type TeachersDirectoryPage } from '~/types/page'
 
 type AccountType = {
   title: string
@@ -26,7 +27,7 @@ const accountTypes: AccountType[] = [
   },
 ]
 
-const AccountType = () => {
+const AccountType: TeachersDirectoryPage = () => {
   return (
     <div className="my-36 mx-4 flex justify-center md:mx-0">
       <div className="flex flex-col">
@@ -53,5 +54,7 @@ const AccountType = () => {
     </div>
   )
 }
+
+AccountType.pageType = 'PUBLIC'
 
 export default AccountType

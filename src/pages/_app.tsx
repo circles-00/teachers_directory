@@ -1,5 +1,3 @@
-import { type AppProps } from 'next/app'
-
 import { api } from '~/utils/api'
 
 import '~/styles/globals.css'
@@ -8,27 +6,19 @@ import { BackToTop, Footer, MobileDrawer, Navigation } from '@components/common'
 import { inter } from '@utils'
 import { SessionProvider } from 'next-auth/react'
 import { useIsMobileDrawerOpen } from '@hooks'
-import { useUser } from '~/hooks/useAuth'
-import { type FC, type ReactElement } from 'react'
+import { type TeachersDirectoryAppProps } from '~/types/page'
+import { AppLayout } from '@layout'
 
-const AppLayout: FC<{ children: ReactElement[] }> = ({ children }) => {
-  const user = useUser()
-
-  // NOTE: we need to show a progress indicator to user while we are loading his session
-  if (user.status === 'loading') {
-    return null
-  }
-
-  return <>{children}</>
-}
-
-const TeachersDirectory = ({ Component, pageProps }: AppProps) => {
+const TeachersDirectory = ({
+  Component,
+  pageProps,
+}: TeachersDirectoryAppProps) => {
   const isMobileDrawerOpen = useIsMobileDrawerOpen()
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
     <SessionProvider session={pageProps.session}>
-      <AppLayout>
+      <AppLayout Component={Component}>
         <Head>
           <title>Teachers Directory</title>
           <meta name="description" content="Teachers Directory" />

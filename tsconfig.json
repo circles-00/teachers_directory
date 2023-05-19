@@ -28,6 +28,7 @@
       "@hooks": ["./src/hooks/index.ts"],
       "@shared": ["./src/shared/index.ts"],
       "@services": ["./src/services/index.ts"],
+      "@layout": ["./src/layout/index.ts"],
     }
   },
   "include": [
@@ -37,7 +38,7 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    "src/typings/**/*.d.ts",
+    "src/types/**/*.d.ts"
   ],
   "exclude": ["node_modules"]
 }

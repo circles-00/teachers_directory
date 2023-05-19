@@ -1,8 +1,8 @@
-import { type NextPage } from 'next'
 import { InitialEmailForm, CodeConfirmation } from '@domains/auth'
 import { useState } from 'react'
+import { type TeachersDirectoryPage } from '~/types/page'
 
-const ForgotPassword: NextPage = () => {
+const ForgotPassword: TeachersDirectoryPage = () => {
   const [isCodeConfirmation, setIsCodeConfirmation] = useState(false)
 
   return isCodeConfirmation ? (
@@ -16,5 +16,7 @@ const ForgotPassword: NextPage = () => {
     <InitialEmailForm setIsCodeConfirmation={setIsCodeConfirmation} />
   )
 }
+
+ForgotPassword.pageType = 'PUBLIC'
 
 export default ForgotPassword
