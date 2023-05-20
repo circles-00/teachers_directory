@@ -13,7 +13,7 @@ type TCredentials = {
   redirect: boolean
 }
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
@@ -40,7 +40,6 @@ const authOptions: NextAuthOptions = {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     session: async ({ session, token }) => {
-      console.log(session, token)
       const userFromDb = await AuthService.findUserByEmail(
         String(session.user?.email)
       )
