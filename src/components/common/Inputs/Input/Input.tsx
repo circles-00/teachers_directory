@@ -1,19 +1,22 @@
-import { type FC } from 'react'
 import { mergeClassNames } from '@utils'
-import { type ControllerRenderProps, type FieldValues } from 'react-hook-form'
+import {
+  type ControllerRenderProps,
+  type FieldValues,
+  type Path,
+} from 'react-hook-form'
 
-export interface IInputProps {
+export interface IInputProps<T> {
   placeholder: string
   containerClassName?: string
   className?: string
   label?: string
   type?: 'text' | 'email' | 'password'
   labelClassName?: string
-  field?: ControllerRenderProps<FieldValues, string>
+  field?: ControllerRenderProps<FieldValues, Path<T>>
   error?: string
 }
 
-export const Input: FC<IInputProps> = ({
+export const Input = <T,>({
   placeholder,
   className = '',
   label,
@@ -22,7 +25,7 @@ export const Input: FC<IInputProps> = ({
   containerClassName = '',
   field,
   error,
-}) => {
+}: IInputProps<T>) => {
   const defaultClassName =
     'h-12 rounded-md border-[1px] border-[#0000004D] p-2 focus:outline-black focus:outline-1 placeholder:text-xs placeholder:-translate-y-0.5'
   const labelDefaultClassName = 'pb-2'

@@ -6,12 +6,18 @@ interface IActionButtonsProps {
   currentStep: number
   setCurrentStep: (step: number) => void
   totalSteps: number
+  saveDisabled?: boolean
+  backDisabled?: boolean
+  showBackButton?: boolean
 }
 
 export const ActionButtons: FC<IActionButtonsProps> = ({
   currentStep,
   setCurrentStep,
   totalSteps,
+  saveDisabled = false,
+  backDisabled = false,
+  showBackButton = true,
 }) => {
   const onNext = () => {
     if (currentStep >= totalSteps - 1) {
@@ -31,13 +37,20 @@ export const ActionButtons: FC<IActionButtonsProps> = ({
 
   return (
     <div className="flex w-full flex-col md:flex-row">
-      <ButtonOutlined
-        onClick={onBack}
-        className="mr-auto mt-4 flex w-full items-center justify-center py-3 pl-3 text-primary md:mr-0 md:w-52"
-      >
-        Back
-      </ButtonOutlined>
-      <SaveButton className="w-full md:w-52" onClick={onNext} />
+      {showBackButton && (
+        <ButtonOutlined
+          disabled={backDisabled}
+          onClick={onBack}
+          className="mr-auto mt-4 flex w-full items-center justify-center py-3 pl-3 text-primary md:mr-0 md:w-52"
+        >
+          Back
+        </ButtonOutlined>
+      )}
+      <SaveButton
+        disabled={saveDisabled}
+        className="w-full md:w-52"
+        onClick={onNext}
+      />
     </div>
   )
 }

@@ -7,7 +7,7 @@ import { first } from 'lodash'
 import { useUpdate } from '@rounik/react-custom-hooks'
 import { type TOption } from '@components'
 
-type Coordinates = {
+export type TCoordinates = {
   lat: number | null
   lng: number | null
 }
@@ -19,7 +19,7 @@ interface IUseAutoCompletePlacesProps {
 export const useAutoCompletePlaces = ({
   isLoaded,
 }: IUseAutoCompletePlacesProps) => {
-  const [coordinates, setCoordinates] = useState<Coordinates>({
+  const [coordinates, setCoordinates] = useState<TCoordinates>({
     lat: null,
     lng: null,
   })

@@ -1,7 +1,6 @@
-import { CodeConfirmation, InitialEmailForm } from "@domains/auth";
-import { useState } from "react";
-import { type TeachersDirectoryPage } from "~/types/page";
-import { EScreenId } from "@domains/screen";
+import { CodeConfirmation, InitialEmailForm } from '@domains/auth'
+import { useState } from 'react'
+import { type TeachersDirectoryPage } from '~/types/page'
 
 const ForgotPassword: TeachersDirectoryPage = () => {
   const [isCodeConfirmation, setIsCodeConfirmation] = useState(false)
@@ -17,8 +16,5 @@ const ForgotPassword: TeachersDirectoryPage = () => {
     <InitialEmailForm setIsCodeConfirmation={setIsCodeConfirmation} />
   )
 }
-
-ForgotPassword.pageType = 'PUBLIC'
-ForgotPassword.screenId = EScreenId.FORGOT_PASSWORD
 
 export default ForgotPassword

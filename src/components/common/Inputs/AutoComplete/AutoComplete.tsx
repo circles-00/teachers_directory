@@ -10,12 +10,14 @@ import {
 import { Combobox, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { mergeClassNames } from '@utils'
+import { type ControllerRenderProps, type FieldValues } from 'react-hook-form'
+import isEmpty from 'lodash.isempty'
 
 export type TOption = {
   value: string
 }
 
-interface IAutoCompleteProps {
+export interface IAutoCompleteProps {
   options: TOption[]
   placeholder?: string
   containerClassName?: string
@@ -26,6 +28,7 @@ interface IAutoCompleteProps {
   asyncOnSelect?: (option: TOption) => void
   asyncValue?: string
   asyncSelected?: TOption
+  field?: ControllerRenderProps<FieldValues, string>
 }
 
 export const AutoComplete: FC<IAutoCompleteProps> = ({
@@ -39,12 +42,15 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
   asyncValue,
   asyncOnSelect,
   asyncSelected,
+  field,
 }) => {
   const [selected, setSelected] = useState<TOption | null>(null)
   const [query, setQuery] = useState('')
   const [showPlaceholder, setShowPlaceholder] = useState(!selected?.value)
 
   const onSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    if (isEmpty(event.target.value)) field?.onChange({ value: '' })
+
     if (isAsync) {
       onAsyncSearch && onAsyncSearch(event)
     } else {
@@ -66,6 +72,21 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
 
   const defaultContainerClassName = 'relative w-full'
 
+  const handleOnChange = (value: TOption) => {
+    isAsync ? asyncOnSelect && asyncOnSelect(value) : setSelected(value)
+    field?.onChange(value)
+  }
+
+  const handleOnInputBlur = () => {
+    setShowPlaceholder(isAsync ? !asyncSelected?.value : !selected?.value)
+    if (!!field?.value) {
+      onSearch({
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        target: { value: field?.value?.value as string },
+      } as ChangeEvent<HTMLInputElement>)
+    }
+  }
+
   return (
     <div
       className={mergeClassNames([
@@ -75,7 +96,7 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
     >
       <Combobox
         value={isAsync ? asyncSelected : selected}
-        onChange={isAsync ? asyncOnSelect : setSelected}
+        onChange={handleOnChange}
       >
         <p className="absolute top-[-3px] left-2 z-10 rounded-lg bg-white px-1 text-[10px] text-[#919EAB] group-hover:bg-gray-50">
           {label}
@@ -83,11 +104,7 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
-              onBlur={() =>
-                setShowPlaceholder(
-                  isAsync ? !asyncSelected?.value : !selected?.value
-                )
-              }
+              onBlur={handleOnInputBlur}
               onFocus={() => setShowPlaceholder(false)}
               className={`w-full rounded-lg border-[1px] border-[#919EAB52] py-4 pl-3 pr-10 text-sm leading-5 ${
                 showPlaceholder ? 'text-[#919EAB]' : ''

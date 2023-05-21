@@ -1,5 +1,5 @@
-import { type TSaveTeacherLocationPayload } from "~/server/api/logic/teachers/schema";
+import { type TSaveTeacherLocationPayload } from '~/server/api/logic/teachers/schema'
 
-export const saveTeacherLocation = async (payload: TSaveTeacherLocationPayload) => {
+export const saveTeacherLocation = (payload: TSaveTeacherLocationPayload) => {
   console.log(payload)
 }

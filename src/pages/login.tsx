@@ -1,23 +1,23 @@
-import { ButtonContained, RoundedContainer, TextFormField } from "@components";
-import { useLabels } from "@utils";
-import { LoginSchema, ThirdPartyLogin, type TLoginForm } from "@domains/auth";
-import Link from "next/link";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SuccessAlert } from "src/components/common/Feedback/Alerts";
-import { useSignUpActions, useSignUpSuccessMessage } from "~/hooks/useStore/helperHooks/useSignUpStore";
-import { AuthService } from "@services";
-import { type TeachersDirectoryPage } from "~/types/page";
-import { EScreenId } from "@domains/screen";
+import { ButtonContained, RoundedContainer, TextFormField } from '@components'
+import { formResolver, useLabels } from '@utils'
+import { LoginSchema, ThirdPartyLogin, type TLoginForm } from '@domains/auth'
+import Link from 'next/link'
+import { FormProvider, useForm } from 'react-hook-form'
+import { SuccessAlert } from 'src/components/common/Feedback/Alerts'
+import {
+  useSignUpActions,
+  useSignUpSuccessMessage,
+} from '~/hooks/useStore/helperHooks/useSignUpStore'
+import { AuthService } from '@services'
+import { type TeachersDirectoryPage } from '~/types/page'
 
 const LoginPage: TeachersDirectoryPage = () => {
   const { labels } = useLabels()
-
   const signUpSuccessMessage = useSignUpSuccessMessage()
   const { setSignUpSuccessMessage } = useSignUpActions()
 
   const methods = useForm<TLoginForm>({
-    resolver: zodResolver(LoginSchema),
+    resolver: formResolver(LoginSchema),
   })
 
   const onSubmit = async (data: TLoginForm) => {
@@ -71,6 +71,4 @@ const LoginPage: TeachersDirectoryPage = () => {
   )
 }
 
-LoginPage.pageType = 'PUBLIC'
-LoginPage.screenId = EScreenId.LOGIN
 export default LoginPage

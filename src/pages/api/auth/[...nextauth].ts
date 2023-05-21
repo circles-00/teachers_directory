@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions = {
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    session: async ({ session, token }) => {
+    session: async ({ session }) => {
       const userFromDb = await AuthService.findUserByEmail(
         String(session.user?.email)
       )
@@ -51,6 +51,14 @@ export const authOptions: NextAuthOptions = {
           ['password', 'verificationCode', 'verificationCodeExpiresAt']
         ),
       }
+    },
+
+    jwt: ({ token, user }) => {
+      if (user) {
+        token.user = user as TUser
+      }
+
+      return token
     },
   },
   jwt: {

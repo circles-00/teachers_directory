@@ -1,29 +1,27 @@
-import { type FC } from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
+import {
+  type FieldValues,
+  type Path,
+  useController,
+  useFormContext,
+} from 'react-hook-form'
 import { type IInputProps, Input } from '~/components'
 
-interface TextFormFieldProps extends IInputProps {
-  name: string
+interface TextFormFieldProps<T extends FieldValues> extends IInputProps<T> {
+  name: Path<T>
 }
 
-export const TextFormField: FC<TextFormFieldProps> = ({ name, ...props }) => {
+export const TextFormField = <T extends FieldValues>({
+  name,
+  ...props
+}: TextFormFieldProps<T>) => {
   const {
     control,
     formState: { errors },
   } = useFormContext()
 
+  const { field } = useController({ name, control })
+
   return (
-    <Controller
-      name={name}
-      control={control}
-      rules={{ required: true }}
-      render={({ field }) => (
-        <Input
-          {...props}
-          field={field}
-          error={errors[name]?.message as string}
-        />
-      )}
-    />
+    <Input {...props} field={field} error={errors[name]?.message as string} />
   )
 }

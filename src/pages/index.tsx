@@ -1,8 +1,7 @@
-import { HeroContainer, SchoolShowcase, TeacherShowcase } from "@domains/home";
-import { type TeachersDirectoryPage } from "~/types/page";
-import { EScreenId } from "@domains/screen";
+import { HeroContainer, SchoolShowcase, TeacherShowcase } from '@domains/home'
+import { type TeachersDirectoryPage } from '~/types/page'
 
-const Home: Pick<TeachersDirectoryPage, 'screenId'> = () => {
+const Home: TeachersDirectoryPage = () => {
   return (
     <div>
       <HeroContainer />
@@ -12,5 +11,4 @@ const Home: Pick<TeachersDirectoryPage, 'screenId'> = () => {
   )
 }
 
-Home.screenId = EScreenId.HOME
 export default Home
