@@ -1,11 +1,5 @@
 import { type FC } from 'react'
-import {
-  ButtonContained,
-  ButtonWithLoading,
-  CircularLoadingSpinner,
-  RoundedContainer,
-  TextFormField,
-} from '@components'
+import { ButtonWithLoading, RoundedContainer, TextFormField } from '@components'
 import Link from 'next/link'
 import { ThirdPartyLogin } from '@domains/auth'
 import { useLabels } from '@utils'
