@@ -71,7 +71,6 @@ export const OtherServicesQuestionnaire: FC<
       <ActionButtons
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
-        totalSteps={totalSteps}
       />
     </div>
   )

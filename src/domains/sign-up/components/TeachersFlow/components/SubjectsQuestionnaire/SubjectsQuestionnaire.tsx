@@ -57,7 +57,6 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
       <ActionButtons
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
-        totalSteps={totalSteps}
       />
     </div>
   )

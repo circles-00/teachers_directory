@@ -3,9 +3,12 @@ import { saveTeacherLocationPayload } from '~/server/api/logic/teachers/schema'
 import { TeacherService } from '../logic/teachers'
 
 export const teachersRouter = createTRPCRouter({
-  saveTeacherLocation: teacherProcedure
+  saveLocation: teacherProcedure
     .input(saveTeacherLocationPayload)
-    .mutation(({ input }) => {
-      return TeacherService.saveTeacherLocation(input)
+    .mutation(({ input, ctx }) => {
+      return TeacherService.saveTeacherLocation(input, ctx.user.id)
     }),
+  getLocation: teacherProcedure.query(({ ctx }) => {
+    return TeacherService.getTeacherLocationByTeacherId(ctx.user.id)
+  }),
 })

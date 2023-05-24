@@ -6,6 +6,7 @@ interface IButtonOutlinedProps {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   className?: string
   disabled?: boolean
+  type?: 'button' | 'submit' | 'reset'
 }
 
 export const ButtonOutlined: FC<IButtonOutlinedProps> = ({
@@ -13,6 +14,7 @@ export const ButtonOutlined: FC<IButtonOutlinedProps> = ({
   className = '',
   onClick,
   disabled,
+  type,
 }) => {
   const defaultClassName = `rounded-md border-[1px] border-primaryTransparent-48 p-2 font-bold children-white ${
     disabled
@@ -22,6 +24,7 @@ export const ButtonOutlined: FC<IButtonOutlinedProps> = ({
 
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={mergeClassNames([defaultClassName, className])}

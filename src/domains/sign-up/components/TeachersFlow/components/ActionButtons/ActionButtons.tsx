@@ -5,28 +5,20 @@ import { SaveButton } from '@domains/sign-up/components/TeachersFlow/components/
 interface IActionButtonsProps {
   currentStep: number
   setCurrentStep: (step: number) => void
-  totalSteps: number
   saveDisabled?: boolean
   backDisabled?: boolean
   showBackButton?: boolean
+  isSaveLoading?: boolean
 }
 
 export const ActionButtons: FC<IActionButtonsProps> = ({
   currentStep,
   setCurrentStep,
-  totalSteps,
   saveDisabled = false,
   backDisabled = false,
   showBackButton = true,
+  isSaveLoading = false,
 }) => {
-  const onNext = () => {
-    if (currentStep >= totalSteps - 1) {
-      return
-    }
-
-    setCurrentStep(currentStep + 1)
-  }
-
   const onBack = () => {
     if (currentStep === 0) {
       return
@@ -39,6 +31,7 @@ export const ActionButtons: FC<IActionButtonsProps> = ({
     <div className="flex w-full flex-col md:flex-row">
       {showBackButton && (
         <ButtonOutlined
+          type="button"
           disabled={backDisabled}
           onClick={onBack}
           className="mr-auto mt-4 flex w-full items-center justify-center py-3 pl-3 text-primary md:mr-0 md:w-52"
@@ -47,9 +40,9 @@ export const ActionButtons: FC<IActionButtonsProps> = ({
         </ButtonOutlined>
       )}
       <SaveButton
+        isLoading={isSaveLoading}
         disabled={saveDisabled}
         className="w-full md:w-52"
-        onClick={onNext}
       />
     </div>
   )

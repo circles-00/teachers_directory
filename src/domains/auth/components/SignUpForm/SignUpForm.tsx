@@ -1,6 +1,7 @@
 import { type FC } from 'react'
 import {
   ButtonContained,
+  ButtonWithLoading,
   CircularLoadingSpinner,
   RoundedContainer,
   TextFormField,
@@ -41,14 +42,9 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ isLoading, error }) => {
             type={'error'}
           />
         )}
-        <ButtonContained
-          className={`flex items-center justify-center py-4 text-white ${
-            isLoading ? 'pointer-events-none cursor-not-allowed' : ''
-          }`}
-        >
-          {isLoading && <CircularLoadingSpinner />}
-          {isLoading ? 'Processing...' : 'Create account'}
-        </ButtonContained>
+        <ButtonWithLoading isLoading={isLoading}>
+          Create account
+        </ButtonWithLoading>
         <p className="text-center text-xs">
           By signing up, I agree to{' '}
           <Link className="text-primary" href="#">

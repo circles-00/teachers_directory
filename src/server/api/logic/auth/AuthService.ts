@@ -9,14 +9,29 @@ import { Mailer } from '~/server/api/logic/mailer'
 import { compare, genSalt, hash } from 'bcryptjs'
 import { TRPCError } from '@trpc/server'
 import { excludeKeysFromObject } from '@utils'
+import { type TUserRole } from '@shared'
+import { TeacherService } from '../teachers'
 
 const hashPassword = async (password: string) => {
   const salt = await genSalt(10)
   return hash(password, salt)
 }
 
+// TODO: Maybe move this to a util function
 export const generateRandom6DigitCode = () => {
   return Math.floor(100000 + Math.random() * 900000)
+}
+
+const createUserProfile = (userId: string, role: TUserRole) => {
+  switch (role) {
+    case 'TEACHER':
+      return TeacherService.saveTeacher({ userId })
+
+    // TODO: Add cases for other roles
+
+    default:
+      return null
+  }
 }
 
 export const signUp = async (data: TSignUpPayload) => {
@@ -54,7 +69,7 @@ export const signUp = async (data: TSignUpPayload) => {
     password: await hashPassword(data.password),
   }
 
-  return excludeKeysFromObject(
+  const createdUser = excludeKeysFromObject(
     await prisma.user.upsert({
       create: {
         ...dataToInsert,
@@ -68,6 +83,10 @@ export const signUp = async (data: TSignUpPayload) => {
     }),
     ['password']
   )
+
+  await createUserProfile(createdUser.id, createdUser.role)
+
+  return createdUser
 }
 
 export const verifyAccount = async ({ email, code }: TVerifyAccountPayload) => {

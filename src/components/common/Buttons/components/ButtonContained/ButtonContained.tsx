@@ -6,6 +6,7 @@ export interface ButtonContainedProps {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   className?: string
   disabled?: boolean
+  type?: 'button' | 'submit' | 'reset'
 }
 
 export const ButtonContained: FC<ButtonContainedProps> = ({
@@ -13,6 +14,7 @@ export const ButtonContained: FC<ButtonContainedProps> = ({
   className = '',
   onClick,
   disabled,
+  type = 'submit',
 }) => {
   const defaultClassName = `rounded-md ${
     disabled
@@ -22,6 +24,7 @@ export const ButtonContained: FC<ButtonContainedProps> = ({
 
   return (
     <button
+      type={type}
       onClick={onClick}
       className={mergeClassNames([defaultClassName, className])}
       disabled={disabled}

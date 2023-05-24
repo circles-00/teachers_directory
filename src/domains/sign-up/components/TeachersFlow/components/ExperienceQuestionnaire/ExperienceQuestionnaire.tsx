@@ -24,7 +24,6 @@ export const ExperienceQuestionnaire: FC<IExperienceQuestionnaireProps> = ({
         <ActionButtons
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
-          totalSteps={totalSteps}
         />
       </div>
     </div>

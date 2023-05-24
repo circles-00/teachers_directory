@@ -19,11 +19,6 @@ enum Role {
   ADMIN
 }
 
-enum LocationType {
-  MANUAL
-  GOOGLE
-}
-
 model User {
   id                        String   @id @default(cuid())
   email                     String   @unique
@@ -51,13 +46,15 @@ model Teacher {
 }
 
 model TeacherLocation {
-  id          String       @id @default(cuid())
-  teacher     Teacher      @relation(fields: [teacherId], references: [id])
-  teacherId   String       @unique
-  latitude    Float
-  longitude   Float
-  description String
-  type        LocationType @default(GOOGLE)
+  id               String  @id @default(cuid())
+  teacher          Teacher @relation(fields: [teacherId], references: [id])
+  teacherId        String  @unique
+  latitude         Float?
+  longitude        Float?
+  streetAddress    String
+  secondaryAddress String?
+  city             String
+  postCode         String
 
   @@map(name: "teachers_location")
 }

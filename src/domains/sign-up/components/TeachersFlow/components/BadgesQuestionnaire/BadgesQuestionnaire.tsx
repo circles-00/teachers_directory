@@ -49,7 +49,6 @@ export const BadgesQuestionnaire: FC<IBadgesQuestionnaireProps> = ({
       <ActionButtons
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
-        totalSteps={totalSteps}
       />
     </div>
   )

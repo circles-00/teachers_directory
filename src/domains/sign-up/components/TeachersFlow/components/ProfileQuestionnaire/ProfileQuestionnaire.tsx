@@ -152,7 +152,6 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
       <ActionButtons
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
-        totalSteps={totalSteps}
       />
     </div>
   )

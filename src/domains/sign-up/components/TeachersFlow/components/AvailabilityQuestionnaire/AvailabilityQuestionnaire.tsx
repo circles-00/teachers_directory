@@ -101,7 +101,6 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
       <ActionButtons
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
-        totalSteps={totalSteps}
       />
     </div>
   )
