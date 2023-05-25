@@ -12,6 +12,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { mergeClassNames } from '@utils'
 import { type ControllerRenderProps, type FieldValues } from 'react-hook-form'
 import isEmpty from 'lodash.isempty'
+import { useUpdate } from '@rounik/react-custom-hooks'
 
 export type TOption = {
   value: string
@@ -31,6 +32,7 @@ export interface IAutoCompleteProps {
   field?: ControllerRenderProps<FieldValues, string>
 }
 
+// TODO: Refactor this component, it's too polluted
 export const AutoComplete: FC<IAutoCompleteProps> = ({
   options,
   placeholder = 'Select',
@@ -47,6 +49,12 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
   const [selected, setSelected] = useState<TOption | null>(null)
   const [query, setQuery] = useState('')
   const [showPlaceholder, setShowPlaceholder] = useState(!selected?.value)
+
+  useUpdate(() => {
+    if (isEmpty(selected?.value) && !isEmpty(field?.value?.value)) {
+      setShowPlaceholder(false)
+    }
+  }, [field?.value, selected])
 
   const onSearch = (event: ChangeEvent<HTMLInputElement>) => {
     if (isEmpty(event.target.value)) field?.onChange({ value: '' })
@@ -79,12 +87,6 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
 
   const handleOnInputBlur = () => {
     setShowPlaceholder(isAsync ? !asyncSelected?.value : !selected?.value)
-    if (!!field?.value) {
-      onSearch({
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        target: { value: field?.value?.value as string },
-      } as ChangeEvent<HTMLInputElement>)
-    }
   }
 
   return (
@@ -110,7 +112,9 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
                 showPlaceholder ? 'text-[#919EAB]' : ''
               } focus:outline-0 focus:ring-0`}
               displayValue={(option: TOption | null) =>
-                showPlaceholder ? placeholder : option?.value ?? ''
+                showPlaceholder
+                  ? placeholder
+                  : option?.value ?? field?.value?.value
               }
               onChange={onSearch}
             />
@@ -136,7 +140,7 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
             leaveTo="opacity-0"
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Combobox.Options className="absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {filteredOptions.length === 0 && filterQuery !== '' ? (
                 <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                   Nothing found.

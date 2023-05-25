@@ -1,8 +1,13 @@
-import { useState, type FC } from 'react'
+import { type FC } from 'react'
 import { StepsHeader, Header, Subject } from '@domains/sign-up'
 import { ButtonOutlined } from '@components'
 import { type StepProps } from '../../types'
 import { ActionButtons } from '@domains/sign-up'
+import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
+import { type TSchema, validationSchema } from './validation'
+import { api, formResolver } from '@utils'
+import { onNextStep } from '@domains/sign-up/components/StepperSidebar/utils'
+import { useUpdate } from '@rounik/react-custom-hooks'
 
 interface ISubjectsQuestionnaireProps extends StepProps {}
 
@@ -11,53 +16,106 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
   totalSteps,
   setCurrentStep,
 }) => {
-  const [subjectForms, setSubjectForms] = useState([
-    {
-      subject: '',
-      level: '',
-      examBoard: '',
+  const initialSubject = {
+    subjectName: '',
+    level: '',
+    examBoard: '',
+  }
+
+  const saveTeacherSubjectsMutation = api.teachers.saveSubjects.useMutation({
+    onSuccess: () => onNextStep({ currentStep, setCurrentStep, totalSteps }),
+  })
+
+  const { data: teacherSubjects } = api.teachers.getSubjects.useQuery()
+
+  const methods = useForm<TSchema>({
+    resolver: formResolver(validationSchema),
+    mode: 'onChange',
+    defaultValues: {
+      subjects: [initialSubject],
     },
-  ])
+  })
+
+  useUpdate(() => {
+    if (teacherSubjects) {
+      methods.reset({
+        subjects: teacherSubjects,
+      })
+    }
+  }, [teacherSubjects, methods])
+
+  const { fields, append, remove } = useFieldArray({
+    name: 'subjects',
+    control: methods.control,
+  })
 
   const addSubject = () => {
-    setSubjectForms([
-      ...subjectForms,
-      { subject: '', level: '', examBoard: '' },
-    ])
+    append(initialSubject)
   }
 
   const removeSubject = (index: number) => {
-    const newSubjects = [...subjectForms]
-    newSubjects.splice(index, 1)
-    setSubjectForms(newSubjects)
+    remove(index)
+  }
+
+  const onSubmit = (data: TSchema) => {
+    saveTeacherSubjectsMutation.mutate(data)
   }
 
   return (
-    <div className="flex flex-col md:w-5/6">
-      <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
-      <Header
-        title="What subject can you teach?"
-        description={`Add the subject(s) you teach. You must select one or two main subjects that will appear on your profile.`}
-      />
-      {subjectForms.map((subject, index, array) => (
-        <Subject
-          index={index}
-          onRemove={removeSubject}
-          key={index}
-          numberOfSubjects={array.length}
-        />
-      ))}
-      <ButtonOutlined
-        onClick={addSubject}
-        className="mt-8 mr-auto w-28 text-primary"
-      >
-        Add Item
-      </ButtonOutlined>
+    <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <div className="flex flex-col md:w-5/6">
+        <FormProvider {...methods}>
+          <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+          <Header
+            title="What subject can you teach?"
+            description={`Add the subject(s) you teach. You must select one or two main subjects that will appear on your profile.`}
+          />
+          {fields.map((field, index, array) => {
+            const fieldErrors = methods.formState.errors.subjects?.[index]
 
-      <ActionButtons
-        currentStep={currentStep}
-        setCurrentStep={setCurrentStep}
-      />
-    </div>
+            return (
+              <Subject
+                subjectName={{
+                  name: methods.register(
+                    `subjects.${index}.subjectName` as const
+                  )?.name,
+                  errors: fieldErrors?.subjectName?.message,
+                }}
+                subjectLevel={{
+                  name: methods.register(`subjects.${index}.level` as const)
+                    ?.name,
+                  errors: fieldErrors?.level?.message,
+                }}
+                subjectExamBoard={{
+                  name: methods.register(`subjects.${index}.examBoard` as const)
+                    ?.name,
+                  errors: fieldErrors?.examBoard?.message,
+                }}
+                index={index}
+                onRemove={removeSubject}
+                key={field.id}
+                numberOfSubjects={array.length}
+              />
+            )
+          })}
+          <ButtonOutlined
+            type="button"
+            onClick={addSubject}
+            className="mt-8 mr-auto w-28 text-primary"
+          >
+            Add Item
+          </ButtonOutlined>
+
+          <ActionButtons
+            isSaveLoading={saveTeacherSubjectsMutation.isLoading}
+            saveDisabled={
+              !methods?.formState?.isDirty || !methods?.formState?.isValid
+            }
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
+          />
+        </FormProvider>
+      </div>
+    </form>
   )
 }

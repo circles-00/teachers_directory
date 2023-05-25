@@ -29,7 +29,7 @@ export const ExperienceQuestionnaireForm: FC<
 
   const subCategories = useMemo(() => {
     const category = filterItems[1]?.items.find(
-      (item) => item.value === role?.id
+      (item) => item.value === role?.value
     )
 
     return category?.subItems?.map((item) => ({
@@ -47,7 +47,7 @@ export const ExperienceQuestionnaireForm: FC<
         <Select
           options={roles ?? []}
           placeholder="Type of role"
-          onChange={(value: SelectOption) => setRole(value)}
+          onChange={(value) => setRole({ value })}
         />
       </div>
       {!!role && (

@@ -15,11 +15,11 @@ import { type TeachersDirectoryPage } from '~/types/page'
 
 const steps = [
   {
-    title: 'Where do you live?',
+    title: 'Where you live?',
     component: LocationQuestionnaire,
   },
   {
-    title: 'What subjects can you teach?',
+    title: 'Subjects you teach',
     component: SubjectsQuestionnaire,
   },
   {
@@ -35,7 +35,7 @@ const steps = [
     component: ProfileQuestionnaire,
   },
   {
-    title: 'Your availability?',
+    title: 'Availability?',
     component: AvailabilityQuestionnaire,
   },
   {

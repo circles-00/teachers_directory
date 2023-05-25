@@ -14,5 +14,15 @@ export const AutoCompleteFormField: FC<IAutoCompleteFormFieldProps> = ({
   const { control } = useFormContext()
   const { field } = useController({ name, control })
 
-  return <AutoComplete field={field} {...rest} />
+  return (
+    // TODO: Refactor this
+    <AutoComplete
+      field={{
+        ...field,
+        value: { value: field.value },
+        onChange: ({ value }) => field.onChange(value),
+      }}
+      {...rest}
+    />
+  )
 }

@@ -12,8 +12,10 @@ export interface IInputProps<T> {
   label?: string
   type?: 'text' | 'email' | 'password'
   labelClassName?: string
-  field?: ControllerRenderProps<FieldValues, Path<T>>
   error?: string
+  onChange?: (value: string) => void
+  onBlur?: () => void
+  value?: string
 }
 
 export const Input = <T,>({
@@ -23,8 +25,10 @@ export const Input = <T,>({
   type = 'text',
   labelClassName = '',
   containerClassName = '',
-  field,
   error,
+  onChange,
+  onBlur,
+  value,
 }: IInputProps<T>) => {
   const defaultClassName =
     'h-12 rounded-md border-[1px] border-[#0000004D] p-2 focus:outline-black focus:outline-1 placeholder:text-xs placeholder:-translate-y-0.5'
@@ -46,10 +50,12 @@ export const Input = <T,>({
         </label>
       )}
       <input
+        value={value}
         type={type}
         placeholder={placeholder}
         className={mergeClassNames([defaultClassName, className])}
-        {...field}
+        onChange={(e) => onChange && onChange(e.target.value)}
+        onBlur={onBlur}
       />
       {!!error && <span className="mt-1 text-xs text-danger">{error}</span>}
     </div>

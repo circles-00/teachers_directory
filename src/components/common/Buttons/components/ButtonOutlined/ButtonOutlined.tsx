@@ -16,7 +16,7 @@ export const ButtonOutlined: FC<IButtonOutlinedProps> = ({
   disabled,
   type,
 }) => {
-  const defaultClassName = `rounded-md border-[1px] border-primaryTransparent-48 p-2 font-bold children-white ${
+  const defaultClassName = `rounded-md border-[1px] hover:bg-[#F2F7F2] border-primaryTransparent-48 p-2 font-bold children-white ${
     disabled
       ? 'bg-[#919EAB3D] text-[#919EABCC] cursor-not-allowed'
       : 'text-primary button-white cursor-pointer'

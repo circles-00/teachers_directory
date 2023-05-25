@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { formRequiredString } from '@utils'
 
 export const saveTeacherLocationPayload = z.object({
   latitude: z.number().nullable(),
@@ -18,3 +19,17 @@ export const saveTeacherPayload = z.object({
 })
 
 export type TSaveTeacherPayload = z.infer<typeof saveTeacherPayload>
+
+export const saveTeacherSubjectsPayload = z.object({
+  subjects: z.array(
+    z.object({
+      subjectName: formRequiredString(),
+      level: formRequiredString(),
+      examBoard: z.string().optional(),
+    })
+  ),
+})
+
+export type TSaveTeacherSubjectsPayload = z.infer<
+  typeof saveTeacherSubjectsPayload
+>

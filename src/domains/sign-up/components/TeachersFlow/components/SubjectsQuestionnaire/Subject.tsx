@@ -1,6 +1,12 @@
 import { type FC } from 'react'
-import { AutoComplete, Select } from '@components'
+import {
+  AutoComplete,
+  AutoCompleteFormField,
+  Select,
+  SelectFormField,
+} from '@components'
 import { TrashButton } from '@domains/sign-up'
+import { type Control, type Path } from 'react-hook-form'
 
 const subjects = [
   {
@@ -22,14 +28,13 @@ const subjects = [
 
 const levels = [
   {
-    value: 'KS1 5-7 yrs',
+    value: 'Early Years (0-5 yrs)',
   },
   {
-    value: 'KS2 7-11 yrs',
+    value: 'Primary (5-11 yrs)',
   },
-  { value: 'KS3 11-14 yrs' },
-  { value: 'KS4 14-16 yrs' },
-  { value: 'KS5 16-18 yrs' },
+  { value: 'Secondary (11-18 yrs)' },
+  { value: 'Higher (18+ yrs)' },
 ]
 
 const examBoards = [
@@ -53,25 +58,52 @@ const examBoards = [
   },
 ]
 
+type TFormFieldProps = {
+  name: string
+  errors?: string
+}
+
 interface SubjectProps {
   onRemove: (index: number) => void
   index: number
   numberOfSubjects: number
+  subjectName: TFormFieldProps
+  subjectLevel: TFormFieldProps
+  subjectExamBoard: TFormFieldProps
 }
 
 export const Subject: FC<SubjectProps> = ({
   index,
   onRemove,
   numberOfSubjects,
+  subjectName,
+  subjectLevel,
+  subjectExamBoard,
 }) => {
   const isDisabled = numberOfSubjects === 1
 
   return (
     <div className="mt-4 flex flex-col items-center justify-between gap-2 md:flex-row">
-      <AutoComplete label="Subject Name" options={subjects} />
-      <Select label="Highest achieved Level" options={levels} />
-      <Select label="Exam board" options={examBoards} />
-      <TrashButton onRemove={onRemove} index={index} isDisabled={isDisabled} />
+      <AutoCompleteFormField
+        name={subjectName.name}
+        label="Subject Name"
+        options={subjects}
+      />
+      <SelectFormField<string>
+        name={subjectLevel?.name}
+        label="Highest achieved level"
+        options={levels}
+      />
+      <SelectFormField<string>
+        name={subjectExamBoard?.name}
+        label="Exam board (optional)"
+        options={examBoards}
+      />
+      <TrashButton
+        onRemove={() => onRemove(index)}
+        index={index}
+        isDisabled={isDisabled}
+      />
     </div>
   )
 }

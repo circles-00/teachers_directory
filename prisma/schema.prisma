@@ -37,10 +37,13 @@ model User {
 }
 
 model Teacher {
-  id       String           @id @default(cuid())
-  user     User             @relation(fields: [userId], references: [id])
-  userId   String           @unique
-  location TeacherLocation?
+  id        String           @id @default(cuid())
+  user      User             @relation(fields: [userId], references: [id])
+  userId    String           @unique
+  location  TeacherLocation?
+  subjects  TeacherSubject[]
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @default(now()) @updatedAt
 
   @@map(name: "teachers")
 }
@@ -56,5 +59,21 @@ model TeacherLocation {
   city             String
   postCode         String
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
   @@map(name: "teachers_location")
+}
+
+model TeacherSubject {
+  id          String   @id @default(cuid())
+  teacher     Teacher  @relation(fields: [teacherId], references: [id])
+  teacherId   String
+  subjectName String
+  level       String
+  examBoard   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map(name: "teachers_subject")
 }

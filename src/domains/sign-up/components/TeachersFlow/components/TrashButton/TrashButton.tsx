@@ -14,6 +14,7 @@ export const TrashButton: FC<ITrashButtonProps> = ({
 }) => {
   return (
     <button
+      type="button"
       disabled={isDisabled}
       onClick={() => onRemove(index)}
       className={`w-full rounded-lg p-3 font-bold text-white md:w-fit md:rounded-none md:p-0 ${

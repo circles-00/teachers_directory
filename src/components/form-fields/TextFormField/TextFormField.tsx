@@ -21,7 +21,5 @@ export const TextFormField = <T extends FieldValues>({
 
   const { field } = useController({ name, control })
 
-  return (
-    <Input {...props} field={field} error={errors[name]?.message as string} />
-  )
+  return <Input {...props} {...field} error={errors[name]?.message as string} />
 }
