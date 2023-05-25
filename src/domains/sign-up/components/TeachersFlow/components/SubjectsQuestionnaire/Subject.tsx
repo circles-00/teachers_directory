@@ -1,12 +1,6 @@
 import { type FC } from 'react'
-import {
-  AutoComplete,
-  AutoCompleteFormField,
-  Select,
-  SelectFormField,
-} from '@components'
+import { AutoCompleteFormField, SelectFormField } from '@components'
 import { TrashButton } from '@domains/sign-up'
-import { type Control, type Path } from 'react-hook-form'
 
 const subjects = [
   {

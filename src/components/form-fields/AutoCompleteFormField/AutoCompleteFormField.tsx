@@ -19,6 +19,7 @@ export const AutoCompleteFormField: FC<IAutoCompleteFormFieldProps> = ({
     <AutoComplete
       field={{
         ...field,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         value: { value: field.value },
         onChange: ({ value }) => field.onChange(value),
       }}

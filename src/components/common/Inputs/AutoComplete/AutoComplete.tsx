@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {
   type ChangeEvent,
   type FC,
@@ -51,6 +52,7 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
   const [showPlaceholder, setShowPlaceholder] = useState(!selected?.value)
 
   useUpdate(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     if (isEmpty(selected?.value) && !isEmpty(field?.value?.value)) {
       setShowPlaceholder(false)
     }
@@ -114,7 +116,8 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
               displayValue={(option: TOption | null) =>
                 showPlaceholder
                   ? placeholder
-                  : option?.value ?? field?.value?.value
+                  : // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                    option?.value ?? field?.value?.value
               }
               onChange={onSearch}
             />

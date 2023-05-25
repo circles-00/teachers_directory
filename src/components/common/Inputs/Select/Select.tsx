@@ -1,6 +1,6 @@
 import { Listbox, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { type FC, Fragment, forwardRef, type ChangeEvent } from 'react'
+import { type FC, Fragment, forwardRef } from 'react'
 import { mergeClassNames } from '@utils'
 import isEmpty from 'lodash.isempty'
 

@@ -39,7 +39,10 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
   useUpdate(() => {
     if (teacherSubjects) {
       methods.reset({
-        subjects: teacherSubjects,
+        subjects: teacherSubjects?.map((subject) => ({
+          ...subject,
+          examBoard: subject?.examBoard ?? '',
+        })),
       })
     }
   }, [teacherSubjects, methods])

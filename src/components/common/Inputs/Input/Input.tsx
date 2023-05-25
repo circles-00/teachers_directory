@@ -1,9 +1,4 @@
 import { mergeClassNames } from '@utils'
-import {
-  type ControllerRenderProps,
-  type FieldValues,
-  type Path,
-} from 'react-hook-form'
 
 export interface IInputProps<T> {
   placeholder: string
