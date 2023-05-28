@@ -31,7 +31,8 @@ const levels = [
   { value: 'Higher (18+ yrs)' },
 ]
 
-const examBoards = [
+// TODO: Move to another file
+export const examBoards = [
   {
     value: 'AQA',
   },

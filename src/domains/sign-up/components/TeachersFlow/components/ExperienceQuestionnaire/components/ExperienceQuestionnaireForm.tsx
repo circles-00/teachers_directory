@@ -1,6 +1,15 @@
-import { type FC, useMemo, useState } from 'react'
-import { Select, CommonRadioGroup, type SelectOption } from '@components'
+import { type FC, useMemo } from 'react'
+import {
+  SelectFormField,
+  RadioGroupFormField,
+  TextFormField,
+  HorizontalSelectFormField,
+} from '@components'
 import { filterItems } from '@domains/search'
+import { useFormContext } from 'react-hook-form'
+import { type TSchema } from '../validation'
+import { useUpdate } from '@rounik/react-custom-hooks'
+import { examBoards } from '@domains/sign-up'
 
 const roles = filterItems[1]?.items.map((item) => ({
   value: item.title,
@@ -20,23 +29,29 @@ interface ExperienceQuestionnaireFormProps {}
 export const ExperienceQuestionnaireForm: FC<
   ExperienceQuestionnaireFormProps
 > = () => {
-  const [teachingQualification, setTeachingQualification] = useState<
-    boolean | null
-  >(null)
-  const [degree, setDegree] = useState<boolean | null>(null)
-  const [examiner, setExaminer] = useState<boolean | null>(null)
-  const [role, setRole] = useState<SelectOption | null>(null)
+  const methods = useFormContext<TSchema>()
+
+  const role = methods.watch('role')
+  const memoizedRole = useMemo(() => role, [role])
+
+  const examiner = methods.watch('examiner')
 
   const subCategories = useMemo(() => {
     const category = filterItems[1]?.items.find(
-      (item) => item.value === role?.value
+      (item) => item.title === memoizedRole
     )
 
     return category?.subItems?.map((item) => ({
       value: item.title,
       id: item.value,
     }))
-  }, [role])
+  }, [memoizedRole])
+
+  useUpdate(() => {
+    if (subCategories && methods.formState.isDirty) {
+      methods.setValue('subRole', subCategories[0]?.value as string)
+    }
+  }, [memoizedRole, subCategories, methods.formState.isDirty])
 
   return (
     <>
@@ -44,15 +59,16 @@ export const ExperienceQuestionnaireForm: FC<
         About your position
       </h2>
       <div className="mt-4 w-11/12">
-        <Select
+        <SelectFormField<TSchema>
+          name="role"
           options={roles ?? []}
           placeholder="Type of role"
-          onChange={(value) => setRole({ value })}
         />
       </div>
       {!!role && (
         <div className="mt-4 w-11/12">
-          <Select
+          <SelectFormField<TSchema>
+            name="subRole"
             options={subCategories ?? []}
             placeholder="Choose a sub-category"
           />
@@ -65,47 +81,56 @@ export const ExperienceQuestionnaireForm: FC<
       </h2>
 
       <div className="mt-4 w-11/12">
-        <Select options={dates} placeholder="Select date" />
+        <TextFormField<TSchema> name="teachingTime" placeholder="Select date" />
       </div>
 
       <h2 className="mt-4 text-lg font-bold">
         Do you have a teaching qualification? (optional)
       </h2>
-      <CommonRadioGroup<typeof teachingQualification>
+      <RadioGroupFormField<TSchema>
+        name="qualification"
         className="mt-4"
         options={[
           { value: true, label: 'Yes' },
           { value: false, label: 'No' },
         ]}
-        value={teachingQualification}
-        onChange={(value) => setTeachingQualification(value)}
       />
 
       <h2 className="mt-4 text-lg font-bold">
         Do you have a degree? (optional)
       </h2>
-      <CommonRadioGroup<typeof teachingQualification>
+      <RadioGroupFormField<TSchema>
+        name="degree"
         className="mt-4"
         options={[
           { value: true, label: 'Yes' },
           { value: false, label: 'No' },
         ]}
-        value={degree}
-        onChange={(value) => setDegree(value)}
       />
 
       <h2 className="mt-4 text-lg font-bold">
         Are you currently an examiner? (optional)
       </h2>
-      <CommonRadioGroup<typeof teachingQualification>
+      <RadioGroupFormField<TSchema>
+        name="examiner"
         className="mt-4"
         options={[
           { value: true, label: 'Yes' },
           { value: false, label: 'No' },
         ]}
-        value={examiner}
-        onChange={(value) => setExaminer(value)}
       />
+      {!!examiner && (
+        <div className="mt-3">
+          <p className="text-md text-primary">
+            If you are an examiner, please add which exam boards you are
+            familiar with
+          </p>
+          <HorizontalSelectFormField<TSchema>
+            name="examBoard"
+            options={examBoards.map((el) => el.value)}
+          />
+        </div>
+      )}
     </>
   )
 }

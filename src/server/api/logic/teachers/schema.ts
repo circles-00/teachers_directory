@@ -2,6 +2,8 @@ import { z } from 'zod'
 import { formRequiredString } from '@utils'
 import { EErrorLabels } from '@domains/sign-up/components/TeachersFlow/components/QualificationsQuestionnaire/validation/error-labels'
 
+// TODO: Share form schema between client and server, and delete this file
+
 export const saveTeacherLocationPayload = z.object({
   latitude: z.number().nullable(),
   longitude: z.number().nullable(),
@@ -58,4 +60,18 @@ export const saveTeacherQualificationsPayload = z.object({
 
 export type TSaveTeacherQualificationsPayload = z.infer<
   typeof saveTeacherQualificationsPayload
+>
+
+export const saveTeacherExperiencePayload = z.object({
+  role: formRequiredString(),
+  subRole: formRequiredString(),
+  teachingTime: formRequiredString(),
+  qualification: z.boolean(),
+  degree: z.boolean(),
+  examiner: z.boolean(),
+  examBoard: z.array(z.string()).optional(),
+})
+
+export type TSaveTeacherTeachingLifePayload = z.infer<
+  typeof saveTeacherExperiencePayload
 >

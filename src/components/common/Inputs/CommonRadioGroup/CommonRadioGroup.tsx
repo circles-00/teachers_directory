@@ -2,19 +2,19 @@ import { RadioGroup } from '@headlessui/react'
 import { type CommonRadioGroupProps } from './types'
 import { mergeClassNames } from '@utils'
 
-export const CommonRadioGroup = <T,>({
+export const CommonRadioGroup = ({
   value,
   options,
   onChange,
   className = '',
-}: CommonRadioGroupProps<T>) => {
+}: CommonRadioGroupProps) => {
   const defaultClassName = 'flex w-11/12 gap-4'
 
   return (
     <RadioGroup
       className={mergeClassNames([defaultClassName, className])}
       value={value}
-      onChange={(value) => onChange(value)}
+      onChange={onChange}
     >
       {options.map((option, index) => (
         <RadioGroup.Option

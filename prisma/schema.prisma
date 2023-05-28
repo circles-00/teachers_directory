@@ -46,6 +46,7 @@ model Teacher {
   updatedAt      DateTime               @default(now()) @updatedAt
   qualifications TeacherQualification[]
   achievements   TeacherAchievement[]
+  experience     TeacherExperience?
 
   @@map(name: "teachers")
 }
@@ -104,4 +105,23 @@ model TeacherAchievement {
   updatedAt   DateTime @updatedAt
 
   @@map(name: "teachers_achievements")
+}
+
+model TeacherExperience {
+  id        String  @id @default(cuid())
+  teacher   Teacher @relation(fields: [teacherId], references: [id])
+  teacherId String  @unique
+
+  role          String
+  subRole       String
+  teachingTime  String
+  qualification Boolean
+  degree        Boolean
+  examiner      Boolean
+  examBoard     String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "teachers_experience")
 }

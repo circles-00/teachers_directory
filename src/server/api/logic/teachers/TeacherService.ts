@@ -3,6 +3,7 @@ import {
   type TSaveTeacherPayload,
   type TSaveTeacherQualificationsPayload,
   type TSaveTeacherSubjectsPayload,
+  type TSaveTeacherTeachingLifePayload,
 } from './schema'
 import { prisma } from '~/server/db'
 
@@ -143,6 +144,34 @@ export const getTeacherQualifications = async (userId: string) => {
     include: {
       qualifications: true,
       achievements: true,
+    },
+  })
+}
+
+export const saveExperience = (
+  payload: TSaveTeacherTeachingLifePayload,
+  userId: string
+) => {
+  return prisma.teacher.update({
+    where: {
+      userId,
+    },
+    data: {
+      experience: {
+        delete: true,
+        create: payload,
+      },
+    },
+  })
+}
+
+export const getTeacherExperience = async (userId: string) => {
+  return await prisma.teacher.findUnique({
+    where: {
+      userId,
+    },
+    include: {
+      experience: true,
     },
   })
 }
