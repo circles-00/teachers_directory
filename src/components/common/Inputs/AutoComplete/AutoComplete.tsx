@@ -89,7 +89,7 @@ export const AutoComplete: FC<IAutoCompleteProps> = ({
 
   const handleOnInputBlur = () => {
     if (!field?.value && !selected)
-      setShowPlaceholder(isAsync ? !asyncSelected?.value : !selected?.value)
+      setShowPlaceholder(isAsync ? !asyncSelected?.value : !selected)
   }
 
   return (
