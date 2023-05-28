@@ -1,17 +1,31 @@
-import { useState, type FC } from 'react'
+import { type FC } from 'react'
 import { StepsHeader, type StepProps, Header } from '@domains/sign-up'
 import {
   ButtonOutlined,
-  CommonRadioGroup,
   InfoBox,
-  Input,
   PencilIcon,
-  RichTextEditor,
+  RadioGroupFormField,
+  RichTextEditorFormField,
   RoundedContainer,
+  SelectFormField,
+  TextFormField,
   TrashIcon,
 } from '@components'
-import { ProfilePicture, SocialLinkForm } from './components'
+import { SocialLinkForm } from './components'
 import { ActionButtons } from '@domains/sign-up'
+import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
+import { type TSchema, validationSchema } from './validation'
+import {
+  api,
+  excludeKeysFromObject,
+  formResolver,
+  generateArray,
+  getDatePartsFromDateString,
+  getMonthNameFromNumber,
+} from '@utils'
+import { PhotoFormField } from '@components/form-fields/PhotoFormField'
+import { useUpdate } from '@rounik/react-custom-hooks'
+import { onNextStep } from '@domains/sign-up/components/StepperSidebar/utils'
 
 const genders = [
   { value: 'male', label: 'Male' },
@@ -26,131 +40,212 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
   setCurrentStep,
   totalSteps,
 }) => {
-  const [currentGender, setCurrentGender] = useState('')
-  const [socialLinks, setSocialLinks] = useState([
-    {
-      type: '',
-      link: '',
+  const initialSocialLink = {
+    platform: '',
+    url: '',
+  }
+
+  const { data } = api.teachers.getTeacherProfile.useQuery()
+
+  const saveTeacherMutation = api.teachers.saveTeacherProfile.useMutation({
+    onSuccess: () => onNextStep({ currentStep, setCurrentStep, totalSteps }),
+  })
+
+  const methods = useForm<TSchema>({
+    resolver: formResolver(validationSchema),
+    mode: 'onChange',
+    defaultValues: {
+      socialLinks: [initialSocialLink],
     },
-  ])
+  })
+
+  const {
+    fields: socialLinks,
+    append,
+    remove,
+  } = useFieldArray({
+    name: 'socialLinks',
+    control: methods.control,
+  })
 
   const onAddSocialLink = () => {
-    setSocialLinks([
-      ...socialLinks,
-      {
-        type: '',
-        link: '',
-      },
-    ])
+    append(initialSocialLink)
   }
   const onRemoveSocialLink = (index: number) => {
-    setSocialLinks(socialLinks.filter((_, i) => i !== index))
+    remove(index)
   }
 
+  const onSubmit = (value: TSchema) => {
+    saveTeacherMutation.mutate(
+      excludeKeysFromObject(value, ['day', 'month', 'year'])
+    )
+  }
+
+  useUpdate(() => {
+    if (data) {
+      const { day, month, year } = getDatePartsFromDateString(data?.dateOfBirth)
+
+      methods.reset({
+        ...data,
+        profilePhoto: data.profilePhoto as string,
+        about: data.about as string,
+        day,
+        month: getMonthNameFromNumber(Number.parseInt(month)),
+        year,
+      })
+
+      methods.trigger().catch(console.error)
+    }
+  }, [data])
+
   return (
-    <div className="flex flex-col md:w-5/6">
-      <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
-      <Header
-        title={'Your Profile'}
-        description={
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis at tortor at sagittis. Nullam eleifend, justo vitae consequat blandit, turpis tortor sodales'
-        }
-      />
-
-      <div className="mt-6">
-        <h1 className="text-lg font-bold text-primary">
-          Write a title for your profile
-        </h1>
-        <Input
-          containerClassName="mt-1"
-          placeholder="e.g English and Drama Teacher"
-          label="You will need to write a short title for your profile page"
-          labelClassName="text-sm"
-          className="border-[#919EAB4D]"
-        />
-      </div>
-
-      <div className="mt-8 flex flex-col gap-4 md:flex-row">
-        <ProfilePicture />
-        <RoundedContainer className="py-8 px-6 md:w-full">
-          <h3 className="text-lg font-bold text-colorText">Deja Brady</h3>
-          <div className="mt-4 flex gap-2">
-            <p className="text-sm font-semibold text-[#637381]">Address:</p>
-            <p className="text-sm font-semibold text-colorText">
-              18605 Thompson Circle Apt. 086 - Idaho Falls, WV / 50337
-            </p>
-          </div>
-
-          <div className="mt-3 flex gap-2">
-            <p className="text-sm font-semibold text-[#637381]">Email:</p>
-            <p className="text-sm font-semibold text-colorText">
-              Deja_brady@gmail.com
-            </p>
-          </div>
-
-          <div className="mt-6 flex gap-4">
-            <button className="flex items-center gap-1">
-              <TrashIcon
-                size={{ width: 26, height: 22 }}
-                fillColor="fill-danger"
-              />
-              <p className="font-semibold text-danger">Delete</p>
-            </button>
-            <button className="flex items-center gap-1">
-              <PencilIcon />
-              <p className="font-semibold text-primary">Edit</p>
-            </button>
-          </div>
-        </RoundedContainer>
-      </div>
-
-      <div className="mt-8 flex flex-col gap-5">
-        <div className="flex gap-2">
-          <h3 className="text-lg font-bold">About you</h3>
-          <InfoBox content="Say something about yourself" />
-        </div>
-
-        <RichTextEditor />
-      </div>
-
-      <div className="mt-8 flex flex-col gap-5">
-        <h3 className="text-lg font-bold">Gender</h3>
-        <CommonRadioGroup<string>
-          className="w-full flex-col md:flex-row"
-          options={genders}
-        />
-      </div>
-
-      <div className="mt-8 flex flex-col gap-5">
-        <h3 className="text-lg font-bold">Date of birth</h3>
-        <div className="flex flex-col gap-5 md:flex-row">
-          <Input placeholder="Day" className="pl-4" />
-          <Input placeholder="Month" className="pl-4" />
-          <Input placeholder="Year" className="pl-4" />
-        </div>
-      </div>
-      <div className="mt-8 flex flex-col gap-5">
-        <h3 className="text-lg font-bold">Social links</h3>
-        {socialLinks.map((socialLink, index, array) => (
-          <SocialLinkForm
-            key={index}
-            index={index}
-            onRemove={onRemoveSocialLink}
-            isDisabled={array.length === 1}
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <div className="flex flex-col md:w-5/6">
+          <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+          <Header
+            title={'Your Profile'}
+            description={
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis at tortor at sagittis. Nullam eleifend, justo vitae consequat blandit, turpis tortor sodales'
+            }
           />
-        ))}
-      </div>
-      <ButtonOutlined
-        className="mr-auto mt-4 w-28 text-primary"
-        onClick={onAddSocialLink}
-      >
-        Add Item
-      </ButtonOutlined>
 
-      <ActionButtons
-        currentStep={currentStep}
-        setCurrentStep={setCurrentStep}
-      />
-    </div>
+          <div className="mt-6">
+            <h1 className="text-lg font-bold text-primary">
+              Write a title for your profile
+            </h1>
+            <TextFormField<TSchema>
+              name="title"
+              containerClassName="mt-1"
+              placeholder="e.g English and Drama Teacher"
+              label="You will need to write a short title for your profile page"
+              labelClassName="text-sm"
+              className="border-[#919EAB4D]"
+            />
+          </div>
+
+          <div className="mt-8 flex flex-col gap-4 md:flex-row">
+            <PhotoFormField<TSchema> name="profilePhoto" />
+            <RoundedContainer className="self-start py-8 px-6 md:w-full">
+              <h3 className="text-lg font-bold text-colorText">Deja Brady</h3>
+              <div className="mt-4 flex gap-2">
+                <p className="text-sm font-semibold text-[#637381]">Address:</p>
+                <p className="text-sm font-semibold text-colorText">
+                  18605 Thompson Circle Apt. 086 - Idaho Falls, WV / 50337
+                </p>
+              </div>
+
+              <div className="mt-3 flex gap-2">
+                <p className="text-sm font-semibold text-[#637381]">Email:</p>
+                <p className="text-sm font-semibold text-colorText">
+                  Deja_brady@gmail.com
+                </p>
+              </div>
+
+              <div className="mt-6 flex gap-4">
+                <button className="flex items-center gap-1">
+                  <TrashIcon
+                    size={{ width: 26, height: 22 }}
+                    fillColor="fill-danger"
+                  />
+                  <p className="font-semibold text-danger">Delete</p>
+                </button>
+                <button className="flex items-center gap-1">
+                  <PencilIcon />
+                  <p className="font-semibold text-primary">Edit</p>
+                </button>
+              </div>
+            </RoundedContainer>
+          </div>
+
+          <div className="mt-8 flex flex-col gap-5">
+            <div className="flex gap-2">
+              <h3 className="text-lg font-bold">About you</h3>
+              <InfoBox content="Say something about yourself" />
+            </div>
+
+            <RichTextEditorFormField<TSchema> name="about" />
+          </div>
+
+          <div className="mt-8 flex flex-col gap-5">
+            <h3 className="text-lg font-bold">Gender</h3>
+            <RadioGroupFormField<string, TSchema>
+              name="gender"
+              className="w-full flex-col md:flex-row"
+              options={genders}
+            />
+          </div>
+
+          <div className="mt-8 flex flex-col gap-5">
+            <h3 className="text-lg font-bold">Date of birth</h3>
+            <div className="flex flex-col gap-5 md:flex-row">
+              <SelectFormField<TSchema>
+                options={generateArray(31).map((item) => ({
+                  value: `${item + 1}`,
+                }))}
+                name="day"
+                placeholder="Day"
+              />
+              <SelectFormField<TSchema>
+                name="month"
+                options={generateArray(12).map((el) => ({
+                  value: getMonthNameFromNumber(el + 1),
+                }))}
+                placeholder="Month"
+              />
+              <SelectFormField<TSchema>
+                name="year"
+                options={generateArray(new Date().getFullYear() + 1 - 1930)
+                  .map((el) => ({
+                    value: `${el + 1930}`,
+                  }))
+                  .sort((a, b) => Number(b.value) - Number(a.value))}
+                placeholder="Year"
+              />
+            </div>
+          </div>
+          <div className="mt-8 flex flex-col gap-5">
+            <h3 className="text-lg font-bold">Social links</h3>
+            {socialLinks.map((field, index, array) => {
+              const fieldsErrors = methods.formState.errors.socialLinks?.[index]
+
+              return (
+                <SocialLinkForm
+                  platform={{
+                    name: methods.register(
+                      `socialLinks.${index}.platform` as const
+                    ).name,
+                  }}
+                  url={{
+                    name: methods.register(`socialLinks.${index}.url` as const)
+                      .name,
+                    errors: fieldsErrors?.url?.message,
+                  }}
+                  key={field.id}
+                  index={index}
+                  onRemove={onRemoveSocialLink}
+                  isDisabled={array.length === 1}
+                />
+              )
+            })}
+          </div>
+          <ButtonOutlined
+            className="mr-auto mt-4 w-28 text-primary"
+            onClick={onAddSocialLink}
+          >
+            Add Item
+          </ButtonOutlined>
+
+          <ActionButtons
+            saveDisabled={
+              !methods.formState.isValid || !methods.formState.isDirty
+            }
+            isSaveLoading={saveTeacherMutation.isLoading}
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
+          />
+        </div>
+      </form>
+    </FormProvider>
   )
 }

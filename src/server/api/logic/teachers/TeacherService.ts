@@ -1,11 +1,13 @@
 import {
   type TSaveTeacherLocationPayload,
   type TSaveTeacherPayload,
+  type TSaveTeacherProfilePayload,
   type TSaveTeacherQualificationsPayload,
   type TSaveTeacherSubjectsPayload,
   type TSaveTeacherTeachingLifePayload,
 } from './schema'
 import { prisma } from '~/server/db'
+import { excludeKeysFromObject } from '@utils'
 
 export const saveTeacher = (payload: TSaveTeacherPayload) => {
   return prisma.teacher.create({
@@ -172,6 +174,42 @@ export const getTeacherExperience = async (userId: string) => {
     },
     include: {
       experience: true,
+    },
+  })
+}
+
+export const saveTeacherProfile = async (
+  payload: TSaveTeacherProfilePayload,
+  userId: string
+) => {
+  const teacherFromDb = await getTeacherByUserId(userId)
+
+  return await prisma.teacher.update({
+    where: {
+      userId,
+    },
+
+    data: {
+      ...excludeKeysFromObject(payload, ['socialLinks']),
+      socialLinks: {
+        deleteMany: {
+          teacherId: teacherFromDb?.id,
+        },
+        createMany: {
+          data: payload.socialLinks,
+        },
+      },
+    },
+  })
+}
+
+export const getTeacherProfile = async (userId: string) => {
+  return await prisma.teacher.findUnique({
+    where: {
+      userId,
+    },
+    include: {
+      socialLinks: true,
     },
   })
 }

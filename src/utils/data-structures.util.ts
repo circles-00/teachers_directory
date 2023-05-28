@@ -1,16 +1,18 @@
-import { every } from 'lodash'
+import { cloneDeep, every } from 'lodash'
 import isEmpty from 'lodash.isempty'
 
 export const excludeKeysFromObject = <T, K extends keyof T>(
   object: T,
   keys: K[]
 ) => {
-  if (!object) return object
+  const copyObject = cloneDeep(object)
+
+  if (!copyObject) return object
 
   for (const key of keys) {
-    delete object[key]
+    delete copyObject[key]
   }
-  return object
+  return copyObject
 }
 
 export const checkIfAllKeysOfObjectsFromArrayAreEmpty = <T extends object>(

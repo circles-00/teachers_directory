@@ -40,6 +40,11 @@ model Teacher {
   id             String                 @id @default(cuid())
   user           User                   @relation(fields: [userId], references: [id])
   userId         String                 @unique
+  title          String                 @default("")
+  profilePhoto   String?
+  about          String?
+  gender         String                 @default("")
+  dateOfBirth    String                 @default("")
   location       TeacherLocation?
   subjects       TeacherSubject[]
   createdAt      DateTime               @default(now())
@@ -47,6 +52,7 @@ model Teacher {
   qualifications TeacherQualification[]
   achievements   TeacherAchievement[]
   experience     TeacherExperience?
+  socialLinks    TeacherSocialLink[]
 
   @@map(name: "teachers")
 }
@@ -124,4 +130,18 @@ model TeacherExperience {
   updatedAt DateTime @updatedAt
 
   @@map(name: "teachers_experience")
+}
+
+model TeacherSocialLink {
+  id        String  @id @default(cuid())
+  teacher   Teacher @relation(fields: [teacherId], references: [id])
+  teacherId String
+
+  platform String
+  url      String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "teachers_social_links")
 }

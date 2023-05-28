@@ -75,3 +75,21 @@ export const saveTeacherExperiencePayload = z.object({
 export type TSaveTeacherTeachingLifePayload = z.infer<
   typeof saveTeacherExperiencePayload
 >
+
+export const saveTeacherProfilePayload = z.object({
+  profilePhoto: formRequiredString(),
+  about: formRequiredString(),
+  gender: formRequiredString(),
+  dateOfBirth: z.string().optional(),
+  title: formRequiredString(),
+  socialLinks: z.array(
+    z.object({
+      url: formRequiredString().url(),
+      platform: formRequiredString(),
+    })
+  ),
+})
+
+export type TSaveTeacherProfilePayload = z.infer<
+  typeof saveTeacherProfilePayload
+>

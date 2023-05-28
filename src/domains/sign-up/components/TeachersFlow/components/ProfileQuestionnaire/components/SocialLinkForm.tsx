@@ -1,23 +1,28 @@
 import { type FC } from 'react'
-import { Select, Input } from '@components'
-import { TrashButton } from '@domains/sign-up'
+import { SelectFormField, TextFormField } from '@components'
+import { type TFormFieldProps, TrashButton } from '@domains/sign-up'
 
 interface ISocialLinkFormProps {
   onRemove: (index: number) => void
   index: number
   isDisabled: boolean
+  platform: TFormFieldProps
+  url: TFormFieldProps
 }
 
 export const SocialLinkForm: FC<ISocialLinkFormProps> = ({
   onRemove,
   index,
   isDisabled,
+  platform,
+  url,
 }) => {
   return (
     <div className="flex flex-col items-center gap-5 md:flex-row">
-      <Select
+      <SelectFormField<string>
+        name={platform.name}
         label="Platform"
-        containerClassName="w-1/2"
+        containerClassName="self-start w-1/2"
         options={[
           { value: 'Facebook' },
           { value: 'Instagram' },
@@ -26,12 +31,19 @@ export const SocialLinkForm: FC<ISocialLinkFormProps> = ({
           { value: 'My website' },
         ]}
       />
-      <Input
+      <TextFormField<string>
+        name={url.name}
         placeholder="https://"
         className="py-[1.65rem]"
         containerClassName="mt-1"
+        error={url.errors}
       />
-      <TrashButton index={index} onRemove={onRemove} isDisabled={isDisabled} />
+      <TrashButton
+        className="self-center"
+        index={index}
+        onRemove={onRemove}
+        isDisabled={isDisabled}
+      />
     </div>
   )
 }

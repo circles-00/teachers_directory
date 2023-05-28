@@ -32,6 +32,7 @@ export const SingleQualification: FC<QualificationProps> = ({
   return (
     <div className="mt-4 flex flex-col items-center justify-between gap-2 md:flex-row">
       <AutoCompleteFormField
+        containerClassName="self-start"
         name={university.name}
         label="University"
         options={data.universities}
@@ -44,11 +45,17 @@ export const SingleQualification: FC<QualificationProps> = ({
         placeholder="Course"
       />
       <SelectFormField<string>
+        containerClassName="self-start"
         name={grade.name}
         label="Grade"
         options={data.grades}
       />
-      <TrashButton index={index} onRemove={onRemove} isDisabled={isDisabled} />
+      <TrashButton
+        className="self-center"
+        index={index}
+        onRemove={onRemove}
+        isDisabled={isDisabled}
+      />
     </div>
   )
 }
