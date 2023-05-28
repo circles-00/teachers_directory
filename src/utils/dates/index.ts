@@ -18,7 +18,7 @@ export const getDatePartsFromDateString = (date: string) => {
 
   return {
     day: dateParts[0] ?? '',
-    month: dateParts[1] ?? '',
+    month: dateParts[1] ?? '1',
     year: dateParts[2] ?? '',
   }
 }

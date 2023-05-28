@@ -4,12 +4,54 @@ import IllustrationUpload from '@assets/illustration_upload.png'
 import Image from 'next/image'
 import { FilesList } from './FilesList'
 import { useDropZoneUtils } from '~/hooks'
+import { convertBase64ToFile, convertFileToBase64 } from '@utils'
+import { useUpdate } from '@rounik/react-custom-hooks'
 
-interface IUploadFilesProps {}
+type TFile = {
+  name: string
+  content: string
+}
 
-export const UploadFiles: FC<IUploadFilesProps> = () => {
-  const { uploadedFiles, onRemoveFile, getInputProps, getRootProps } =
-    useDropZoneUtils()
+interface IUploadFilesProps {
+  initialValue?: TFile[]
+  onChange?: (value: TFile[]) => void
+}
+
+export const UploadFiles: FC<IUploadFilesProps> = ({
+  onChange,
+  initialValue,
+}) => {
+  const {
+    uploadedFiles,
+    onRemoveFile,
+    getInputProps,
+    getRootProps,
+    setUploadedFiles,
+  } = useDropZoneUtils()
+
+  useUpdate(() => {
+    // Only run initially
+    if (initialValue) {
+      setUploadedFiles(
+        initialValue.map((el) => convertBase64ToFile(el.content, el.name))
+      )
+    }
+  }, [initialValue])
+
+  useUpdate(
+    async () => {
+      const newUploadedFiles = await Promise.all(
+        uploadedFiles.map(async (file) => {
+          const content = await convertFileToBase64(file)
+          return { name: file.name, content }
+        })
+      )
+
+      onChange && onChange(newUploadedFiles)
+    },
+    [uploadedFiles],
+    true
+  )
 
   return (
     <div className="mt-8">

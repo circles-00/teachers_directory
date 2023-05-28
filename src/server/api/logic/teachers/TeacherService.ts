@@ -1,4 +1,5 @@
 import {
+  type TSaveTeacherAvailabilityPayload,
   type TSaveTeacherLocationPayload,
   type TSaveTeacherPayload,
   type TSaveTeacherProfilePayload,
@@ -150,10 +151,36 @@ export const getTeacherQualifications = async (userId: string) => {
   })
 }
 
-export const saveExperience = (
+export const getTeacherExperience = async (userId: string) => {
+  return await prisma.teacher.findUnique({
+    where: {
+      userId,
+    },
+    include: {
+      experience: true,
+    },
+  })
+}
+
+export const saveExperience = async (
   payload: TSaveTeacherTeachingLifePayload,
   userId: string
 ) => {
+  const experienceFromDb = await getTeacherExperience(userId)
+
+  if (!experienceFromDb?.experience) {
+    return prisma.teacher.update({
+      where: {
+        userId,
+      },
+      data: {
+        experience: {
+          create: payload,
+        },
+      },
+    })
+  }
+
   return prisma.teacher.update({
     where: {
       userId,
@@ -163,17 +190,6 @@ export const saveExperience = (
         delete: true,
         create: payload,
       },
-    },
-  })
-}
-
-export const getTeacherExperience = async (userId: string) => {
-  return await prisma.teacher.findUnique({
-    where: {
-      userId,
-    },
-    include: {
-      experience: true,
     },
   })
 }
@@ -210,6 +226,69 @@ export const getTeacherProfile = async (userId: string) => {
     },
     include: {
       socialLinks: true,
+    },
+  })
+}
+
+export const getTeacherAvailability = async (userId: string) => {
+  return await prisma.teacher.findUnique({
+    where: {
+      userId,
+    },
+    include: {
+      availability: {
+        include: {
+          files: true,
+        },
+      },
+    },
+  })
+}
+
+export const saveTeacherAvailability = async (
+  payload: TSaveTeacherAvailabilityPayload,
+  userId: string
+) => {
+  const teacherFromDb = await getTeacherAvailability(userId)
+
+  if (!teacherFromDb?.availability) {
+    return await prisma.teacher.update({
+      where: {
+        userId,
+      },
+      data: {
+        availability: {
+          create: {
+            ...payload,
+            files: {
+              createMany: {
+                data: payload.files,
+              },
+            },
+          },
+        },
+      },
+    })
+  }
+
+  return await prisma.teacher.update({
+    where: {
+      userId,
+    },
+    data: {
+      availability: {
+        update: {
+          ...payload,
+          files: {
+            deleteMany: {
+              teacherAvailabilityId: teacherFromDb?.availability?.id,
+            },
+            createMany: {
+              data: payload.files,
+            },
+          },
+        },
+      },
     },
   })
 }

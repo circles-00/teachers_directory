@@ -53,6 +53,7 @@ model Teacher {
   achievements   TeacherAchievement[]
   experience     TeacherExperience?
   socialLinks    TeacherSocialLink[]
+  availability   TeacherAvailability?
 
   @@map(name: "teachers")
 }
@@ -144,4 +145,36 @@ model TeacherSocialLink {
   updatedAt DateTime @updatedAt
 
   @@map(name: "teachers_social_links")
+}
+
+model TeacherAvailability {
+  id        String  @id @default(cuid())
+  teacher   Teacher @relation(fields: [teacherId], references: [id])
+  teacherId String  @unique
+
+  availabilityTable Json
+  availableNow      Boolean
+  startDate         String?
+  files             File[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "teachers_availability")
+}
+
+model File {
+  id                    String              @id @default(cuid())
+  teacherAvailablity    TeacherAvailability @relation(fields: [teacherAvailabilityId], references: [id])
+  teacherAvailabilityId String
+
+  name    String
+  content String
+
+  fileType String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "files")
 }

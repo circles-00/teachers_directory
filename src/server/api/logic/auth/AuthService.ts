@@ -176,7 +176,6 @@ export const login = async ({ email, password }: TLoginPayload) => {
     code: 'BAD_REQUEST',
     message: 'Invalid email or password',
   })
-
   const userFromDb = await findUserByEmail(email)
 
   if (!userFromDb) {
@@ -195,7 +194,7 @@ export const login = async ({ email, password }: TLoginPayload) => {
 export const findUserByEmail = async (email: string) => {
   if (!email) return null
 
-  return prisma.user.findFirst({
+  return prisma.user.findUnique({
     where: {
       email,
     },

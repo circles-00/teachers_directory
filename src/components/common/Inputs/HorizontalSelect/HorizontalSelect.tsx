@@ -12,12 +12,12 @@ export const HorizontalSelect: FC<IHorizontalSelectProps> = ({
   value,
 }) => {
   const onSelect = (selectedValue: string) => {
-    if (!onChange || !value) return
+    if (!onChange) return
 
-    if (value.includes(selectedValue)) {
+    if (value?.includes(selectedValue)) {
       onChange(value.filter((item) => item !== selectedValue))
     } else {
-      onChange([...value, selectedValue])
+      onChange([...(value ?? []), selectedValue])
     }
   }
 

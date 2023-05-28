@@ -35,7 +35,11 @@ export const FilesList: FC<IFilesListProps> = ({
           <p className="hidden text-[#637381] md:block">
             {format(new Date(file.lastModified), 'dd LLL Y')}
           </p>
-          <button className="mr-2" onClick={() => onRemoveFile(index)}>
+          <button
+            type="button"
+            className="mr-2"
+            onClick={() => onRemoveFile(index)}
+          >
             <XMarkIcon className="h-5 w-5" />
           </button>
         </div>

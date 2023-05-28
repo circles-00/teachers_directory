@@ -24,5 +24,6 @@ export const useDropZoneUtils = () => {
     getRootProps,
     getInputProps,
     onRemoveFile,
+    setUploadedFiles,
   }
 }

@@ -92,6 +92,10 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
         day,
         month: getMonthNameFromNumber(Number.parseInt(month)),
         year,
+        socialLinks:
+          data?.socialLinks?.length > 0
+            ? data?.socialLinks
+            : [initialSocialLink],
       })
 
       methods.trigger().catch(console.error)

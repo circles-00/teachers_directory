@@ -1,4 +1,4 @@
-import { cloneDeep, every } from 'lodash'
+import { cloneDeep, every, isEqual, xorWith } from 'lodash'
 import isEmpty from 'lodash.isempty'
 
 export const excludeKeysFromObject = <T, K extends keyof T>(
@@ -22,3 +22,6 @@ export const checkIfAllKeysOfObjectsFromArrayAreEmpty = <T extends object>(
 
   return every(array, (el) => every(el, isEmpty))
 }
+
+export const isArrayEqual = <T>(x?: T[], y?: T[]) =>
+  isEmpty(xorWith(x, y, isEqual))

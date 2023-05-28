@@ -1,5 +1,6 @@
 import { createTRPCRouter, teacherProcedure } from '~/server/api/trpc'
 import {
+  saveTeacherAvailabilityPayload,
   saveTeacherExperiencePayload,
   saveTeacherLocationPayload,
   saveTeacherProfilePayload,
@@ -48,5 +49,13 @@ export const teachersRouter = createTRPCRouter({
     }),
   getTeacherProfile: teacherProcedure.query(({ ctx }) => {
     return TeacherService.getTeacherProfile(ctx.user.id)
+  }),
+  saveTeacherAvailability: teacherProcedure
+    .input(saveTeacherAvailabilityPayload)
+    .mutation(({ input, ctx }) => {
+      return TeacherService.saveTeacherAvailability(input, ctx.user.id)
+    }),
+  getTeacherAvailability: teacherProcedure.query(({ ctx }) => {
+    return TeacherService.getTeacherAvailability(ctx.user.id)
   }),
 })
