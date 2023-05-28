@@ -104,7 +104,7 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
           <ButtonOutlined
             type="button"
             onClick={addSubject}
-            className="mt-8 mr-auto w-28 text-primary"
+            className="mt-8 ml-auto w-28 text-primary"
           >
             Add Item
           </ButtonOutlined>
