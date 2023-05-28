@@ -64,6 +64,7 @@ export const signUp = async (data: TSignUpPayload) => {
 
   const dataToInsert = {
     ...data,
+    id: userFromDb?.id,
     verificationCode: randomCode,
     verificationCodeExpiresAt: new Date(new Date().getTime() + 30 * 60 * 1000),
     password: await hashPassword(data.password),
@@ -84,7 +85,7 @@ export const signUp = async (data: TSignUpPayload) => {
     ['password']
   )
 
-  await createUserProfile(createdUser.id, createdUser.role)
+  if (!userFromDb) await createUserProfile(createdUser.id, createdUser.role)
 
   return createdUser
 }
@@ -192,7 +193,9 @@ export const login = async ({ email, password }: TLoginPayload) => {
 }
 
 export const findUserByEmail = async (email: string) => {
-  return prisma.user.findUnique({
+  if (!email) return null
+
+  return prisma.user.findFirst({
     where: {
       email,
     },

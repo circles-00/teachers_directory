@@ -1,55 +1,67 @@
-import { type FC, useState } from 'react'
+import { type FC } from 'react'
 import { ButtonOutlined } from '../../../../../../../components'
 import { Header } from '../../../../Header'
-import { Qualification } from './Qualification'
+import { SingleQualification } from './SingleQualification'
+import { useFieldArray, useFormContext } from 'react-hook-form'
+import { initialQualification } from '../initialData'
+import { type TSchema } from '../validation'
 
 interface IQualifications {
   title: string
   description: string
-  custom?: boolean
 }
 
-export const Qualifications: FC<IQualifications> = ({
-  title,
-  description,
-  custom,
-}) => {
-  const [qualificationForms, setQualificationForms] = useState([
-    {
-      university: '',
-      course: '',
-      grade: '',
-    },
-  ])
+export const Qualifications: FC<IQualifications> = ({ title, description }) => {
+  const methods = useFormContext<TSchema>()
+
+  const { fields, append, remove } = useFieldArray({
+    name: 'qualifications',
+    control: methods.control,
+  })
 
   const addQualification = () => {
-    setQualificationForms([
-      ...qualificationForms,
-      { university: '', course: '', grade: '' },
-    ])
+    append(initialQualification)
   }
 
   const removeQualification = (index: number) => {
-    const newQualifications = [...qualificationForms]
-    newQualifications.splice(index, 1)
-    setQualificationForms(newQualifications)
+    remove(index)
   }
 
   return (
     <div>
       <Header title={title} description={description} />
       <div className="mt-10">
-        {qualificationForms.map((subject, index, array) => (
-          <Qualification
-            index={index}
-            onRemove={removeQualification}
-            key={index}
-            numberOfQualifications={array.length}
-            custom={custom}
-          />
-        ))}
+        {fields.map((field, index, array) => {
+          const fieldErrors = methods.formState.errors.qualifications?.[index]
+
+          return (
+            <SingleQualification
+              university={{
+                name: methods.register(
+                  `qualifications.${index}.university` as const
+                ).name,
+                errors: fieldErrors?.university?.message,
+              }}
+              course={{
+                name: methods.register(
+                  `qualifications.${index}.course` as const
+                ).name,
+                errors: fieldErrors?.course?.message,
+              }}
+              grade={{
+                name: methods.register(`qualifications.${index}.grade` as const)
+                  .name,
+              }}
+              index={index}
+              onRemove={removeQualification}
+              key={field.id}
+              numberOfQualifications={array.length}
+            />
+          )
+        })}
       </div>
       <ButtonOutlined
+        type="button"
         onClick={addQualification}
         className="mt-8 mr-auto w-28 text-primary"
       >

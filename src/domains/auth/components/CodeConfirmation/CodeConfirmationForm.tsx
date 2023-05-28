@@ -1,6 +1,13 @@
-import { useState, type FC, useRef, useEffect } from 'react'
+import {
+  useState,
+  type FC,
+  useRef,
+  useEffect,
+  type ClipboardEvent,
+} from 'react'
 import { generateArray } from '@utils'
 import isEmpty from 'lodash.isempty'
+import { useEffectOnce, useUpdate } from '@rounik/react-custom-hooks'
 
 interface ICodeConfirmationFormProps {
   onSubmit: (code: string) => void
@@ -46,10 +53,25 @@ export const CodeConfirmationForm: FC<ICodeConfirmationFormProps> = ({
     setConfirmationCode(newConfirmationCode)
   }
 
+  const eventHandler = (event: ClipboardEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    const clipboardData = event.clipboardData.getData('text')
+
+    if (
+      clipboardData.length !== 6 ||
+      Number.isNaN(Number.parseInt(clipboardData))
+    )
+      return
+    setConfirmationCode(
+      clipboardData.split('').map((el) => Number.parseInt(el))
+    )
+  }
+
   return (
     <div className="flex justify-center gap-3.5 md:gap-6">
       {generateArray(6).map((idx) => (
         <input
+          onPaste={(event) => idx === 0 && eventHandler(event)}
           key={idx}
           type="tel"
           disabled={isCodeCorrect}

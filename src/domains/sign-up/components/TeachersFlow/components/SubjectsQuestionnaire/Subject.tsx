@@ -1,6 +1,6 @@
 import { type FC } from 'react'
 import { AutoCompleteFormField, SelectFormField } from '@components'
-import { TrashButton } from '@domains/sign-up'
+import { type TFormFieldProps, TrashButton } from '@domains/sign-up'
 
 const subjects = [
   {
@@ -51,11 +51,6 @@ const examBoards = [
     value: 'Other',
   },
 ]
-
-type TFormFieldProps = {
-  name: string
-  errors?: string
-}
 
 interface SubjectProps {
   onRemove: (index: number) => void

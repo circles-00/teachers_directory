@@ -13,8 +13,6 @@ import { type TeachersDirectoryPage } from '~/types/page'
 
 const LoginPage: TeachersDirectoryPage = () => {
   const { labels } = useLabels()
-  const signUpSuccessMessage = useSignUpSuccessMessage()
-  const { setSignUpSuccessMessage } = useSignUpActions()
 
   const methods = useForm<TLoginForm>({
     resolver: formResolver(LoginSchema),
@@ -24,18 +22,8 @@ const LoginPage: TeachersDirectoryPage = () => {
     await AuthService.signInWithCredentials(data)
   }
 
-  const closeSignUpSuccessMessage = () => {
-    setSignUpSuccessMessage('')
-  }
-
   return (
     <FormProvider {...methods}>
-      {!!signUpSuccessMessage && (
-        <SuccessAlert
-          message={signUpSuccessMessage}
-          onClose={closeSignUpSuccessMessage}
-        />
-      )}
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <RoundedContainer className="m-5 my-20 gap-5 px-12 pb-10 pt-14">
           <h1 className="text-3xl font-bold">Sign in</h1>

@@ -12,6 +12,7 @@ interface TextFormFieldProps<T extends FieldValues> extends IInputProps<T> {
 
 export const TextFormField = <T extends FieldValues>({
   name,
+  error,
   ...props
 }: TextFormFieldProps<T>) => {
   const {
@@ -21,5 +22,11 @@ export const TextFormField = <T extends FieldValues>({
 
   const { field } = useController({ name, control })
 
-  return <Input {...props} {...field} error={errors[name]?.message as string} />
+  return (
+    <Input
+      {...props}
+      {...field}
+      error={error ?? (errors[name]?.message as string)}
+    />
+  )
 }

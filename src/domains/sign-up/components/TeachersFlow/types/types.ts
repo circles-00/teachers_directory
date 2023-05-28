@@ -4,3 +4,8 @@ export interface StepProps {
   totalSteps: number
   setCurrentStep: (step: number) => void
 }
+
+export type TFormFieldProps = {
+  name: string
+  errors?: string
+}

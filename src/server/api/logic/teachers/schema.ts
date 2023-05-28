@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { formRequiredString } from '@utils'
+import { EErrorLabels } from '@domains/sign-up/components/TeachersFlow/components/QualificationsQuestionnaire/validation/error-labels'
 
 export const saveTeacherLocationPayload = z.object({
   latitude: z.number().nullable(),
@@ -32,4 +33,29 @@ export const saveTeacherSubjectsPayload = z.object({
 
 export type TSaveTeacherSubjectsPayload = z.infer<
   typeof saveTeacherSubjectsPayload
+>
+
+export const saveTeacherQualificationsPayload = z.object({
+  qualifications: z.array(
+    z.object({
+      university: formRequiredString(),
+      course: formRequiredString({
+        required_error: EErrorLabels.qualifications.course,
+      }),
+      grade: formRequiredString(),
+    })
+  ),
+  achievements: z
+    .array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+        grade: z.string(),
+      })
+    )
+    .optional(),
+})
+
+export type TSaveTeacherQualificationsPayload = z.infer<
+  typeof saveTeacherQualificationsPayload
 >

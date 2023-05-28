@@ -37,13 +37,15 @@ model User {
 }
 
 model Teacher {
-  id        String           @id @default(cuid())
-  user      User             @relation(fields: [userId], references: [id])
-  userId    String           @unique
-  location  TeacherLocation?
-  subjects  TeacherSubject[]
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @default(now()) @updatedAt
+  id             String                 @id @default(cuid())
+  user           User                   @relation(fields: [userId], references: [id])
+  userId         String                 @unique
+  location       TeacherLocation?
+  subjects       TeacherSubject[]
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @default(now()) @updatedAt
+  qualifications TeacherQualification[]
+  achievements   TeacherAchievement[]
 
   @@map(name: "teachers")
 }
@@ -75,5 +77,31 @@ model TeacherSubject {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  @@map(name: "teachers_subject")
+  @@map(name: "teachers_subject") // TODO: Rename to teachers_subjects
+}
+
+model TeacherQualification {
+  id         String   @id @default(cuid())
+  teacher    Teacher  @relation(fields: [teacherId], references: [id])
+  teacherId  String
+  university String
+  course     String
+  grade      String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map(name: "teachers_qualifications")
+}
+
+model TeacherAchievement {
+  id          String   @id @default(cuid())
+  teacher     Teacher  @relation(fields: [teacherId], references: [id])
+  teacherId   String
+  title       String
+  description String
+  grade       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map(name: "teachers_achievements")
 }
