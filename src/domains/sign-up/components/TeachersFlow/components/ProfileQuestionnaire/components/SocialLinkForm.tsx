@@ -31,8 +31,8 @@ export const SocialLinkForm: FC<ISocialLinkFormProps> = ({
           { value: 'My website' },
         ]}
       />
-      <TextFormField<string>
-        name={url.name}
+      <TextFormField
+        name={url?.name}
         placeholder="https://"
         className="py-[1.65rem]"
         containerClassName="mt-1"

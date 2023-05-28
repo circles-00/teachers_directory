@@ -33,7 +33,7 @@ export const Achievements: FC<IAchievementsProps> = ({
     <div>
       <Header title={title} description={description} />
       <div className="mt-10"></div>
-      {fields.map((field, index, array) => {
+      {fields.map((field, index) => {
         const fieldsErrors = methods.formState.errors.achievements?.[index]
 
         return (

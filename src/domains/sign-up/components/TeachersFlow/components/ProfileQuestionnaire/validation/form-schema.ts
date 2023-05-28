@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { formatMonth, formRequiredString, getMonthNumberFromName } from '@utils'
+import { formRequiredString, getMonthNumberFromName } from '@utils'
 import { EErrorLabels } from './error-labels'
 import isEmpty from 'lodash.isempty'
 

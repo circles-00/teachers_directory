@@ -14,7 +14,7 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
   setCurrentStep,
   totalSteps,
 }) => {
-  const [availability, setAvailability] = useState<boolean | null>(null)
+  const [availability] = useState<boolean | null>(null)
   const [availabilityDate, setAvailabilityDate] = useState<Date>()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 

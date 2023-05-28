@@ -1,5 +1,5 @@
 import { type FC } from 'react'
-import { Input, TextFormField } from '@components'
+import { TextFormField } from '@components'
 import { type TFormFieldProps, TrashButton } from '@domains/sign-up'
 
 interface AchievementProps {

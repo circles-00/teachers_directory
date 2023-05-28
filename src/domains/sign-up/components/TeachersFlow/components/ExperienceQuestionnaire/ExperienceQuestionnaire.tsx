@@ -15,7 +15,7 @@ export const ExperienceQuestionnaire: FC<IExperienceQuestionnaireProps> = ({
   setCurrentStep,
   totalSteps,
 }) => {
-  const { data, isLoading } = api.teachers.getTeacherExperience.useQuery()
+  const { data } = api.teachers.getTeacherExperience.useQuery()
 
   const teacherExperienceMutation =
     api.teachers.saveTeacherExperience.useMutation({

@@ -3,11 +3,6 @@ import { formResolver, useLabels } from '@utils'
 import { LoginSchema, ThirdPartyLogin, type TLoginForm } from '@domains/auth'
 import Link from 'next/link'
 import { FormProvider, useForm } from 'react-hook-form'
-import { SuccessAlert } from 'src/components/common/Feedback/Alerts'
-import {
-  useSignUpActions,
-  useSignUpSuccessMessage,
-} from '~/hooks/useStore/helperHooks/useSignUpStore'
 import { AuthService } from '@services'
 import { type TeachersDirectoryPage } from '~/types/page'
 

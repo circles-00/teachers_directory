@@ -16,14 +16,6 @@ const roles = filterItems[1]?.items.map((item) => ({
   id: item.value,
 }))
 
-const dates = [
-  { value: 'Date #1' },
-  { value: 'Date #2' },
-  { value: 'Date #3' },
-  { value: 'Date #4' },
-  { value: 'Date #5' },
-]
-
 interface ExperienceQuestionnaireFormProps {}
 
 export const ExperienceQuestionnaireForm: FC<

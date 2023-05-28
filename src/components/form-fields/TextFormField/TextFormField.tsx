@@ -10,7 +10,7 @@ interface TextFormFieldProps<T extends FieldValues> extends IInputProps<T> {
   name: Path<T>
 }
 
-export const TextFormField = <T,>({
+export const TextFormField = <T extends FieldValues>({
   name,
   error,
   ...props
