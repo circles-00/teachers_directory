@@ -87,7 +87,7 @@ export const ExperienceQuestionnaireForm: FC<
       <h2 className="mt-4 text-lg font-bold">
         Do you have a teaching qualification? (optional)
       </h2>
-      <RadioGroupFormField<TSchema>
+      <RadioGroupFormField<boolean, TSchema>
         name="qualification"
         className="mt-4"
         options={[
@@ -99,7 +99,7 @@ export const ExperienceQuestionnaireForm: FC<
       <h2 className="mt-4 text-lg font-bold">
         Do you have a degree? (optional)
       </h2>
-      <RadioGroupFormField<TSchema>
+      <RadioGroupFormField<boolean, TSchema>
         name="degree"
         className="mt-4"
         options={[
@@ -111,7 +111,7 @@ export const ExperienceQuestionnaireForm: FC<
       <h2 className="mt-4 text-lg font-bold">
         Are you currently an examiner? (optional)
       </h2>
-      <RadioGroupFormField<TSchema>
+      <RadioGroupFormField<boolean, TSchema>
         name="examiner"
         className="mt-4"
         options={[

@@ -115,10 +115,8 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
 
       <div className="mt-8 flex flex-col gap-5">
         <h3 className="text-lg font-bold">Gender</h3>
-        <CommonRadioGroup<typeof currentGender>
+        <CommonRadioGroup<string>
           className="w-full flex-col md:flex-row"
-          value={currentGender}
-          onChange={setCurrentGender}
           options={genders}
         />
       </div>

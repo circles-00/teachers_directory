@@ -14,9 +14,7 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
   setCurrentStep,
   totalSteps,
 }) => {
-  const [availability, setAvailability] = useState<'now' | 'future' | null>(
-    null
-  )
+  const [availability, setAvailability] = useState<boolean | null>(null)
   const [availabilityDate, setAvailabilityDate] = useState<Date>()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
@@ -46,17 +44,15 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
 
           <p className="text-sm">Some paragraph here</p>
         </div>
-        <CommonRadioGroup<typeof availability>
+        <CommonRadioGroup<boolean>
           className="mt-4 w-full flex-col md:flex-row"
           options={[
-            { value: 'now', label: 'I’m available now' },
-            { value: 'future', label: 'I will be available later' },
+            { value: true, label: 'I’m available now' },
+            { value: false, label: 'I will be available later' },
           ]}
-          value={availability}
-          onChange={(value) => setAvailability(value)}
         />
       </div>
-      {availability === 'future' && (
+      {availability && (
         <div className="mt-5">
           <h3 className="text-lg font-bold">
             When will you be available in the future?

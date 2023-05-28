@@ -2,16 +2,16 @@ import { type CommonRadioGroupProps } from '@components/common/Inputs/CommonRadi
 import { type Path, useController, useFormContext } from 'react-hook-form'
 import { CommonRadioGroup } from '~/components'
 
-interface IRadioGroupFormFieldProps<T> extends CommonRadioGroupProps {
-  name: Path<T>
+interface IRadioGroupFormFieldProps<T, U> extends CommonRadioGroupProps<T> {
+  name: Path<U>
 }
 
-export const RadioGroupFormField = <T,>({
+export const RadioGroupFormField = <T, U>({
   name,
   ...props
-}: IRadioGroupFormFieldProps<T>) => {
+}: IRadioGroupFormFieldProps<T, U>) => {
   const { control } = useFormContext()
   const { field } = useController({ name, control })
 
-  return <CommonRadioGroup {...field} {...props} />
+  return <CommonRadioGroup<T> {...field} {...props} />
 }
