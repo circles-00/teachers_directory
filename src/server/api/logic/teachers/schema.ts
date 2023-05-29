@@ -111,3 +111,16 @@ export const saveTeacherAvailabilityPayload = z.object({
 export type TSaveTeacherAvailabilityPayload = z.infer<
   typeof saveTeacherAvailabilityPayload
 >
+
+export const saveTeacherOtherServicesPayload = z.object({
+  otherServices: z.array(
+    z.object({
+      title: formRequiredString(),
+      description: formRequiredString(),
+    })
+  ),
+})
+
+export type TSaveTeacherOtherServices = z.infer<
+  typeof saveTeacherOtherServicesPayload
+>

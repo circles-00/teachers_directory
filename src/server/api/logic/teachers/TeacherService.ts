@@ -1,6 +1,7 @@
 import {
   type TSaveTeacherAvailabilityPayload,
   type TSaveTeacherLocationPayload,
+  type TSaveTeacherOtherServices,
   type TSaveTeacherPayload,
   type TSaveTeacherProfilePayload,
   type TSaveTeacherQualificationsPayload,
@@ -287,6 +288,55 @@ export const saveTeacherAvailability = async (
               data: payload.files,
             },
           },
+        },
+      },
+    },
+  })
+}
+
+export const getTeacherOtherServices = async (userId: string) => {
+  return await prisma.teacher.findUnique({
+    where: {
+      userId,
+    },
+    include: {
+      otherServices: true,
+    },
+  })
+}
+
+export const saveTeacherOtherServices = async (
+  payload: TSaveTeacherOtherServices,
+  userId: string
+) => {
+  const teacherFromDb = await getTeacherOtherServices(userId)
+
+  if (!teacherFromDb?.otherServices) {
+    return await prisma.teacher.update({
+      where: {
+        userId,
+      },
+      data: {
+        otherServices: {
+          createMany: {
+            data: payload.otherServices,
+          },
+        },
+      },
+    })
+  }
+
+  return await prisma.teacher.update({
+    where: {
+      userId,
+    },
+    data: {
+      otherServices: {
+        deleteMany: {
+          teacherId: teacherFromDb?.id,
+        },
+        createMany: {
+          data: payload.otherServices,
         },
       },
     },

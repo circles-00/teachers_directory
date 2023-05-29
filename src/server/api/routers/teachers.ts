@@ -3,6 +3,7 @@ import {
   saveTeacherAvailabilityPayload,
   saveTeacherExperiencePayload,
   saveTeacherLocationPayload,
+  saveTeacherOtherServicesPayload,
   saveTeacherProfilePayload,
   saveTeacherQualificationsPayload,
   saveTeacherSubjectsPayload,
@@ -57,5 +58,13 @@ export const teachersRouter = createTRPCRouter({
     }),
   getTeacherAvailability: teacherProcedure.query(({ ctx }) => {
     return TeacherService.getTeacherAvailability(ctx.user.id)
+  }),
+  saveTeacherOtherServices: teacherProcedure
+    .input(saveTeacherOtherServicesPayload)
+    .mutation(({ input, ctx }) => {
+      return TeacherService.saveTeacherOtherServices(input, ctx.user.id)
+    }),
+  getTeacherOtherServices: teacherProcedure.query(({ ctx }) => {
+    return TeacherService.getTeacherOtherServices(ctx.user.id)
   }),
 })

@@ -54,6 +54,7 @@ model Teacher {
   experience     TeacherExperience?
   socialLinks    TeacherSocialLink[]
   availability   TeacherAvailability?
+  otherServices  TeacherOtherService[]
 
   @@map(name: "teachers")
 }
@@ -178,4 +179,18 @@ model File {
   updatedAt DateTime @updatedAt
 
   @@map(name: "files")
+}
+
+model TeacherOtherService {
+  id        String  @id @default(cuid())
+  teacher   Teacher @relation(fields: [teacherId], references: [id])
+  teacherId String
+
+  title       String
+  description String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "teachers_other_services")
 }
