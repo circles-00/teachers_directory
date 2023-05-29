@@ -60,6 +60,7 @@ interface SubjectProps {
   subjectName: TFormFieldProps
   subjectLevel: TFormFieldProps
   subjectExamBoard: TFormFieldProps
+  isMainSubject: TFormFieldProps
 }
 
 export const Subject: FC<SubjectProps> = ({
@@ -69,6 +70,7 @@ export const Subject: FC<SubjectProps> = ({
   subjectName,
   subjectLevel,
   subjectExamBoard,
+  isMainSubject,
 }) => {
   const isDisabled = numberOfSubjects === 1
 
@@ -88,6 +90,11 @@ export const Subject: FC<SubjectProps> = ({
         name={subjectExamBoard?.name}
         label="Exam board (optional)"
         options={examBoards}
+      />
+      <SelectFormField<string>
+        name={isMainSubject.name}
+        label="Is this a main subject?"
+        options={[{ value: 'Main Subject' }, { value: 'Not Main Subject' }]}
       />
       <TrashButton
         onRemove={() => onRemove(index)}

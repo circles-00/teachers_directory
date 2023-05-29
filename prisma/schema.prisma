@@ -76,14 +76,15 @@ model TeacherLocation {
 }
 
 model TeacherSubject {
-  id          String   @id @default(cuid())
-  teacher     Teacher  @relation(fields: [teacherId], references: [id])
-  teacherId   String
-  subjectName String
-  level       String
-  examBoard   String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(cuid())
+  teacher       Teacher  @relation(fields: [teacherId], references: [id])
+  teacherId     String
+  subjectName   String
+  level         String
+  examBoard     String?
+  isMainSubject Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@map(name: "teachers_subject") // TODO: Rename to teachers_subjects
 }

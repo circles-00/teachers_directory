@@ -28,6 +28,7 @@ export const saveTeacherSubjectsPayload = z.object({
       subjectName: formRequiredString(),
       level: formRequiredString(),
       examBoard: z.string().optional(),
+      isMainSubject: z.boolean(),
     })
   ),
 })

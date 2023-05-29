@@ -6,6 +6,8 @@ export const validationSchema = z.object({
     z.object({
       subjectName: formRequiredString(),
       level: formRequiredString(),
+      mainSubjectSelect: z.string(),
+      isMainSubject: z.boolean(),
       examBoard: z.string().optional(),
     })
   ),

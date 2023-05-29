@@ -20,6 +20,8 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
     subjectName: '',
     level: '',
     examBoard: '',
+    isMainSubject: false,
+    mainSubjectSelect: '',
   }
 
   const saveTeacherSubjectsMutation = api.teachers.saveSubjects.useMutation({
@@ -42,6 +44,9 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
         subjects: teacherSubjects?.map((subject) => ({
           ...subject,
           examBoard: subject?.examBoard ?? '',
+          mainSubjectSelect: subject?.isMainSubject
+            ? 'Main Subject'
+            : 'Not Main Subject',
         })),
       })
     }
@@ -61,7 +66,15 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
   }
 
   const onSubmit = (data: TSchema) => {
-    saveTeacherSubjectsMutation.mutate(data)
+    const dataToSubmit = { ...data }
+    dataToSubmit.subjects = dataToSubmit.subjects.map((subject) => {
+      // Workaround
+      subject.isMainSubject = subject.mainSubjectSelect === 'Main Subject'
+
+      return subject
+    })
+
+    saveTeacherSubjectsMutation.mutate(dataToSubmit)
   }
 
   return (
@@ -93,6 +106,11 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
                   name: methods.register(`subjects.${index}.examBoard` as const)
                     ?.name,
                   errors: fieldErrors?.examBoard?.message,
+                }}
+                isMainSubject={{
+                  name: methods.register(
+                    `subjects.${index}.mainSubjectSelect` as const
+                  )?.name,
                 }}
                 index={index}
                 onRemove={removeSubject}
