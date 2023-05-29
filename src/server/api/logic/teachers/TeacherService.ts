@@ -342,3 +342,62 @@ export const saveTeacherOtherServices = async (
     },
   })
 }
+
+export const getTeacherProfileCompletionProgress = async (userId: string) => {
+  const teacherFromDb = await prisma.teacher.findUnique({
+    where: {
+      userId,
+    },
+    include: {
+      subjects: true,
+      qualifications: true,
+      experience: true,
+      socialLinks: true,
+      availability: true,
+      otherServices: true,
+      location: true,
+    },
+  })
+
+  const teacherSteps = Object.values(
+    excludeKeysFromObject(teacherFromDb, [
+      // TODO: Refactor
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      'createdAt',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      'updatedAt',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      'id',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      'userId',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      'about',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      'dateOfBirth',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      'title',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      'gender',
+    ]) ?? {}
+  )
+
+  const completeSteps = teacherSteps.filter((value) => {
+    if (Array.isArray(value) && value.length > 0) return true
+    return !Array.isArray(value) && value !== null
+  }).length
+
+  const progress = Math.round((completeSteps / teacherSteps.length) * 100)
+
+  return {
+    progress,
+  }
+}

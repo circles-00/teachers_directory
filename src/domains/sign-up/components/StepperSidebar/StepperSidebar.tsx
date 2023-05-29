@@ -1,6 +1,8 @@
 import { type FC } from 'react'
 import { LinearProgressBar, RoundedContainer } from '@components'
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
+import { api } from '@utils'
+import { useUpdate } from '@rounik/react-custom-hooks'
 
 // TODO: Change this hardcoded value
 const PROGRESS = 45
@@ -16,6 +18,13 @@ export const StepperSidebar: FC<IStepperSidebarProps> = ({
   setCurrentStep,
   steps,
 }) => {
+  const { data, refetch } =
+    api.teachers.getTeacherProfileCompletionProgress.useQuery()
+
+  useUpdate(() => {
+    refetch().catch(console.error)
+  }, [currentStep])
+
   const isCurrentStep = (index: number) => index === currentStep
 
   return (
@@ -38,11 +47,12 @@ export const StepperSidebar: FC<IStepperSidebarProps> = ({
         ))}
       </RoundedContainer>
       <RoundedContainer className="mt-4 p-4 md:w-full">
-        <LinearProgressBar progress={PROGRESS} />
+        <LinearProgressBar progress={data?.progress ?? 0} />
         <h1 className="mt-2 font-bold">Almost there</h1>
         <p className="text-xs">
-          Your profile is <span className="text-primary">{PROGRESS}%</span>{' '}
-          ready, continue with <br /> the progress
+          Your profile is{' '}
+          <span className="text-primary">{data?.progress}%</span> ready,
+          continue with <br /> the progress
         </p>
       </RoundedContainer>
     </div>

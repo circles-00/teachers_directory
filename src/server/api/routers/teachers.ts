@@ -67,4 +67,7 @@ export const teachersRouter = createTRPCRouter({
   getTeacherOtherServices: teacherProcedure.query(({ ctx }) => {
     return TeacherService.getTeacherOtherServices(ctx.user.id)
   }),
+  getTeacherProfileCompletionProgress: teacherProcedure.query(({ ctx }) => {
+    return TeacherService.getTeacherProfileCompletionProgress(ctx.user.id)
+  }),
 })
