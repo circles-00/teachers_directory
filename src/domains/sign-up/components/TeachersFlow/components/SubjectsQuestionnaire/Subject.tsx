@@ -1,24 +1,7 @@
 import { type FC } from 'react'
 import { AutoCompleteFormField, SelectFormField } from '@components'
 import { type TFormFieldProps, TrashButton } from '@domains/sign-up'
-
-const subjects = [
-  {
-    value: 'Maths',
-  },
-  {
-    value: 'English',
-  },
-  {
-    value: 'Science',
-  },
-  {
-    value: 'History',
-  },
-  {
-    value: 'Geography',
-  },
-]
+import { subjects } from './data'
 
 const levels = [
   {
