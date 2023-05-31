@@ -34,7 +34,7 @@ export const BadgesQuestionnaire: FC<IBadgesQuestionnaireProps> = ({
   setCurrentStep,
 }) => {
   return (
-    <div className="flex flex-col md:w-5/6">
+    <div className="flex flex-col">
       <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
       <Header
         title={'Would you like a badge next to your name?'}

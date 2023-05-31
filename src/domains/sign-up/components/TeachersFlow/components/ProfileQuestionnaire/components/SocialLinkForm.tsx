@@ -1,6 +1,7 @@
 import { type FC } from 'react'
 import { SelectFormField, TextFormField } from '@components'
 import { type TFormFieldProps, TrashButton } from '@domains/sign-up'
+import { UrlFormField } from '@components/form-fields/UrlFormField'
 
 interface ISocialLinkFormProps {
   onRemove: (index: number) => void
@@ -31,7 +32,7 @@ export const SocialLinkForm: FC<ISocialLinkFormProps> = ({
           { value: 'My website' },
         ]}
       />
-      <TextFormField
+      <UrlFormField
         name={url?.name}
         placeholder="https://"
         className="py-[1.65rem]"

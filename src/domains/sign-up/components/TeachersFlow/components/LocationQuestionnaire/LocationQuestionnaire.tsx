@@ -80,7 +80,7 @@ export const LocationQuestionnaire: FC<ILocationQuestionnaireProps> = ({
             title="Where you live?"
             description={`This won't be displayed but we use your postcode to calculate distances to \npotential schools. Also, if you add your mobile number, we can text you if you have \na job application.`}
           />
-          <div className="flex w-5/6 flex-col">
+          <div className="flex flex-col md:w-5/6">
             <AutoComplete
               options={data.map((item) => ({ value: item.description }))}
               isAsync
@@ -126,7 +126,9 @@ export const LocationQuestionnaire: FC<ILocationQuestionnaireProps> = ({
             <ActionButtons
               isSaveLoading={teacherMutation.isLoading}
               showBackButton={currentStep > 0}
-              saveDisabled={!methods.formState.isValid}
+              saveDisabled={
+                !methods.formState.isDirty || !methods.formState.isValid
+              }
               currentStep={currentStep}
               setCurrentStep={setCurrentStep}
             />

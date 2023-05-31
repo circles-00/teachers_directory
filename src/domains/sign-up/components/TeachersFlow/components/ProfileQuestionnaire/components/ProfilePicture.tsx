@@ -42,7 +42,7 @@ export const ProfilePicture: FC<IProfilePictureProps> = ({
 
   return (
     <div className="md:w-full">
-      <RoundedContainer className="items-center justify-center pt-8 pb-4 md:w-full">
+      <RoundedContainer className="items-center justify-center pt-10 pb-6 md:w-full">
         <div
           {...getRootProps()}
           // ! Note: Using inline style for backgrounds, due to Tailwind dynamic classNames behaviour

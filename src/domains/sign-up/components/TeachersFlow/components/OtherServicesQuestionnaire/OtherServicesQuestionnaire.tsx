@@ -7,7 +7,7 @@ import {
   type TFormFieldProps,
   TrashButton,
 } from '@domains/sign-up'
-import { ButtonOutlined, Input, TextFormField } from '@components'
+import { ButtonOutlined, TextAreaFormField, TextFormField } from '@components'
 import { api, formResolver } from '@utils'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { type TSchema, validationSchema } from './validation'
@@ -36,7 +36,7 @@ const OtherService: FC<IOtherServiceProps> = ({
       placeholder="Service I offer"
       containerClassName="md:w-1/3"
     />
-    <TextFormField
+    <TextAreaFormField
       name={description.name}
       error={description.errors}
       placeholder="Description"
@@ -100,10 +100,10 @@ export const OtherServicesQuestionnaire: FC<
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <div className="flex flex-col md:w-5/6">
+        <div className="flex flex-col xl:w-5/6">
           <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
           <Header
-            title={'Other services'}
+            title="Other services (optional)"
             description={`Add the subject(s) you teach. You must select one or two main subjects that will appear on your profile`}
           />
 

@@ -42,7 +42,7 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
 }) => {
   const initialSocialLink = {
     platform: '',
-    url: '',
+    url: 'https://',
   }
 
   const { data } = api.teachers.getTeacherProfile.useQuery()
@@ -97,15 +97,13 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
             ? data?.socialLinks
             : [initialSocialLink],
       })
-
-      methods.trigger().catch(console.error)
     }
   }, [data])
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <div className="flex flex-col md:w-5/6">
+        <div className="flex flex-col lg:w-5/6">
           <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
           <Header
             title={'Your Profile'}
@@ -130,36 +128,6 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
 
           <div className="mt-8 flex flex-col gap-4 md:flex-row">
             <PhotoFormField<TSchema> name="profilePhoto" />
-            <RoundedContainer className="self-start py-8 px-6 md:w-full">
-              <h3 className="text-lg font-bold text-colorText">Deja Brady</h3>
-              <div className="mt-4 flex gap-2">
-                <p className="text-sm font-semibold text-[#637381]">Address:</p>
-                <p className="text-sm font-semibold text-colorText">
-                  18605 Thompson Circle Apt. 086 - Idaho Falls, WV / 50337
-                </p>
-              </div>
-
-              <div className="mt-3 flex gap-2">
-                <p className="text-sm font-semibold text-[#637381]">Email:</p>
-                <p className="text-sm font-semibold text-colorText">
-                  Deja_brady@gmail.com
-                </p>
-              </div>
-
-              <div className="mt-6 flex gap-4">
-                <button className="flex items-center gap-1">
-                  <TrashIcon
-                    size={{ width: 26, height: 22 }}
-                    fillColor="fill-danger"
-                  />
-                  <p className="font-semibold text-danger">Delete</p>
-                </button>
-                <button className="flex items-center gap-1">
-                  <PencilIcon />
-                  <p className="font-semibold text-primary">Edit</p>
-                </button>
-              </div>
-            </RoundedContainer>
           </div>
 
           <div className="mt-8 flex flex-col gap-5">
@@ -181,7 +149,10 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
           </div>
 
           <div className="mt-8 flex flex-col gap-5">
-            <h3 className="text-lg font-bold">Date of birth</h3>
+            <div className="flex items-center gap-2">
+              <h3 className="text-lg font-bold">Date of birth</h3>
+              <InfoBox content="Your date of birth will not be shown on your profile" />
+            </div>
             <div className="flex flex-col gap-5 md:flex-row">
               <SelectFormField<TSchema>
                 options={generateArray(31).map((item) => ({
@@ -242,7 +213,7 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
 
           <ActionButtons
             saveDisabled={
-              !methods.formState.isValid || !methods.formState.isDirty
+              !methods.formState.isDirty || !methods.formState.isValid
             }
             isSaveLoading={saveTeacherMutation.isLoading}
             currentStep={currentStep}

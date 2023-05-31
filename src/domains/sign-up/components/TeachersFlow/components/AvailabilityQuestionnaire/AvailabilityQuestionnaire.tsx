@@ -80,7 +80,7 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <div className="flex flex-col md:w-5/6">
+        <div className="flex flex-col">
           <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
           <Header
             title={'Your Availability'}

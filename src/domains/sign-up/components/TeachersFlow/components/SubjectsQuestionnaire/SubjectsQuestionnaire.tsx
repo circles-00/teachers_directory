@@ -44,9 +44,7 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
         subjects: teacherSubjects?.map((subject) => ({
           ...subject,
           examBoard: subject?.examBoard ?? '',
-          mainSubjectSelect: subject?.isMainSubject
-            ? 'Main Subject'
-            : 'Not Main Subject',
+          mainSubjectSelect: subject?.isMainSubject ? 'Yes' : 'No',
         })),
       })
     }
@@ -69,7 +67,7 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
     const dataToSubmit = { ...data }
     dataToSubmit.subjects = dataToSubmit.subjects.map((subject) => {
       // Workaround
-      subject.isMainSubject = subject.mainSubjectSelect === 'Main Subject'
+      subject.isMainSubject = subject.mainSubjectSelect === 'Yes'
 
       return subject
     })
@@ -78,9 +76,9 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
   }
 
   return (
-    <form onSubmit={methods.handleSubmit(onSubmit)}>
-      <div className="flex flex-col md:w-5/6">
-        <FormProvider {...methods}>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <div className="flex flex-col">
           <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
           <Header
             title="What subject can you teach?"
@@ -130,13 +128,13 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
           <ActionButtons
             isSaveLoading={saveTeacherSubjectsMutation.isLoading}
             saveDisabled={
-              !methods?.formState?.isDirty || !methods?.formState?.isValid
+              !methods.formState.isDirty || !methods?.formState?.isValid
             }
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
           />
-        </FormProvider>
-      </div>
-    </form>
+        </div>
+      </form>
+    </FormProvider>
   )
 }

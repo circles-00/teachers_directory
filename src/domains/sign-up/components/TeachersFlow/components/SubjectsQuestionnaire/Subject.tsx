@@ -58,7 +58,7 @@ export const Subject: FC<SubjectProps> = ({
   const isDisabled = numberOfSubjects === 1
 
   return (
-    <div className="mt-4 flex flex-col items-center justify-between gap-2 md:flex-row">
+    <div className="mt-4 flex w-full flex-col items-center justify-between gap-2 md:flex-row">
       <AutoCompleteFormField
         name={subjectName.name}
         label="Subject Name"
@@ -76,8 +76,8 @@ export const Subject: FC<SubjectProps> = ({
       />
       <SelectFormField<string>
         name={isMainSubject.name}
-        label="Is this a main subject?"
-        options={[{ value: 'Main Subject' }, { value: 'Not Main Subject' }]}
+        label="Main subject you teach?"
+        options={[{ value: 'Yes' }, { value: 'No' }]} // Look for a workaround in SubjectsQuestionnaire.tsx
       />
       <TrashButton
         onRemove={() => onRemove(index)}

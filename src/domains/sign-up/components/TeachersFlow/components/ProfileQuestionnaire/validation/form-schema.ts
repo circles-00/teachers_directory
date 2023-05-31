@@ -7,6 +7,7 @@ export const validationSchema = z
   .object({
     profilePhoto: formRequiredString({
       required_error: EErrorLabels.profilePhoto,
+      invalid_type_error: EErrorLabels.profilePhoto,
     }),
     about: formRequiredString(),
     gender: formRequiredString(),
@@ -14,10 +15,12 @@ export const validationSchema = z
     day: formRequiredString(),
     month: formRequiredString(),
     year: formRequiredString(),
-    title: formRequiredString(),
+    title: formRequiredString({ required_error: EErrorLabels.profileTitle }),
     socialLinks: z.array(
       z.object({
-        url: formRequiredString().url(),
+        url: formRequiredString({
+          required_error: EErrorLabels.socialPlatformUrl,
+        }).url(),
         platform: formRequiredString(),
       })
     ),

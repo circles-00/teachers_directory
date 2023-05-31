@@ -63,7 +63,7 @@ export const QualificationsQuestionnaire: FC<
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-        <div className="flex flex-col md:w-5/6">
+        <div className="flex flex-col">
           <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
           <Qualifications
             title="Your qualifications (Optional)"
@@ -79,7 +79,7 @@ export const QualificationsQuestionnaire: FC<
           <ActionButtons
             isSaveLoading={saveTeacherQualificationsMutation.isLoading}
             saveDisabled={
-              !methods?.formState?.isDirty || !methods?.formState?.isValid
+              !methods.formState.isDirty || !methods?.formState?.isValid
             }
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}

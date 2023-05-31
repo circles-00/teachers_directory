@@ -10,7 +10,7 @@ export const data = {
       value: 'PGCE',
     },
     {
-      value: 'PHS',
+      value: 'PhD',
     },
     {
       value: 'OTHER',

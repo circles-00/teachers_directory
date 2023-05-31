@@ -1,0 +1,5 @@
+export * from './PdfIcon'
+export * from './WordIcon'
+export * from './PngIcon'
+export * from './JpegIcon'
+export * from './JpgIcon'

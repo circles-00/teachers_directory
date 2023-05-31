@@ -2,7 +2,6 @@ import { type FC, useMemo } from 'react'
 import {
   SelectFormField,
   RadioGroupFormField,
-  TextFormField,
   HorizontalSelectFormField,
 } from '@components'
 import { filterItems } from '@domains/search'
@@ -10,6 +9,7 @@ import { useFormContext } from 'react-hook-form'
 import { type TSchema } from '../validation'
 import { useUpdate } from '@rounik/react-custom-hooks'
 import { examBoards } from '@domains/sign-up'
+import { teachingTimeOptions } from '@domains/sign-up/components/TeachersFlow/components/ExperienceQuestionnaire/data'
 
 const roles = filterItems[1]?.items.map((item) => ({
   value: item.title,
@@ -73,7 +73,11 @@ export const ExperienceQuestionnaireForm: FC<
       </h2>
 
       <div className="mt-4 w-11/12">
-        <TextFormField<TSchema> name="teachingTime" placeholder="Select date" />
+        <SelectFormField<TSchema>
+          options={teachingTimeOptions}
+          name="teachingTime"
+          placeholder="Select date"
+        />
       </div>
 
       <h2 className="mt-4 text-lg font-bold">
@@ -101,7 +105,7 @@ export const ExperienceQuestionnaireForm: FC<
       />
 
       <h2 className="mt-4 text-lg font-bold">
-        Are you currently an examiner? (optional)
+        Have you been an examiner last 3 years? (optional)
       </h2>
       <RadioGroupFormField<boolean, TSchema>
         name="examiner"
