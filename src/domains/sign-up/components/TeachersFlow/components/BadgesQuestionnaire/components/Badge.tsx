@@ -84,7 +84,10 @@ export const Badge: FC<IBadgeProps> = ({
           <h3 className="font-semibold">{title}</h3>
           <p className="text-colorText">{description}</p>
         </div>
-        <button className="mt-4 h-16 rounded-md bg-[#00AB5529] px-6 font-bold text-primary">
+        <button
+          type="button"
+          className="mt-4 h-16 rounded-md bg-[#00AB5529] px-6 font-bold text-primary"
+        >
           Upload
         </button>
       </div>
@@ -105,7 +108,11 @@ export const Badge: FC<IBadgeProps> = ({
                   <p className="md:hidden">{formatLongString(file.name, 10)}</p>
                 </div>
               </div>
-              <button className="mr-2" onClick={() => onRemoveFile(index)}>
+              <button
+                type="button"
+                className="mr-2"
+                onClick={() => onRemoveFile(index)}
+              >
                 <CircledXIcon
                   fillColor="#000000"
                   opacity={1}
