@@ -1,17 +1,74 @@
 import { type FC } from 'react'
 import { CircledXIcon, StarIcon } from '@components'
 import { useDropZoneUtils } from '~/hooks'
-import { formatLongString } from '@utils'
+import {
+  convertBase64ToFile,
+  convertFileToBase64,
+  formatLongString,
+} from '@utils'
 import { FileIcon } from '@components/common/FileIcon'
+import { type TSchema } from '../validation'
+import { useController, useFormContext } from 'react-hook-form'
+import { useUpdate } from '@rounik/react-custom-hooks'
+
+type TFile = {
+  name: string
+  content: string
+}
 
 interface IBadgeProps {
   title: string
   description: string
+  initialValue?: TFile[]
+  name: keyof TSchema
 }
 
-export const Badge: FC<IBadgeProps> = ({ title, description }) => {
-  const { uploadedFiles, onRemoveFile, getInputProps, getRootProps } =
-    useDropZoneUtils()
+export const Badge: FC<IBadgeProps> = ({
+  title,
+  description,
+  initialValue,
+  name,
+}) => {
+  const {
+    uploadedFiles,
+    setUploadedFiles,
+    onRemoveFile,
+    getInputProps,
+    getRootProps,
+  } = useDropZoneUtils()
+
+  const { control } = useFormContext()
+
+  const {
+    field: { onChange },
+  } = useController({
+    name: name,
+    control: control,
+  })
+
+  useUpdate(() => {
+    // Only run initially
+    if (initialValue) {
+      setUploadedFiles(
+        initialValue.map((el) => convertBase64ToFile(el.content, el.name))
+      )
+    }
+  }, [initialValue])
+
+  useUpdate(
+    async () => {
+      const newUploadedFiles = await Promise.all(
+        uploadedFiles.map(async (file) => {
+          const content = await convertFileToBase64(file)
+          return { name: file.name, content, fileType: name }
+        })
+      )
+
+      onChange(newUploadedFiles)
+    },
+    [uploadedFiles],
+    true
+  )
 
   return (
     <div className="flex flex-col rounded-lg shadow-md">

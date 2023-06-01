@@ -124,3 +124,17 @@ export const saveTeacherOtherServicesPayload = z.object({
 export type TSaveTeacherOtherServices = z.infer<
   typeof saveTeacherOtherServicesPayload
 >
+
+const badgeSchema = z.object({
+  name: formRequiredString(),
+  content: formRequiredString(),
+  fileType: formRequiredString(),
+})
+export const saveTeacherBadgesPayload = z.object({
+  qualificationBadges: z.array(badgeSchema).optional(),
+  degreeBadges: z.array(badgeSchema).optional(),
+  examinerBadges: z.array(badgeSchema).optional(),
+  dbsBadges: z.array(badgeSchema).optional(),
+})
+
+export type TSaveTeacherBadgesPayload = z.infer<typeof saveTeacherBadgesPayload>

@@ -127,7 +127,8 @@ export const LocationQuestionnaire: FC<ILocationQuestionnaireProps> = ({
               isSaveLoading={teacherMutation.isLoading}
               showBackButton={currentStep > 0}
               saveDisabled={
-                !methods.formState.isDirty || !methods.formState.isValid
+                (!methods.formState.isDirty && !isManualLocation) ||
+                !methods.formState.isValid
               }
               currentStep={currentStep}
               setCurrentStep={setCurrentStep}

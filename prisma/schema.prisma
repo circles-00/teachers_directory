@@ -55,6 +55,7 @@ model Teacher {
   socialLinks    TeacherSocialLink[]
   availability   TeacherAvailability?
   otherServices  TeacherOtherService[]
+  badges         TeacherBadge?
 
   @@map(name: "teachers")
 }
@@ -166,9 +167,12 @@ model TeacherAvailability {
 }
 
 model File {
-  id                    String              @id @default(cuid())
-  teacherAvailablity    TeacherAvailability @relation(fields: [teacherAvailabilityId], references: [id])
-  teacherAvailabilityId String
+  id                    String               @id @default(cuid())
+  teacherAvailablity    TeacherAvailability? @relation(fields: [teacherAvailabilityId], references: [id])
+  teacherAvailabilityId String?
+
+  teacherBadge   TeacherBadge? @relation(fields: [teacherBadgeId], references: [id])
+  teacherBadgeId String?
 
   name    String
   content String
@@ -193,4 +197,18 @@ model TeacherOtherService {
   updatedAt DateTime @updatedAt
 
   @@map(name: "teachers_other_services")
+}
+
+model TeacherBadge {
+  id String @id @default(cuid())
+
+  files File[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Teacher   Teacher @relation(fields: [teacherId], references: [id])
+  teacherId String  @unique
+
+  @@map(name: "teachers_badges")
 }

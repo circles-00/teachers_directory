@@ -1,6 +1,7 @@
 import { createTRPCRouter, teacherProcedure } from '~/server/api/trpc'
 import {
   saveTeacherAvailabilityPayload,
+  saveTeacherBadgesPayload,
   saveTeacherExperiencePayload,
   saveTeacherLocationPayload,
   saveTeacherOtherServicesPayload,
@@ -69,5 +70,13 @@ export const teachersRouter = createTRPCRouter({
   }),
   getTeacherProfileCompletionProgress: teacherProcedure.query(({ ctx }) => {
     return TeacherService.getTeacherProfileCompletionProgress(ctx.user.id)
+  }),
+  saveTeacherBadges: teacherProcedure
+    .input(saveTeacherBadgesPayload)
+    .mutation(({ input, ctx }) => {
+      return TeacherService.saveTeacherBadges(input, ctx.user.id)
+    }),
+  getTeacherBadges: teacherProcedure.query(({ ctx }) => {
+    return TeacherService.getTeacherBadges(ctx.user.id)
   }),
 })

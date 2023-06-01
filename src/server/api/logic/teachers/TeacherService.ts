@@ -1,5 +1,6 @@
 import {
   type TSaveTeacherAvailabilityPayload,
+  type TSaveTeacherBadgesPayload,
   type TSaveTeacherLocationPayload,
   type TSaveTeacherOtherServices,
   type TSaveTeacherPayload,
@@ -10,6 +11,8 @@ import {
 } from './schema'
 import { prisma } from '~/server/db'
 import { excludeKeysFromObject } from '@utils'
+import isEmpty from 'lodash.isempty'
+import { type TFile } from '~/server/api/types'
 
 export const saveTeacher = (payload: TSaveTeacherPayload) => {
   return prisma.teacher.create({
@@ -399,5 +402,108 @@ export const getTeacherProfileCompletionProgress = async (userId: string) => {
 
   return {
     progress,
+  }
+}
+
+export const saveTeacherBadges = async (
+  payload: TSaveTeacherBadgesPayload,
+  userId: string
+) => {
+  const files = Object.values(payload)
+    .flat(1)
+    .filter((value) => !isEmpty(value))
+
+  const teacherFromDb = await prisma.teacher.findUnique({
+    where: {
+      userId,
+    },
+    include: {
+      badges: {
+        include: {
+          files: true,
+        },
+      },
+    },
+  })
+
+  const createBadgesPromise = prisma.teacher.update({
+    where: {
+      userId,
+    },
+    data: {
+      badges: {
+        create: {
+          files: {
+            createMany: {
+              data: files,
+            },
+          },
+        },
+      },
+    },
+  })
+
+  if (!teacherFromDb?.badges) {
+    return await createBadgesPromise
+  }
+
+  await prisma.file.deleteMany({
+    where: {
+      teacherBadgeId: teacherFromDb?.badges?.id,
+    },
+  })
+
+  await prisma.teacherBadge.delete({
+    where: {
+      teacherId: teacherFromDb?.id,
+    },
+  })
+
+  return createBadgesPromise
+}
+
+const getBadgeFiles = (files: TFile[], fileType: string) =>
+  files
+    .filter((el) => el.fileType === fileType)
+    .map((el) => ({
+      name: el.name,
+      content: el.content,
+    }))
+
+export const getTeacherBadges = async (userId: string) => {
+  const teacher = await prisma.teacher.findUnique({
+    where: {
+      userId,
+    },
+    include: {
+      badges: {
+        include: {
+          files: true,
+        },
+      },
+    },
+  })
+
+  return {
+    qualificationBadges: getBadgeFiles(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      teacher?.badges?.files ?? [],
+      'qualificationBadges'
+    ),
+    degreeBadges: getBadgeFiles(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      teacher?.badges?.files ?? [],
+      'degreeBadges'
+    ),
+    examinerBadges: getBadgeFiles(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      teacher?.badges?.files ?? [],
+      'examinerBadges'
+    ),
+    dbsBadges: getBadgeFiles(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      teacher?.badges?.files ?? [],
+      'dbsBadges'
+    ),
   }
 }
