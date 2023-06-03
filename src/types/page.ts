@@ -60,4 +60,10 @@ export const EScreensList = [
     path: '/search',
     type: 'PUBLIC',
   },
+  {
+    name: "Teacher's Dashboard",
+    path: '/teachers/dashboard',
+    type: 'PRIVATE',
+    redirect: '/login',
+  },
 ]

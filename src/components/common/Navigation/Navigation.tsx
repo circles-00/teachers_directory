@@ -7,11 +7,14 @@ import { NavigationItems } from './components/NavigationItems'
 import { useRouter } from 'next/router'
 import { useLabels } from '@utils'
 import { Can } from '@components/auth'
+import Image from 'next/image'
+import { useUser } from '~/hooks/useAuth'
 interface INavigationProps {}
 
 export const Navigation: FC<INavigationProps> = () => {
   const router = useRouter()
   const { labels } = useLabels()
+  const { user } = useUser()
 
   const onHandleLoginClick = () => {
     router.push('/login').catch((err) => console.error(err))
@@ -45,6 +48,18 @@ export const Navigation: FC<INavigationProps> = () => {
             className="rounded-md bg-buttonPrimary py-[8px] px-[24px] text-base font-medium text-white"
           >
             {labels.signUp}
+          </button>
+        </Can>
+        <Can hideFromGuest>
+          <button className="relative h-11 w-11 overflow-hidden rounded-full">
+            <Image
+              src={user?.profilePicture ?? ''}
+              alt={'Profile picture'}
+              fill
+              style={{
+                objectFit: 'cover',
+              }}
+            />
           </button>
         </Can>
         <Link className="sm:block md:hidden" href="/search">

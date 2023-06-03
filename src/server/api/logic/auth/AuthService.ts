@@ -85,7 +85,7 @@ export const signUp = async (data: TSignUpPayload) => {
     ['password']
   )
 
-  if (!userFromDb) await createUserProfile(createdUser.id, createdUser.role)
+  await createUserProfile(createdUser.id, createdUser.role)
 
   return createdUser
 }
@@ -182,7 +182,7 @@ export const login = async ({ email, password }: TLoginPayload) => {
     throw invalidUserError
   }
 
-  const isPasswordValid = await compare(password, userFromDb.password)
+  const isPasswordValid = await compare(password, userFromDb?.password ?? '')
 
   if (!isPasswordValid || !userFromDb.verified) {
     throw invalidUserError
@@ -194,9 +194,21 @@ export const login = async ({ email, password }: TLoginPayload) => {
 export const findUserByEmail = async (email: string) => {
   if (!email) return null
 
-  return prisma.user.findUnique({
+  const userFromDb = await prisma.user.findUnique({
     where: {
       email,
     },
+    include: {
+      Teacher: true,
+    },
   })
+
+  if (!userFromDb) return null
+
+  const { Teacher, ...user } = userFromDb
+
+  return {
+    ...user,
+    profilePicture: Teacher?.profilePhoto,
+  }
 }
