@@ -4,7 +4,7 @@ import { JWT } from 'next-auth/jwt'
 
 import { type TUser } from '~/server/api/types'
 
-type NextAuthUser = Omit<TUser, 'password'> & {
+export type NextAuthUser = Omit<TUser, 'password'> & {
   profilePicture: string
 }
 

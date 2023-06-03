@@ -4,6 +4,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import { AuthService } from '~/server/api/logic/auth'
 import { excludeKeysFromObject } from '@utils'
 import { type TUser } from '~/server/api/types'
+import { type NextAuthUser } from '~/types/next-auth'
 
 type TCredentials = {
   username: string
@@ -55,7 +56,7 @@ export const authOptions: NextAuthOptions = {
 
     jwt: ({ token, user }) => {
       if (user) {
-        token.user = user as TUser
+        token.user = user as NextAuthUser
       }
 
       return token
