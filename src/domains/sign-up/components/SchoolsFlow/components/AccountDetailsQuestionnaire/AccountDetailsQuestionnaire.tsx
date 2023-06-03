@@ -18,7 +18,11 @@ export const AccountDetailsQuestionnaire: FC<
   return (
     <div className="flex flex-col gap-8 md:flex-row">
       <div className="mb-8 flex flex-col md:mb-0 md:w-5/6">
-        <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+        <StepsHeader
+          setCurrentStep={setCurrentStep}
+          currentStep={currentStep}
+          totalSteps={totalSteps}
+        />
         <Header
           title={'Account details'}
           description={`After the sign up process, we will send you a link to your email address to verify your account.`}

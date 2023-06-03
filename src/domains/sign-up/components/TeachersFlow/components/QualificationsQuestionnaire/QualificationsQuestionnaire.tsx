@@ -64,7 +64,11 @@ export const QualificationsQuestionnaire: FC<
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
         <div className="flex flex-col">
-          <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+          <StepsHeader
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+          />
           <Qualifications
             title="Your qualifications (Optional)"
             description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce facilisis at tortor at sagittis. Nullam eleifend, justo vitae consequat blandit, turpis tortor sodales`}

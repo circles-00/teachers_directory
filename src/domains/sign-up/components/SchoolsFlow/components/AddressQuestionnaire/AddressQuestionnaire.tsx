@@ -8,10 +8,15 @@ interface IAddressQuestionnaireProps extends StepProps {}
 export const AddressQuestionnaire: FC<IAddressQuestionnaireProps> = ({
   totalSteps,
   currentStep,
+  setCurrentStep,
 }) => {
   return (
     <div className="flex flex-col md:w-5/6">
-      <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+      <StepsHeader
+        setCurrentStep={setCurrentStep}
+        currentStep={currentStep}
+        totalSteps={totalSteps}
+      />
       <Header
         title={'Address and information'}
         description={`This address will be displayed, and we will use your postcode to calculate distances to potential teachers.`}

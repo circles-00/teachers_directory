@@ -52,7 +52,11 @@ export const ExperienceQuestionnaire: FC<IExperienceQuestionnaireProps> = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <div className="flex flex-col">
-          <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+          <StepsHeader
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+          />
           <Header
             title={'Tell us about your teaching life'}
             description={

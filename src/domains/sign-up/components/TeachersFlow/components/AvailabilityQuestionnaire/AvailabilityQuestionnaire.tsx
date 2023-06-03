@@ -81,7 +81,11 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <div className="flex flex-col">
-          <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+          <StepsHeader
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+          />
           <Header
             title={'Your Availability'}
             description={`Select any dates that are you are free for additional services (e.g. proof reading) or for teaching.`}

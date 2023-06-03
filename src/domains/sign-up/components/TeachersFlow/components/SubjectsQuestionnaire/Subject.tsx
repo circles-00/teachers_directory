@@ -58,7 +58,7 @@ export const Subject: FC<SubjectProps> = ({
   const isDisabled = numberOfSubjects === 1
 
   return (
-    <div className="mt-4 flex w-full flex-col items-center justify-between gap-2 md:flex-row">
+    <div className="mt-4 flex w-full flex-col items-center justify-between gap-[2px] md:flex-row xl:gap-2">
       <AutoCompleteFormField
         name={subjectName.name}
         label="Subject Name"

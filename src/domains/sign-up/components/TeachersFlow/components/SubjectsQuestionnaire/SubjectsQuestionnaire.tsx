@@ -79,7 +79,11 @@ export const SubjectsQuestionnaire: FC<ISubjectsQuestionnaireProps> = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <div className="flex flex-col">
-          <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+          <StepsHeader
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+          />
           <Header
             title="What subject can you teach?"
             description={`Add the subject(s) you teach. You must select one or two main subjects that will appear on your profile.`}

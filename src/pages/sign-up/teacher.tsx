@@ -58,7 +58,7 @@ const TeachersSignUpPage: TeachersDirectoryPage = () => {
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
       />
-      <div className="mt-2 w-5/6 xl:w-7/12">
+      <div className="mt-2 lg:w-5/6 xl:w-7/12">
         <CurrentStepComponent
           currentStep={currentStep}
           totalSteps={steps.length}

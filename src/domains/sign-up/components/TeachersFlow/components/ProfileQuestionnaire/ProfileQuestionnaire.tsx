@@ -104,7 +104,11 @@ export const ProfileQuestionnaire: FC<IProfileQuestionnaireProps> = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <div className="flex flex-col lg:w-5/6">
-          <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+          <StepsHeader
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+          />
           <Header
             title={'Your Profile'}
             description={

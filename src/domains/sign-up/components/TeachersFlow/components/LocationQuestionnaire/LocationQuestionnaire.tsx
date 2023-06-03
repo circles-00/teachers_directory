@@ -75,7 +75,11 @@ export const LocationQuestionnaire: FC<ILocationQuestionnaireProps> = ({
     <form onSubmit={methods.handleSubmit(onSubmit)}>
       <FormProvider {...methods}>
         <div className="flex flex-col">
-          <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+          <StepsHeader
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+          />
           <Header
             title="Where you live?"
             description={`This won't be displayed but we use your postcode to calculate distances to \npotential schools. Also, if you add your mobile number, we can text you if you have \na job application.`}
@@ -125,7 +129,6 @@ export const LocationQuestionnaire: FC<ILocationQuestionnaireProps> = ({
             )}
             <ActionButtons
               isSaveLoading={teacherMutation.isLoading}
-              showBackButton={currentStep > 0}
               saveDisabled={
                 (!methods.formState.isDirty && !isManualLocation) ||
                 !methods.formState.isValid

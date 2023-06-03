@@ -76,7 +76,11 @@ export const BadgesQuestionnaire: FC<IBadgesQuestionnaireProps> = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <div className="flex flex-col">
-          <StepsHeader currentStep={currentStep} totalSteps={totalSteps} />
+          <StepsHeader
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+          />
           <Header
             title={'Would you like a badge next to your name?'}
             description={`If you are a teacher, you can have a verified tag for each of the following evidence you produce.`}
