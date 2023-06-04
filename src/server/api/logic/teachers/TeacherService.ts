@@ -13,6 +13,8 @@ import { prisma } from '~/server/db'
 import { excludeKeysFromObject } from '@utils'
 import isEmpty from 'lodash.isempty'
 import { type TFile } from '~/server/api/types'
+import { EProfileCompletenessLabels } from '~/server/api/logic/teachers/utils/labels'
+import { type TCompletenessStep } from '~/server/api/logic/teachers/types'
 
 export const saveTeacher = (payload: TSaveTeacherPayload) => {
   return prisma.teacher.create({
@@ -355,17 +357,16 @@ export const getTeacherProfileCompletionProgress = async (userId: string) => {
       subjects: true,
       qualifications: true,
       experience: true,
-      socialLinks: true,
       availability: true,
       otherServices: true,
       location: true,
+      badges: true,
     },
   })
 
-  const teacherSteps = Object.values(
+  const filteredObject =
     excludeKeysFromObject(teacherFromDb, [
       // TODO: Refactor
-
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       'createdAt',
@@ -386,22 +387,65 @@ export const getTeacherProfileCompletionProgress = async (userId: string) => {
       'dateOfBirth',
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
-      'title',
+      'profilePhoto',
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       'gender',
     ]) ?? {}
-  )
 
-  const completeSteps = teacherSteps.filter((value) => {
-    if (Array.isArray(value) && value.length > 0) return true
-    return !Array.isArray(value) && value !== null
-  }).length
+  const steps = Object.entries(filteredObject ?? {})
+    .filter(([key]) => key !== 'profileStatus')
+    .reduce((acc, [key, value]) => {
+      const isStepComplete =
+        (!Array.isArray(value) && value !== null) ||
+        (Array.isArray(value) && value?.length > 0)
 
-  const progress = Math.round((completeSteps / teacherSteps.length) * 100)
+      if (key === 'title') {
+        acc = {
+          ...acc,
+          profile: {
+            title: EProfileCompletenessLabels['profile']?.title,
+            isComplete: isStepComplete,
+          },
+        }
+
+        return acc
+      }
+
+      acc = {
+        ...acc,
+        [key]: {
+          title: EProfileCompletenessLabels[key]?.title,
+          isComplete: isStepComplete,
+          isOptional: !!EProfileCompletenessLabels[key]?.isOptional,
+        },
+      }
+      return acc
+    }, {}) as TCompletenessStep[]
+
+  const totalSteps = Object.keys(steps).length
+
+  const completeSteps = Object.values(steps).filter(
+    (step) => step.isComplete
+  ).length
+
+  const progress = Math.round((completeSteps / totalSteps) * 100)
+
+  const isProfileReadyForReview = Object.values(steps)
+    .filter((step) => !step.isOptional)
+    .every((step) => step.isComplete)
+    ? 'READY_FOR_REVIEW'
+    : 'NOT_READY_FOR_REVIEW'
+
+  const profileStatus =
+    teacherFromDb?.profileStatus === 'NOT_STARTED'
+      ? isProfileReadyForReview
+      : teacherFromDb?.profileStatus
 
   return {
     progress,
+    steps,
+    profileStatus,
   }
 }
 

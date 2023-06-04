@@ -19,17 +19,23 @@ enum Role {
   ADMIN
 }
 
+enum ProfileStatus {
+  NOT_STARTED
+  UNDER_REVIEW
+  LIVE
+}
+
 model User {
-  id                        String   @id @default(cuid())
-  email                     String   @unique
+  id                        String        @id @default(cuid())
+  email                     String        @unique
   password                  String
   firstName                 String
   lastName                  String
   verificationCode          Int
   verificationCodeExpiresAt DateTime
-  verified                  Boolean  @default(false)
-  createdAt                 DateTime @default(now())
-  updatedAt                 DateTime @updatedAt
+  verified                  Boolean       @default(false)
+  createdAt                 DateTime      @default(now())
+  updatedAt                 DateTime      @updatedAt
   role                      Role
   Teacher                   Teacher?
 
@@ -56,6 +62,7 @@ model Teacher {
   availability   TeacherAvailability?
   otherServices  TeacherOtherService[]
   badges         TeacherBadge?
+  profileStatus             ProfileStatus @default(NOT_STARTED)
 
   @@map(name: "teachers")
 }

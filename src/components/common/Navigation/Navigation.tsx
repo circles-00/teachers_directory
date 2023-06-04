@@ -51,7 +51,7 @@ export const Navigation: FC<INavigationProps> = () => {
           </button>
         </Can>
         <Can hideFromGuest>
-          <button className="relative h-11 w-11 overflow-hidden rounded-full">
+          <button className="relative mr-7 hidden h-11 w-11 overflow-hidden rounded-full md:block">
             <Image
               src={user?.profilePicture ?? ''}
               alt={'Profile picture'}

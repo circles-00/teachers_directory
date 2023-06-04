@@ -20,7 +20,7 @@ const config = {
           80: 'rgba(0, 171, 85, 0.80)',
         },
         colorText: '#212B36',
-        danger: '#dc1841'
+        danger: '#dc1841',
       },
       fontFamily: {
         graphik: ['var(--font-graphik)']
