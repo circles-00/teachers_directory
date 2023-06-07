@@ -5,16 +5,24 @@ import Link from 'next/link'
 import { FormProvider, useForm } from 'react-hook-form'
 import { AuthService } from '@services'
 import { type TeachersDirectoryPage } from '~/types/page'
+import { useRouter } from 'next/router'
 
 const LoginPage: TeachersDirectoryPage = () => {
   const { labels } = useLabels()
+
+  const router = useRouter()
 
   const methods = useForm<TLoginForm>({
     resolver: formResolver(LoginSchema),
   })
 
-  const onSubmit = async (data: TLoginForm) => {
-    await AuthService.signInWithCredentials(data)
+  const onSubmit = (data: TLoginForm) => {
+    AuthService.signInWithCredentials(data)
+      .then(() => {
+        // TODO: Route based on role
+        router.push('/teachers/dashboard').catch(console.error)
+      })
+      .catch(console.error)
   }
 
   return (

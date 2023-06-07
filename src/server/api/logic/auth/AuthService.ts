@@ -189,7 +189,7 @@ export const login = async ({ email, password }: TLoginPayload) => {
     throw invalidUserError
   }
 
-  return userFromDb
+  return excludeKeysFromObject(userFromDb, ['profilePicture'])
 }
 
 export const findUserByEmail = async (email: string) => {
