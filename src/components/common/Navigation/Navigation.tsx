@@ -9,6 +9,7 @@ import { useLabels } from '@utils'
 import { Can } from '@components/auth'
 import Image from 'next/image'
 import { useUser } from '~/hooks/useAuth'
+import isEmpty from 'lodash.isempty'
 interface INavigationProps {}
 
 export const Navigation: FC<INavigationProps> = () => {
@@ -50,18 +51,20 @@ export const Navigation: FC<INavigationProps> = () => {
             {labels.signUp}
           </button>
         </Can>
-        <Can hideFromGuest>
-          <button className="relative mr-7 hidden h-11 w-11 overflow-hidden rounded-full md:block">
-            <Image
-              src={user?.profilePicture ?? ''}
-              alt={'Profile picture'}
-              fill
-              style={{
-                objectFit: 'cover',
-              }}
-            />
-          </button>
-        </Can>
+        {!isEmpty(user?.profilePicture) && (
+          <Can hideFromGuest>
+            <button className="relative mr-7 hidden h-11 w-11 overflow-hidden rounded-full md:block">
+              <Image
+                src={user?.profilePicture ?? ''}
+                alt={'Profile picture'}
+                fill
+                style={{
+                  objectFit: 'cover',
+                }}
+              />
+            </button>
+          </Can>
+        )}
         <Link className="sm:block md:hidden" href="/search">
           <MagnifyingGlassIcon className="ml-4 h-6 w-6 text-primary" />
         </Link>

@@ -15,10 +15,17 @@ import isEmpty from 'lodash.isempty'
 import { type TFile } from '~/server/api/types'
 import { EProfileCompletenessLabels } from '~/server/api/logic/teachers/utils/labels'
 import { type TCompletenessStep } from '~/server/api/logic/teachers/types'
+import { TRPCError } from '@trpc/server'
 
-export const saveTeacher = (payload: TSaveTeacherPayload) => {
-  return prisma.teacher.create({
-    data: {
+export const saveOrUpdateTeacher = (payload: TSaveTeacherPayload) => {
+  return prisma.teacher.upsert({
+    create: {
+      userId: payload.userId,
+    },
+    update: {
+      userId: payload.userId,
+    },
+    where: {
       userId: payload.userId,
     },
   })
@@ -447,6 +454,26 @@ export const getTeacherProfileCompletionProgress = async (userId: string) => {
     steps,
     profileStatus,
   }
+}
+
+export const updateTeacherProfileStatus = async (userId: string) => {
+  const { profileStatus } = await getTeacherProfileCompletionProgress(userId)
+
+  if (profileStatus !== 'READY_FOR_REVIEW') {
+    throw new TRPCError({
+      code: 'BAD_REQUEST',
+      message: 'Profile is not ready for review',
+    })
+  }
+
+  return await prisma.teacher.update({
+    where: {
+      userId,
+    },
+    data: {
+      profileStatus: 'UNDER_REVIEW',
+    },
+  })
 }
 
 export const saveTeacherBadges = async (

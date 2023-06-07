@@ -9,7 +9,7 @@ export const validationSchema = z
       required_error: EErrorLabels.profilePhoto,
       invalid_type_error: EErrorLabels.profilePhoto,
     }),
-    about: formRequiredString(),
+    about: z.any(),
     gender: formRequiredString(),
     dateOfBirth: z.string().optional(),
     day: formRequiredString(),

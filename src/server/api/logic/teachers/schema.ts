@@ -76,7 +76,7 @@ export type TSaveTeacherTeachingLifePayload = z.infer<
 
 export const saveTeacherProfilePayload = z.object({
   profilePhoto: formRequiredString(),
-  about: formRequiredString(),
+  about: z.any(),
   gender: formRequiredString(),
   dateOfBirth: z.string().optional(),
   title: formRequiredString(),

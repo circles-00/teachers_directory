@@ -30,7 +30,7 @@ export const Achievements: FC<IAchievementsProps> = ({
   }
 
   return (
-    <div>
+    <div className="flex flex-col">
       <Header title={title} description={description} />
       <div className="mt-10"></div>
       {fields.map((field, index) => {
@@ -65,7 +65,7 @@ export const Achievements: FC<IAchievementsProps> = ({
       <ButtonOutlined
         type="button"
         onClick={addAchievement}
-        className="mt-8 mr-auto w-28 text-primary"
+        className="mt-8 ml-auto w-28 text-primary"
       >
         Add Item
       </ButtonOutlined>

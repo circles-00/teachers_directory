@@ -1,14 +1,14 @@
 import { BulletList } from '@tiptap/extension-bullet-list'
 import OrderedList from '@tiptap/extension-ordered-list'
 import Placeholder from '@tiptap/extension-placeholder'
-import { EditorContent, useEditor } from '@tiptap/react'
+import { EditorContent, type JSONContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { type FC } from 'react'
 import { EditorToolbar } from './components'
 import { useUpdate } from '@rounik/react-custom-hooks'
 export interface IRichTextEditorProps {
   value?: string
-  onChange?: (value: string) => void
+  onChange?: (value: JSONContent) => void
 }
 
 export const RichTextEditor: FC<IRichTextEditorProps> = ({
@@ -35,6 +35,9 @@ export const RichTextEditor: FC<IRichTextEditorProps> = ({
             'Write a description about you, your background, and what you offer...',
         }),
       ],
+      parseOptions: {
+        preserveWhitespace: true,
+      },
       editorProps: {
         attributes: {
           class:
@@ -42,7 +45,7 @@ export const RichTextEditor: FC<IRichTextEditorProps> = ({
         },
       },
       onUpdate: ({ editor }) => {
-        onChange && onChange(editor.getHTML())
+        onChange && onChange(editor.getJSON())
       },
     },
     []

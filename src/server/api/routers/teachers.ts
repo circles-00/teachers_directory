@@ -10,6 +10,7 @@ import {
   saveTeacherSubjectsPayload,
 } from '~/server/api/logic/teachers/schema'
 import { TeacherService } from '../logic/teachers'
+import { updateTeacherProfileStatus } from '../logic/teachers/TeacherService'
 
 export const teachersRouter = createTRPCRouter({
   saveLocation: teacherProcedure
@@ -78,5 +79,8 @@ export const teachersRouter = createTRPCRouter({
     }),
   getTeacherBadges: teacherProcedure.query(({ ctx }) => {
     return TeacherService.getTeacherBadges(ctx.user.id)
+  }),
+  submitProfileForReview: teacherProcedure.mutation(({ ctx }) => {
+    return TeacherService.updateTeacherProfileStatus(ctx.user.id)
   }),
 })

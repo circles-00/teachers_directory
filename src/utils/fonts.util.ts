@@ -1,11 +1,18 @@
-import { Open_Sans, Playfair_Display, Inter } from 'next/font/google'
+import {
+  Open_Sans,
+  Playfair_Display,
+  Inter,
+  Public_Sans,
+} from 'next/font/google'
 import localFont from 'next/font/local'
 
-const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
-const openSans = Open_Sans({ subsets: ['latin'] })
-const inter = Inter({ subsets: ['latin'] })
+export const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
+export const openSans = Open_Sans({ subsets: ['latin'] })
+export const inter = Inter({ subsets: ['latin'] })
 
-const graphik = localFont({
+export const publicSans = Public_Sans({ subsets: ['latin'] })
+
+export const graphik = localFont({
   src: [
     {
       path: '../../public/fonts/Graphik-Regular-Trial.otf',
@@ -14,5 +21,3 @@ const graphik = localFont({
   ],
   variable: '--font-graphik',
 })
-
-export { playfairDisplay, openSans, graphik, inter }

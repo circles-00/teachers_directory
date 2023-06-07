@@ -19,7 +19,7 @@ const StatisticsCard: FC<IStatisticsCardProps> = ({ count, title }) => {
 
 export const StatisticsHeader: FC<IStatisticsHeaderProps> = () => {
   return (
-    <div className="flex w-fit gap-32 rounded-xl border-2 border-gray-100 px-32 py-4">
+    <div className="flex w-full flex-col items-center justify-center gap-10 rounded-xl border-2 border-gray-100 py-4 md:flex-row md:gap-40">
       <StatisticsCard count={12} title="Network Schools" />
       <StatisticsCard count={12} title="Favourite Schools" />
       <StatisticsCard count={12} title="Reviews Received" />

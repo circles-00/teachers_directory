@@ -13,6 +13,7 @@ interface IIconInputProps {
   placeholder?: string
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   value?: string
+  iconPosition?: 'left' | 'right'
 }
 
 export const IconInput: FC<IIconInputProps> = ({
@@ -22,11 +23,14 @@ export const IconInput: FC<IIconInputProps> = ({
   iconClassName = '',
   onChange,
   value,
+  iconPosition = 'right',
 }) => {
   const defaultInputClassName =
-    'w-full h-12 rounded-md border-[1px] border-[#0000004D] p-2 py-6 focus:outline-slate-400'
+    'w-full h-12 rounded-md border-[1px] border-[#0000004D]'
 
-  const defaultIconClassName = 'pointer-events-none absolute top-0 right-0'
+  const defaultIconClassName = `pointer-events-none absolute top-0 ${
+    iconPosition === 'right' ? 'right-0' : 'left-0'
+  }`
 
   return (
     <div className="relative">

@@ -25,7 +25,7 @@ export const generateRandom6DigitCode = () => {
 const createUserProfile = (userId: string, role: TUserRole) => {
   switch (role) {
     case 'TEACHER':
-      return TeacherService.saveTeacher({ userId })
+      return TeacherService.saveOrUpdateTeacher({ userId })
 
     // TODO: Add cases for other roles
 
@@ -85,6 +85,7 @@ export const signUp = async (data: TSignUpPayload) => {
     ['password']
   )
 
+  console.log(createdUser)
   await createUserProfile(createdUser.id, createdUser.role)
 
   return createdUser

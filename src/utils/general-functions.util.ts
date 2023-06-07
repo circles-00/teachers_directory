@@ -40,3 +40,7 @@ export const formatLongString = (str: string, maxLength: number) => {
 }
 
 export const isClient = () => typeof window !== 'undefined'
+
+export const generateRandomHexColor = () => {
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`
+}

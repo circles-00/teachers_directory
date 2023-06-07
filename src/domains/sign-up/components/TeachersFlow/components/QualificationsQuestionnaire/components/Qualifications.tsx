@@ -28,7 +28,7 @@ export const Qualifications: FC<IQualifications> = ({ title, description }) => {
   }
 
   return (
-    <div>
+    <div className="flex flex-col">
       <Header title={title} description={description} />
       <div className="mt-10">
         {fields.map((field, index, array) => {
@@ -63,7 +63,7 @@ export const Qualifications: FC<IQualifications> = ({ title, description }) => {
       <ButtonOutlined
         type="button"
         onClick={addQualification}
-        className="mt-8 mr-auto w-28 text-primary"
+        className="mt-8 ml-auto w-28 text-primary"
       >
         Add Item
       </ButtonOutlined>
