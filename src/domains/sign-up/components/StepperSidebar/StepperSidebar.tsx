@@ -4,9 +4,6 @@ import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import { api } from '@utils'
 import { useUpdate } from '@rounik/react-custom-hooks'
 
-// TODO: Change this hardcoded value
-const PROGRESS = 45
-
 interface IStepperSidebarProps {
   currentStep: number
   setCurrentStep: (step: number) => void

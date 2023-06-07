@@ -1,5 +1,5 @@
 import { type FC } from 'react'
-import { PdfIcon, WordIcon, PngIcon, JpegIcon, JpgIcon } from '@components'
+import { PdfIcon, WordIcon, PngIcon, JpegIcon } from '@components'
 import { DocumentIcon } from '@heroicons/react/24/outline'
 
 interface FileIconProps {

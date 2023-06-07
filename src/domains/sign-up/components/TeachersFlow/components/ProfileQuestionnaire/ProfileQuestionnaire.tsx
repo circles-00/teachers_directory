@@ -3,13 +3,10 @@ import { StepsHeader, type StepProps, Header } from '@domains/sign-up'
 import {
   ButtonOutlined,
   InfoBox,
-  PencilIcon,
   RadioGroupFormField,
   RichTextEditorFormField,
-  RoundedContainer,
   SelectFormField,
   TextFormField,
-  TrashIcon,
 } from '@components'
 import { SocialLinkForm } from './components'
 import { ActionButtons } from '@domains/sign-up'

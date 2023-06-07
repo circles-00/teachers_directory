@@ -10,7 +10,6 @@ import {
   saveTeacherSubjectsPayload,
 } from '~/server/api/logic/teachers/schema'
 import { TeacherService } from '../logic/teachers'
-import { updateTeacherProfileStatus } from '../logic/teachers/TeacherService'
 
 export const teachersRouter = createTRPCRouter({
   saveLocation: teacherProcedure
