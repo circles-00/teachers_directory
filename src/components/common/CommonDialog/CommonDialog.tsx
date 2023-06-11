@@ -35,7 +35,7 @@ export const CommonDialog: FC<ICommonDialogProps> = ({
         onClose={onClose}
       >
         <Transition.Child
-          as={'div'}
+          as="div"
           enter="ease-out duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"

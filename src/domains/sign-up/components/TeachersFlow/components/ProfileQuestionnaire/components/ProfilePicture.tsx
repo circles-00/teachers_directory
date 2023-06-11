@@ -1,5 +1,5 @@
-import { useCallback, type FC } from 'react'
-import { CameraIcon, RoundedContainer } from '@components'
+import { useCallback, type FC, useState } from 'react'
+import { CameraIcon, CropImage, RoundedContainer } from '@components'
 import { useDropzone } from 'react-dropzone'
 import { convertFileToBase64 } from '@utils'
 import isEmpty from 'lodash.isempty'
@@ -15,19 +15,20 @@ export const ProfilePicture: FC<IProfilePictureProps> = ({
   onChange,
   errors,
 }) => {
-  const onDrop = useCallback(
-    (files: File[]) => {
-      if (!files[0]) return
+  const [image, setImage] = useState('')
+  const [isCropping, setIsCropping] = useState(false)
 
-      const file = files[0]
-      convertFileToBase64(file)
-        .then((backgroundBase64) => {
-          onChange && onChange(backgroundBase64)
-        })
-        .catch((error) => console.error(error))
-    },
-    [onChange]
-  )
+  const onDrop = useCallback((files: File[]) => {
+    if (!files[0]) return
+
+    const file = files[0]
+    convertFileToBase64(file)
+      .then((backgroundBase64) => {
+        setImage(backgroundBase64)
+        setIsCropping(true)
+      })
+      .catch((error) => console.error(error))
+  }, [])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -40,8 +41,22 @@ export const ProfilePicture: FC<IProfilePictureProps> = ({
     maxFiles: 1,
   })
 
+  const onCropSubmit = useCallback(
+    (croppedImage: string) => {
+      onChange && onChange(croppedImage)
+      setIsCropping(false)
+    },
+    [onChange]
+  )
+
   return (
     <div className="md:w-full">
+      <CropImage
+        onSubmit={onCropSubmit}
+        initialImage={image ?? ''}
+        open={isCropping}
+        onClose={() => setIsCropping(false)}
+      />
       <RoundedContainer className="items-center justify-center pt-10 pb-6 md:w-full">
         <div
           {...getRootProps()}
