@@ -64,7 +64,7 @@ export const ProfilePicture: FC<IProfilePictureProps> = ({
           // ! https://tailwindcss.com/docs/content-configuration#dynamic-class-names
           style={{
             backgroundImage: !isDragActive ? `url(${value ?? ''})` : '',
-            backgroundSize: 'cover',
+            backgroundSize: 'contain',
             backgroundColor: '#F4F6F8',
             backgroundPosition: 'center',
           }}
