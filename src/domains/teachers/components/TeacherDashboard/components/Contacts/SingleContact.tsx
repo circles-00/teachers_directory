@@ -8,7 +8,7 @@ interface ISingleContactProps {
 
 export const SingleContact: FC<ISingleContactProps> = ({ name, email }) => {
   return (
-    <div className="flex items-center gap-4 py-4 px-7">
+    <div className="flex items-center gap-2 px-2 py-4 md:gap-4 md:px-7">
       <div className="h-10 w-10 rounded-full bg-[#C4C4C4]" />
       <div className="flex flex-col">
         <p className="text-sm font-bold">{name}</p>
