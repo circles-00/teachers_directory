@@ -45,7 +45,6 @@ export const Select: FC<ISelectProps> = forwardRef<
     }
 
     const selectedValue = useMemo(() => {
-      // {displayValue ?? value ?? placeholder
       if (!isEmpty(displayValue)) return displayValue
       if (!isEmpty(value)) return value
 
