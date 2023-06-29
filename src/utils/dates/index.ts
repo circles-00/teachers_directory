@@ -22,3 +22,8 @@ export const getDatePartsFromDateString = (date: string) => {
     year: dateParts[2] ?? '',
   }
 }
+
+export const addDays = (date: Date, days: number) => {
+  date.setDate(date.getDate() + days)
+  return date
+}

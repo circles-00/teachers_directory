@@ -10,7 +10,7 @@ import {
   type TSaveTeacherTeachingLifePayload,
 } from './schema'
 import { prisma } from '~/server/db'
-import { excludeKeysFromObject } from '@utils'
+import { addDays, excludeKeysFromObject } from '@utils'
 import isEmpty from 'lodash.isempty'
 import { type TFile } from '~/server/api/types'
 import { EProfileCompletenessLabels } from '~/server/api/logic/teachers/utils/labels'
@@ -471,11 +471,12 @@ export const getTeacherProfileCompletionProgress = async (userId: string) => {
   }
 
   const trialLeftDaysEpoch =
-    new Date().getTime() - new Date(teacherFromDb?.activatedAt ?? '').getTime()
+    addDays(new Date(teacherFromDb?.activatedAt ?? ''), 30).getTime() -
+    new Date().getTime()
 
   const trialLeftDays = Math.round(trialLeftDaysEpoch / (1000 * 3600 * 24))
 
-  if (userSubscriptions?.data?.length === 0 && trialLeftDays > 30) {
+  if (userSubscriptions?.data?.length === 0 && trialLeftDays < 0) {
     profileStatus = 'TRIAL_OVER'
   }
 
