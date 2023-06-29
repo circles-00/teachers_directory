@@ -7,6 +7,7 @@ import isEmpty from 'lodash.isempty'
 export type SelectOption = {
   value: string
   id?: string
+  placeholder?: string
 }
 
 export interface ISelectProps {
@@ -16,6 +17,7 @@ export interface ISelectProps {
   onChange?: (value: string) => void
   label?: string
   value?: string
+  displayValue?: string
 }
 
 // eslint-disable-next-line react/display-name
@@ -31,6 +33,7 @@ export const Select: FC<ISelectProps> = forwardRef<
       onChange,
       label,
       value,
+      displayValue,
     },
     ref
   ) => {
@@ -58,7 +61,7 @@ export const Select: FC<ISelectProps> = forwardRef<
                 showPlaceholder ? 'text-[#919EAB]' : ''
               }`}
             >
-              {!isEmpty(value) ? value : placeholder}
+              {displayValue ?? value ?? placeholder}
             </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronDownIcon
@@ -92,7 +95,7 @@ export const Select: FC<ISelectProps> = forwardRef<
                           selected ? 'font-medium' : 'font-normal'
                         }`}
                       >
-                        {option.value}
+                        {option?.placeholder ?? option.value}
                       </span>
                     </>
                   )}

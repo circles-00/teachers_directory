@@ -66,4 +66,10 @@ export const EScreensList = [
     type: 'PRIVATE',
     redirect: '/login',
   },
+  {
+    name: 'Teacher Checkout',
+    path: '/teachers/checkout',
+    type: 'PRIVATE',
+    redirect: '/login',
+  },
 ]

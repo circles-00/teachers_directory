@@ -11,6 +11,7 @@ import { TRPCError } from '@trpc/server'
 import { excludeKeysFromObject } from '@utils'
 import { type TUserRole } from '@shared'
 import { TeacherService } from '../teachers'
+import { PaymentsService } from '../payments'
 
 const hashPassword = async (password: string) => {
   const salt = await genSalt(10)
@@ -22,7 +23,7 @@ export const generateRandom6DigitCode = () => {
   return Math.floor(100000 + Math.random() * 900000)
 }
 
-const createUserProfile = (userId: string, role: TUserRole) => {
+const createUserProfile = async (userId: string, role: TUserRole) => {
   switch (role) {
     case 'TEACHER':
       return TeacherService.saveOrUpdateTeacher({ userId })
@@ -62,6 +63,11 @@ export const signUp = async (data: TSignUpPayload) => {
     })
   }
 
+  const { id: stripeCustomerId } = await PaymentsService.createCustomer({
+    email: data.email,
+    name: `${data.firstName} ${data.lastName}`,
+  })
+
   const dataToInsert = {
     ...data,
     id: userFromDb?.id,
@@ -74,6 +80,11 @@ export const signUp = async (data: TSignUpPayload) => {
     await prisma.user.upsert({
       create: {
         ...dataToInsert,
+        paymentProfile: {
+          create: {
+            stripeCustomerId,
+          },
+        },
       },
       update: {
         ...dataToInsert,
@@ -85,7 +96,6 @@ export const signUp = async (data: TSignUpPayload) => {
     ['password']
   )
 
-  console.log(createdUser)
   await createUserProfile(createdUser.id, createdUser.role)
 
   return createdUser
@@ -212,4 +222,45 @@ export const findUserByEmail = async (email: string) => {
     ...user,
     profilePicture: Teacher?.profilePhoto,
   }
+}
+
+export const findUserPaymentProfileByUserId = async (userId: string) => {
+  const userFromDb = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    include: {
+      paymentProfile: {
+        include: {
+          paymentMethods: true,
+        },
+      },
+    },
+  })
+
+  return userFromDb?.paymentProfile
+}
+
+export const findUserPaymentMethodsByUserId = async (userId: string) => {
+  const paymentProfile = await findUserPaymentProfileByUserId(userId)
+
+  return paymentProfile?.paymentMethods
+}
+
+export const updatePaymentClientSecret = async (
+  userId: string,
+  clientSecret: string
+) => {
+  return prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      paymentProfile: {
+        update: {
+          clientSecret,
+        },
+      },
+    },
+  })
 }

@@ -28,7 +28,7 @@
       "@hooks": ["./src/hooks/index.ts"],
       "@shared": ["./src/shared/index.ts"],
       "@services": ["./src/services/index.ts"],
-      "@layout": ["./src/layout/index.ts"],
+      "@layout": ["./src/layout/index.ts"]
     }
   },
   "include": [

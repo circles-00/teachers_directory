@@ -38,6 +38,7 @@ model User {
   updatedAt                 DateTime @updatedAt
   role                      Role
   Teacher                   Teacher?
+  paymentProfile PaymentProfile?
 
   @@map(name: "users")
 }
@@ -63,6 +64,7 @@ model Teacher {
   otherServices  TeacherOtherService[]
   badges         TeacherBadge?
   profileStatus  ProfileStatus          @default(NOT_STARTED)
+  activatedAt    DateTime?
 
   @@map(name: "teachers")
 }
@@ -218,4 +220,51 @@ model TeacherBadge {
   teacherId String  @unique
 
   @@map(name: "teachers_badges")
+}
+
+model PaymentProfile {
+  id        String  @id @default(cuid())
+  user   User @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  stripeCustomerId String @unique
+  clientSecret  String?
+
+  paymentMethods PaymentMethod[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "payment_profiles")
+}
+
+model PaymentLogs {
+  id        String  @id @default(cuid())
+
+  stripeCustomerId String
+
+  logs Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "payment_logs")
+}
+
+model PaymentMethod {
+  id        String  @id @default(cuid())
+  paymentProfile   PaymentProfile @relation(fields: [paymentProfileId], references: [stripeCustomerId])
+  paymentProfileId String
+
+  paymentMethodId String @unique
+
+  cardBrand String
+  cardLast4 String
+  cardExpirationDate String
+  fingerprint String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map(name: "payment_methods")
 }

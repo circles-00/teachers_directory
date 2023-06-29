@@ -16,6 +16,7 @@ import { type TFile } from '~/server/api/types'
 import { EProfileCompletenessLabels } from '~/server/api/logic/teachers/utils/labels'
 import { type TCompletenessStep } from '~/server/api/logic/teachers/types'
 import { TRPCError } from '@trpc/server'
+import { PaymentsService } from '../payments'
 
 export const saveOrUpdateTeacher = (payload: TSaveTeacherPayload) => {
   return prisma.teacher.upsert({
@@ -371,6 +372,12 @@ export const getTeacherProfileCompletionProgress = async (userId: string) => {
     },
   })
 
+  const paymentProfile = await prisma.paymentProfile.findUnique({
+    where: {
+      userId,
+    },
+  })
+
   const filteredObject =
     excludeKeysFromObject(teacherFromDb, [
       // TODO: Refactor
@@ -398,6 +405,12 @@ export const getTeacherProfileCompletionProgress = async (userId: string) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       'gender',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      'profileStatus',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      'activatedAt',
     ]) ?? {}
 
   const steps = Object.entries(filteredObject ?? {})
@@ -444,15 +457,33 @@ export const getTeacherProfileCompletionProgress = async (userId: string) => {
     ? 'READY_FOR_REVIEW'
     : 'NOT_READY_FOR_REVIEW'
 
-  const profileStatus =
+  const userSubscriptions = await PaymentsService.getCustomerSubscriptions(
+    paymentProfile?.stripeCustomerId ?? ''
+  )
+
+  let profileStatus =
     teacherFromDb?.profileStatus === 'NOT_STARTED'
       ? isProfileReadyForReview
       : teacherFromDb?.profileStatus
+
+  if (userSubscriptions?.data?.length > 0) {
+    profileStatus = 'PAID'
+  }
+
+  const trialLeftDaysEpoch =
+    new Date().getTime() - new Date(teacherFromDb?.activatedAt ?? '').getTime()
+
+  const trialLeftDays = Math.round(trialLeftDaysEpoch / (1000 * 3600 * 24))
+
+  if (userSubscriptions?.data?.length === 0 && trialLeftDays > 30) {
+    profileStatus = 'TRIAL_OVER'
+  }
 
   return {
     progress,
     steps,
     profileStatus,
+    trialLeftDays,
   }
 }
 

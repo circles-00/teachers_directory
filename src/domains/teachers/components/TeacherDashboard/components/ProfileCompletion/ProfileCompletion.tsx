@@ -9,6 +9,7 @@ import {
 import { api } from '@utils'
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import { useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
 interface IProfileCompletionProps {}
 
@@ -17,6 +18,8 @@ type TProfileStatus =
   | 'NOT_READY_FOR_REVIEW'
   | 'UNDER_REVIEW'
   | 'LIVE'
+  | 'PAID'
+  | 'TRIAL_OVER'
 interface ISectionProps {
   title: string
   isComplete: boolean
@@ -108,6 +111,7 @@ function Section({ title, isComplete }: ISectionProps) {
 
 export const ProfileCompletion: FC<IProfileCompletionProps> = () => {
   const queryClient = useQueryClient()
+  const router = useRouter()
 
   const { user, userFullName } = useUser()
   const { data: teacherProfile } = api.teachers.getTeacherProfile.useQuery()
@@ -153,9 +157,33 @@ export const ProfileCompletion: FC<IProfileCompletionProps> = () => {
 
     if (profileStatus === 'LIVE') {
       return {
-        label: 'You have 60 days left on your free trial',
+        label: `You have ${
+          profileProgress?.trialLeftDays ?? 0
+        } days left on your free trial`,
         buttonText: 'Upgrade now',
         icon: CircleCheckIcon,
+        buttonOnClick: () => {
+          router.push('/teachers/checkout').catch(console.error)
+        },
+      }
+    }
+
+    if (profileStatus === 'PAID') {
+      return {
+        label: '',
+        buttonText: 'Subscription active',
+        icon: CircleCheckIcon,
+      }
+    }
+
+    if (profileStatus === 'TRIAL_OVER') {
+      return {
+        label: '',
+        buttonText: 'Your trial is over, please upgrade now',
+        icon: CircleCheckIcon,
+        buttonOnClick: () => {
+          router.push('/teachers/checkout').catch(console.error)
+        },
       }
     }
 
@@ -163,7 +191,12 @@ export const ProfileCompletion: FC<IProfileCompletionProps> = () => {
       label: '',
       buttonText: '',
     }
-  }, [profileProgress, submitProfileForReviewMutation])
+  }, [
+    profileProgress?.profileStatus,
+    profileProgress?.trialLeftDays,
+    router,
+    submitProfileForReviewMutation,
+  ])
 
   return (
     <div className="flex flex-col rounded-xl border-2 border-gray-100 py-7">

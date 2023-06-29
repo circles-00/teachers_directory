@@ -7,6 +7,7 @@ import { inter } from '@utils'
 import { SessionProvider } from 'next-auth/react'
 import { useIsMobileDrawerOpen } from '@hooks'
 import { type TeachersDirectoryAppProps } from '~/types/page'
+
 const TeachersDirectory = ({
   Component,
   pageProps: { session, ...pageProps },

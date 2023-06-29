@@ -19,6 +19,8 @@ const server = z.object({
   EMAIL_TRANSPORT_TYPE: z.string().min(1),
   BREVO_API_KEY: z.string().min(1).optional(),
   MAILER_ENV: z.string().min(1).optional(),
+  STRIPE_SECRET_KEY: z.string().min(1),
+  STRIPE_WEBHOOKS_SIGNING_SECRET: z.string().min(1),
 })
 
 /**
@@ -28,6 +30,8 @@ const server = z.object({
 const client = z.object({
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
   NEXT_PUBLIC_GOOGLE_API_KEY: z.string().min(1),
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().min(1),
+  NEXT_PUBLIC_PRICE_ID: z.string().min(1),
 })
 
 /**
@@ -53,6 +57,10 @@ const processEnv = {
   MAILER_ENV: process.env.MAILER_ENV,
   NEXT_PUBLIC_GOOGLE_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+  STRIPE_WEBHOOKS_SIGNING_SECRET: process.env.STRIPE_WEBHOOKS_SIGNING_SECRET,
+  NEXT_PUBLIC_PRICE_ID: process.env.NEXT_PUBLIC_PRICE_ID,
 }
 
 // Don't touch the part below
