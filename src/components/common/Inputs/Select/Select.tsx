@@ -1,6 +1,6 @@
 import { Listbox, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { type FC, Fragment, forwardRef } from 'react'
+import { type FC, Fragment, forwardRef, useMemo } from 'react'
 import { mergeClassNames } from '@utils'
 import isEmpty from 'lodash.isempty'
 
@@ -44,6 +44,14 @@ export const Select: FC<ISelectProps> = forwardRef<
       if (value && onChange) onChange(value)
     }
 
+    const selectedValue = useMemo(() => {
+      // {displayValue ?? value ?? placeholder
+      if (!isEmpty(displayValue)) return displayValue
+      if (!isEmpty(value)) return value
+
+      return placeholder
+    }, [displayValue, placeholder, value])
+
     return (
       <Listbox value={value} onChange={onSelectChange}>
         <div
@@ -61,7 +69,7 @@ export const Select: FC<ISelectProps> = forwardRef<
                 showPlaceholder ? 'text-[#919EAB]' : ''
               }`}
             >
-              {displayValue ?? value ?? placeholder}
+              {selectedValue}
             </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronDownIcon
