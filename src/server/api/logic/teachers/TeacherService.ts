@@ -471,7 +471,7 @@ export const getTeacherProfileCompletionProgress = async (userId: string) => {
   }
 
   const trialLeftDaysEpoch =
-    addDays(new Date(teacherFromDb?.activatedAt ?? ''), 30).getTime() -
+    addDays(new Date(teacherFromDb?.activatedAt ?? ''), 60).getTime() -
     new Date().getTime()
 
   const trialLeftDays = Math.round(trialLeftDaysEpoch / (1000 * 3600 * 24))

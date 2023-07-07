@@ -1,4 +1,5 @@
 export * from './RichTextEditor'
 export * from './components'
+export * from './hooks'
 export * from './icons'
 export * from './types'

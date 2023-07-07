@@ -1,18 +1,20 @@
 import { useState, type FC } from 'react'
 import { FilterItem } from './FilterItem'
-import { type TFilterItem } from '../types'
+import { type Item, type TFilterItem } from '../types'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline'
 
 interface IFilterMenuProps {
   item: TFilterItem
-  onChange: (item: TFilterItem) => void
+  onChange: (item: TFilterItem, parent: Item) => void
   isSelected: (item: TFilterItem) => boolean
+  parent: Item
 }
 
 export const FilterMenu: FC<IFilterMenuProps> = ({
   item,
   onChange,
   isSelected,
+  parent,
 }) => {
   const [areSubItemsOpen, setAreSubItemsOpen] = useState(false)
 
@@ -20,6 +22,7 @@ export const FilterMenu: FC<IFilterMenuProps> = ({
     <div>
       <div className="flex justify-between gap-2">
         <FilterItem
+          parent={parent}
           isSelected={isSelected(item)}
           item={item}
           onChange={onChange}
@@ -40,6 +43,7 @@ export const FilterMenu: FC<IFilterMenuProps> = ({
         <div className="ml-4 mt-3 flex flex-col gap-3">
           {item.subItems.map((subItem, index) => (
             <FilterItem
+              parent={parent}
               isSelected={isSelected(subItem)}
               key={index}
               item={subItem}

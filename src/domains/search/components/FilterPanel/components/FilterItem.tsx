@@ -1,21 +1,23 @@
 import { type FC } from 'react'
-import { type TFilterItem } from '@domains/search'
+import { type Item, type TFilterItem } from '@domains/search'
 
 interface IFilterItemProps {
   item: TFilterItem
-  onChange: (item: TFilterItem) => void
+  onChange: (item: TFilterItem, parent: Item) => void
   isSelected: boolean
+  parent: Item
 }
 
 export const FilterItem: FC<IFilterItemProps> = ({
   item,
   onChange,
   isSelected,
+  parent,
 }) => {
   return (
     <div className="flex items-center gap-2">
       <input
-        onChange={() => onChange(item)}
+        onChange={() => onChange(item, parent)}
         className="h-5 w-5 accent-primary"
         type="checkbox"
         checked={isSelected}

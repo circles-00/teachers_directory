@@ -168,6 +168,7 @@ model TeacherAvailability {
   availableNow      Boolean
   startDate         String?
   files             File[]
+  typeOfJob         String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

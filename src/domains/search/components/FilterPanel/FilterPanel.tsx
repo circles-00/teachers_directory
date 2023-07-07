@@ -5,8 +5,8 @@ import { type Item, type TFilterItem } from './types'
 
 interface IFilterPanelProps {
   filterItem: Item
-  onChange: (item: TFilterItem) => void
-  selectedFilters: TFilterItem[]
+  onChange: (item: TFilterItem, parent: Item) => void
+  selectedFilters: string[]
 }
 
 export const FilterPanel: FC<IFilterPanelProps> = ({
@@ -17,7 +17,7 @@ export const FilterPanel: FC<IFilterPanelProps> = ({
   const [isOpen, setIsOpen] = useState(true)
 
   const isSelected = (item: TFilterItem) => {
-    return selectedFilters?.some((i) => i.title === item.title)
+    return selectedFilters?.some((i) => i === item.title)
   }
 
   return (
@@ -51,6 +51,7 @@ export const FilterPanel: FC<IFilterPanelProps> = ({
             item={item}
             onChange={onChange}
             key={index}
+            parent={filterItem}
           />
         ))}
       </div>

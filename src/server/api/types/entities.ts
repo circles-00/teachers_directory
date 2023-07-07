@@ -1,13 +1,22 @@
 import {
   type User,
-  type Teacher,
   type TeacherLocation,
   type File,
+  type Prisma,
 } from '@prisma/client'
 
 export type TUser = User
 
-export type TTeacher = Teacher
+export type TTeacher = Prisma.TeacherGetPayload<{
+  include: {
+    subjects: true
+    otherServices: true
+    experience: true
+    location: true
+    availability: true
+    user: true
+  }
+}>
 
 export type TTeacherLocation = TeacherLocation
 

@@ -3,6 +3,7 @@ import { type Item } from '@domains/search/components'
 export const filterItems: Item[] = [
   {
     title: 'Teaching availablity',
+    relation: 'availability',
     items: [
       {
         title: 'Now',
@@ -16,6 +17,9 @@ export const filterItems: Item[] = [
   },
   {
     title: 'Position',
+    relation: 'experience',
+    // Order is important here
+    nestedRelations: ['role', 'subRole'],
     items: [
       {
         title: 'Leadership/Management',
@@ -311,14 +315,18 @@ export const filterItems: Item[] = [
       {
         title: 'Qualified Teacher',
         value: 'qualifiedTeacher',
+        isSpecific: true,
       },
       {
         title: 'Enhanced DBS',
         value: 'enhancedDBS',
+        isSpecific: true,
       },
       {
         title: 'Gender',
         value: 'gender',
+        relation: 'gender',
+        isSpecific: true,
         subItems: [
           {
             title: 'Male',
