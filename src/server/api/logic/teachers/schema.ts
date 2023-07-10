@@ -150,8 +150,6 @@ export type TSaveTeacherBadgesPayload = z.infer<typeof saveTeacherBadgesPayload>
 export const searchTeacherQueryPayload = z.array(
   z.object({
     relation: z.string(),
-    nestedRelation: z.string().optional(),
-    isNested: z.boolean(),
     value: z.array(z.string()),
   })
 )

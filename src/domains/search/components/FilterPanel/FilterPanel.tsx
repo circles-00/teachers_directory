@@ -1,24 +1,13 @@
 import { type FC, useState } from 'react'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline'
 import { FilterMenu } from './components'
-import { type Item, type TFilterItem } from './types'
 
 interface IFilterPanelProps {
-  filterItem: Item
-  onChange: (item: TFilterItem, parent: Item) => void
-  selectedFilters: string[]
+  filterItem: INode
 }
 
-export const FilterPanel: FC<IFilterPanelProps> = ({
-  filterItem,
-  onChange,
-  selectedFilters,
-}) => {
+export const FilterPanel: FC<IFilterPanelProps> = ({ filterItem }) => {
   const [isOpen, setIsOpen] = useState(true)
-
-  const isSelected = (item: TFilterItem) => {
-    return selectedFilters?.some((i) => i === item.title)
-  }
 
   return (
     <div className="flex flex-col px-6 md:ml-10 md:px-0">
@@ -45,14 +34,8 @@ export const FilterPanel: FC<IFilterPanelProps> = ({
           isOpen ? 'block' : 'hidden'
         }`}
       >
-        {filterItem?.items.map((item, index) => (
-          <FilterMenu
-            isSelected={isSelected}
-            item={item}
-            onChange={onChange}
-            key={index}
-            parent={filterItem}
-          />
+        {filterItem?.children?.map((item, index) => (
+          <FilterMenu item={item} key={index} />
         ))}
       </div>
     </div>

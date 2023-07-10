@@ -3,50 +3,89 @@ import { prisma } from '../../../db'
 import { type TSearchTeacherQueryPayload } from './schema'
 import { defaultProfilePhoto } from './utils/defaultProfilePhoto'
 
+interface IAvailabilityWhere {
+  availability?: {
+    typeOfJob?: {
+      in: string[]
+    }
+    OR?: any[]
+  }
+}
+
+type IWhere = IAvailabilityWhere
+
 export const searchTeachers = async (payload: TSearchTeacherQueryPayload) => {
+  // TODO: Careful with filter
   const where = payload.reduce((acc, item) => {
-    if (item.relation === 'availability') {
-      const availabilityWhere = {
-        ...acc,
-        availability: { OR: [] as any[] },
-      }
-      if (item.value.includes('Now')) {
-        availabilityWhere.availability.OR.push({
-          availableNow: item.value.includes('Now'),
-        })
-      }
-
-      if (item.value.includes('Future')) {
-        availabilityWhere.availability.OR.push({
-          startDate: {
-            not: null,
+    switch (item.relation) {
+      case 'availability':
+      case 'typeOfJob':
+        const availabilityWhere: IAvailabilityWhere = {
+          ...acc,
+          availability: {
+            typeOfJob: acc.availability?.typeOfJob,
+            OR: acc?.availability?.OR ?? [],
           },
-        })
-      }
+        }
+        if (item.value.includes('Now')) {
+          availabilityWhere?.availability?.OR?.push({
+            availableNow: item.value.includes('Now'),
+          })
+        }
 
-      return availabilityWhere
-    }
+        if (item.value.includes('Future')) {
+          availabilityWhere?.availability?.OR?.push({
+            startDate: {
+              not: null,
+            },
+          })
+        }
 
-    if (item.isNested) {
-      return {
-        ...acc,
-        [item.relation]: {
-          [item?.nestedRelation ?? '']: {
+        if (item.relation === 'typeOfJob' && availabilityWhere.availability) {
+          availabilityWhere.availability.typeOfJob = {
             in: item.value,
-            mode: 'insensitive',
-          },
-        },
-      }
-    }
+          }
+        }
 
-    return {
-      ...acc,
-      [item.relation]: {
-        in: item.value,
-        mode: 'insensitive',
-      },
+        return availabilityWhere
+
+      // !!
+      case 'examiner':
+      case 'experience':
+        return {
+          ...acc,
+          OR: [
+            {
+              experience: {
+                role: {
+                  in: item.value,
+                },
+              },
+            },
+            {
+              experience: {
+                subRole: {
+                  in: item.value,
+                },
+              },
+            },
+          ],
+        }
+
+      default:
+        return {
+          ...acc,
+          [item.relation]: {
+            in: item.value.map((value) => value.toLowerCase()),
+          },
+        }
     }
-  }, {})
+  }, {} as IWhere) as unknown as IWhere
+
+  console.log(JSON.stringify(where, null, 2))
+  if (where?.availability?.OR?.length === 0) {
+    delete where.availability?.OR
+  }
 
   const results = await prisma.teacher.findMany({
     where: {

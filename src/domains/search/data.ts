@@ -1,278 +1,223 @@
-import { type Item } from '@domains/search/components'
-
-export const filterItems: Item[] = [
+export const filterItems: INodeLike[] = [
   {
-    title: 'Teaching availablity',
-    relation: 'availability',
-    items: [
+    label: 'availability',
+    title: 'Teaching availability',
+    children: [
       {
-        title: 'Now',
-        value: 'now',
+        label: 'Now',
       },
       {
-        title: 'Future',
-        value: 'future',
+        label: 'Future',
       },
     ],
   },
   {
+    label: 'experience',
     title: 'Position',
-    relation: 'experience',
-    // Order is important here
-    nestedRelations: ['role', 'subRole'],
-    items: [
+    children: [
       {
-        title: 'Leadership/Management',
-        value: 'leadershipManagement',
+        label: 'Leadership/Management',
         count: 266,
-        subItems: [
+        children: [
           {
-            title: 'Head teacher',
-            value: 'headTeacher',
+            label: 'Head teacher',
             count: 196,
           },
           {
-            title: 'Deputy',
-            value: 'deputy',
+            label: 'Deputy',
             count: 11,
           },
           {
-            title: 'Assistant',
-            value: 'assistant',
+            label: 'Assistant',
             count: 59,
           },
         ],
       },
       {
-        title: 'Teaching/Lecturing',
-        value: 'teachingLecturing',
+        label: 'Teaching/Lecturing',
         count: 475,
-        subItems: [
+        children: [
           {
-            title: 'Teacher',
-            value: 'teacher',
+            label: 'Teacher',
             count: 401,
           },
           {
-            title: 'Head of department',
-            value: 'headOfDepartment',
+            label: 'Head of department',
             count: 41,
           },
           {
-            title: 'Tutor',
-            value: 'tutor',
+            label: 'Tutor',
             count: 28,
           },
           {
-            title: 'Teaching Assistant',
-            value: 'teachingAssistant',
+            label: 'Teaching Assistant',
             count: 28,
           },
           {
-            title: 'Lecturer',
-            value: 'lecturer',
+            label: 'Lecturer',
             count: 28,
           },
           {
-            title: 'SENDCo',
-            value: 'sendCo',
+            label: 'SENDCo',
             count: 28,
           },
         ],
       },
       {
-        title: 'Non-teaching/Support',
-        value: 'nonTeachingSupport',
+        label: 'Non-teaching/Support',
         count: 24,
-        subItems: [
+        children: [
           {
-            title: 'Other Support Position',
-            value: 'otherSupportPosition',
+            label: 'Other Support Position',
             count: 16,
           },
           {
-            title: 'Learning support',
-            value: 'learningSupport',
+            label: 'Learning support',
             count: 16,
           },
           {
-            title: 'Administrative/Clerk',
-            value: 'administrativeClerk',
+            label: 'Administrative/Clerk',
             count: 16,
           },
           {
-            title: 'Technician',
-            value: 'technician',
+            label: 'Technician',
             count: 16,
           },
           {
-            title: 'Lorem',
-            value: 'lorem',
+            label: 'Lorem',
+            title: 'lorem',
             count: 16,
           },
           {
-            title: 'IT Manger / Technician',
-            value: 'itMangerTechnician',
+            label: 'IT Manger / Technician',
             count: 16,
           },
           {
-            title: 'Cover Supervisor',
-            value: 'coverSupervisor',
+            label: 'Cover Supervisor',
             count: 16,
           },
           {
-            title: 'Specialist',
-            value: 'specialist',
+            label: 'Specialist',
             count: 16,
           },
           {
-            title: 'Caretaker/Groundperson',
-            value: 'caretakerGroundperson',
+            label: 'Caretaker/Groundperson',
             count: 16,
           },
           {
-            title: 'Examiner',
-            value: 'examiner',
+            label: 'Examiner',
             count: 16,
           },
           {
-            title: 'Secretary/Receptionist',
-            value: 'secretaryReceptionist',
+            label: 'Secretary/Receptionist',
             count: 16,
           },
           {
-            title: 'Behaviour Manager/Specialist',
-            value: 'behaviourManagerSpecialist',
+            label: 'Behaviour Manager/Specialist',
             count: 16,
           },
           {
-            title: 'Cleaner',
-            value: 'cleaner',
+            label: 'Cleaner',
             count: 16,
           },
           {
-            title: 'Mentor',
-            value: 'mentor',
+            label: 'Mentor',
             count: 16,
           },
           {
-            title: 'Premises Manger/Housekeeper',
-            value: 'premisesMangerHousekeeper',
+            label: 'Premises Manger/Housekeeper',
             count: 16,
           },
           {
-            title: 'Business Manager /Bursar',
-            value: 'businessManagerBursar',
+            label: 'Business Manager /Bursar',
             count: 16,
           },
           {
-            title: 'Support Manager',
-            value: 'supportManager',
+            label: 'Support Manager',
             count: 16,
           },
           {
-            title: 'Human Resources',
-            value: 'humanResources',
+            label: 'Human Resources',
             count: 16,
           },
           {
-            title: 'Housemaster/mistress',
-            value: 'housemasterMistress',
+            label: 'Housemaster/mistress',
             count: 16,
           },
           {
-            title: 'Boarding Supervisor',
-            value: 'boardingSupervisor',
+            label: 'Boarding Supervisor',
             count: 16,
           },
           {
-            title: 'Librarian',
-            value: 'librarian',
+            label: 'Librarian',
             count: 16,
           },
           {
-            title: 'Canteen Supervisor',
-            value: 'canteenSupervisor',
+            label: 'Canteen Supervisor',
             count: 16,
           },
           {
-            title: 'Tuckshop Convenor',
-            value: 'tuckshopConvenor',
+            label: 'Tuckshop Convenor',
             count: 16,
           },
           {
-            title: 'Data Manager / Analyst',
-            value: 'dataManagerAnalyst',
+            label: 'Data Manager / Analyst',
             count: 16,
           },
           {
-            title: 'Speech and Language Therapist',
-            value: 'speechAndLanguageTherapist',
+            label: 'Speech and Language Therapist',
             count: 16,
           },
           {
-            title: 'Advisor / Consultant',
-            value: 'advisorConsultant',
+            label: 'Advisor / Consultant',
             count: 16,
           },
           {
-            title: 'Career Advisor',
-            value: 'careerAdvisor',
+            label: 'Career Advisor',
             count: 16,
           },
           {
-            title: 'Occupational Therapist',
-            value: 'occupationalTherapist',
+            label: 'Occupational Therapist',
             count: 16,
           },
           {
-            title: 'Guidance Counsellor',
-            value: 'guidanceCounsellor',
+            label: 'Guidance Counsellor',
             count: 16,
           },
           {
-            title: 'Matron/Nurse',
-            value: 'matronNurse',
+            label: 'Matron/Nurse',
             count: 16,
           },
           {
-            title: 'Educational Psychologists',
-            value: 'educationalPsychologists',
+            label: 'Educational Psychologists',
             count: 16,
           },
           {
-            title: 'Officer Manager',
-            value: 'officerManager',
+            label: 'Officer Manager',
             count: 16,
           },
           {
-            title: 'Personal Assistant to Headteacher',
-            value: 'personalAssistantToHeadteacher',
+            label: 'Personal Assistant to Headteacher',
             count: 16,
           },
           {
-            title: 'Data Services/Timetabling',
-            value: 'dataServicesTimetabling',
+            label: 'Data Services/Timetabling',
             count: 16,
           },
           {
-            title: 'Driver',
-            value: 'driver',
+            label: 'Driver',
             count: 16,
           },
           {
-            title: 'Health Care worker',
-            value: 'healthCareWorker',
+            label: 'Health Care worker',
             count: 16,
           },
           {
-            title: 'Chaplin/Priest',
-            value: 'chaplinPriest',
+            label: 'Chaplin/Priest',
             count: 16,
           },
           {
-            title: 'Literacy Worker',
-            value: 'literacyWorker',
+            label: 'Literacy Worker',
             count: 16,
           },
         ],
@@ -280,97 +225,79 @@ export const filterItems: Item[] = [
     ],
   },
   {
+    label: 'typeOfJob',
     title: 'Looking for',
-    items: [
+    children: [
       {
-        title: 'Full-time',
-        value: 'fullTime',
+        label: 'Full-time',
         count: 564,
       },
       {
-        title: 'Part-time',
-        value: 'partTime',
+        label: 'Part-time',
         count: 87,
       },
       {
-        title: 'Fixed term',
-        value: 'fixedTerm',
+        label: 'Fixed term',
         count: 87,
       },
       {
-        title: 'Supply work',
-        value: 'supplyWork',
+        label: 'Supply work',
         count: 135,
       },
       {
-        title: 'Temporary',
-        value: 'temporary',
+        label: 'Temporary',
         count: 87,
       },
     ],
   },
   {
     title: 'Other',
-    items: [
+    label: 'other',
+    children: [
       {
-        title: 'Qualified Teacher',
-        value: 'qualifiedTeacher',
-        isSpecific: true,
+        label: 'Qualified Teacher',
       },
       {
-        title: 'Enhanced DBS',
-        value: 'enhancedDBS',
-        isSpecific: true,
+        label: 'Enhanced DBS',
       },
       {
+        label: 'gender',
         title: 'Gender',
-        value: 'gender',
-        relation: 'gender',
-        isSpecific: true,
-        subItems: [
+        children: [
           {
-            title: 'Male',
-            value: 'male',
+            label: 'Male',
           },
           {
-            title: 'Female',
-            value: 'female',
+            label: 'Female',
           },
           {
-            title: 'Other',
-            value: 'other',
+            label: 'Other',
           },
         ],
       },
       {
+        label: 'examiner',
         title: 'Examiner',
-        value: 'examiner',
-        subItems: [
+        children: [
           {
-            title: 'AQA',
-            value: 'aqa',
+            label: 'AQA',
           },
           {
-            title: 'OCR',
-            value: 'ocr',
+            label: 'OCR',
           },
           {
-            title: 'Edexcel',
-            value: 'edexcel',
+            label: 'Edexcel',
           },
           {
-            title: 'CCEA',
-            value: 'ccea',
+            label: 'CCEA',
           },
           {
-            title: 'WJEC/Eduqas',
-            value: 'wjecEduqas',
+            label: 'WJEC/Eduqas',
           },
         ],
       },
       {
-        title: 'NQT (ECT)',
-        value: 'nqtEct',
+        label: 'NQT (ECT)',
       },
     ],
   },

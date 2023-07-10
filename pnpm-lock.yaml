@@ -61,6 +61,7 @@ specifiers:
   react-dropzone: 14.2.3
   react-easy-crop: 4.7.4
   react-hook-form: 7.43.9
+  react-tree-select-hook: 1.0.0
   stripe: 12.9.0
   superjson: 1.12.2
   tailwind-merge: 1.13.1
@@ -111,6 +112,7 @@ dependencies:
   react-dropzone: 14.2.3_react@18.2.0
   react-easy-crop: 4.7.4_biqbaboplfbrettd7655fr4n2y
   react-hook-form: 7.43.9_react@18.2.0
+  react-tree-select-hook: 1.0.0_react@18.2.0
   stripe: 12.9.0
   superjson: 1.12.2
   tailwind-merge: 1.13.1
@@ -3558,6 +3560,15 @@ packages:
     resolution: {integrity: sha512-yFNHrlVEReVYKsLI5lF05tZoHveA5pGzjFbFJY/3pOqqjGOmMmqx83N4hIjN2n6E1AOa+eQEUxs3CgRnPmT0RQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /react-tree-select-hook/1.0.0_react@18.2.0:
+    resolution: {integrity: sha512-+S1hvu4z6nAVDvIxw5e5ikc/3bR/lkYU230Cyva5Tabdp3hVLVcTpOqa82rHmHr1FjF7LqTkv11AeBzYYXnleA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16.8.0
     dependencies:
       react: 18.2.0
     dev: false
