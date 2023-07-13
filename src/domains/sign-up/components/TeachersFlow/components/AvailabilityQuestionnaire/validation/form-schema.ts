@@ -26,6 +26,7 @@ export const validationSchema = z.object({
       })
     )
     .refine((data) => data.length > 0, { message: EErrorLabels.files }),
+  typeOfJob: formRequiredString(),
 })
 
 export type TSchema = z.infer<typeof validationSchema>

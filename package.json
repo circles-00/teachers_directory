@@ -51,6 +51,7 @@
     "react-dropzone": "14.2.3",
     "react-easy-crop": "4.7.4",
     "react-hook-form": "7.43.9",
+    "react-tree-select-hook": "1.0.0",
     "stripe": "12.9.0",
     "superjson": "1.12.2",
     "tailwind-merge": "1.13.1",

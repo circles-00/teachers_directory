@@ -1,32 +1,27 @@
 import { type FC } from 'react'
-import { type TFilterItem } from '@domains/search'
+import { useCheckBoxTreeContext } from '@domains/search'
 
 interface IFilterItemProps {
-  item: TFilterItem
-  onChange: (item: TFilterItem) => void
-  isSelected: boolean
+  item: INode
 }
 
-export const FilterItem: FC<IFilterItemProps> = ({
-  item,
-  onChange,
-  isSelected,
-}) => {
+export const FilterItem: FC<IFilterItemProps> = ({ item }) => {
+  const { getCheckboxProps } = useCheckBoxTreeContext()
+
   return (
     <div className="flex items-center gap-2">
       <input
-        onChange={() => onChange(item)}
+        {...getCheckboxProps(item.id)}
         className="h-5 w-5 accent-primary"
         type="checkbox"
-        checked={isSelected}
       />
       <p className="truncate text-[#1A1A2B]">
-        {item.title}{' '}
-        <span
+        {item.title ?? item.label}{' '}
+        {/* <span
           className={`text-[#797995] ${!!item.count ? 'visible' : 'invisible'}`}
         >
           ({item.count})
-        </span>
+        </span> */}
       </p>
     </div>
   )

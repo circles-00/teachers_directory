@@ -5,7 +5,7 @@ import {
   type TAvailabilityTable,
   UploadFiles,
 } from './components'
-import { InfoBox, RadioGroupFormField } from '@components'
+import { InfoBox, RadioGroupFormField, SelectFormField } from '@components'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
 import { CalendarIcon } from '@heroicons/react/24/outline'
@@ -17,6 +17,7 @@ import { api, formResolver } from '@utils'
 import { useUpdate } from '@rounik/react-custom-hooks'
 import { onNextStep } from '@domains/sign-up/components/StepperSidebar/utils'
 import isEmpty from 'lodash.isempty'
+import { typeOfJobsData } from './data'
 
 interface IAvailabilityQuestionnaireProps extends StepProps {}
 
@@ -116,6 +117,22 @@ export const AvailabilityQuestionnaire: FC<IAvailabilityQuestionnaireProps> = ({
                 { value: true, label: 'I’m available now' },
                 { value: false, label: 'I will be available later' },
               ]}
+            />
+          </div>
+
+          <div className="mt-5">
+            <div className="flex items-center gap-1">
+              <h3 className="text-lg font-bold">
+                What type of job are you looking for?
+              </h3>
+              <InfoBox content={'What type of job are you looking for?'} />
+            </div>
+
+            <p className="text-sm">Some paragraph here</p>
+            <SelectFormField
+              containerClassName="w-1/2"
+              name="typeOfJob"
+              options={typeOfJobsData}
             />
           </div>
           {availableNow === false && (

@@ -106,6 +106,7 @@ export const saveTeacherAvailabilityPayload = z.object({
       content: formRequiredString(),
     })
   ),
+  typeOfJob: formRequiredString(),
 })
 
 export type TSaveTeacherAvailabilityPayload = z.infer<
@@ -138,3 +139,24 @@ export const saveTeacherBadgesPayload = z.object({
 })
 
 export type TSaveTeacherBadgesPayload = z.infer<typeof saveTeacherBadgesPayload>
+
+// export const searchTeacherQueryPayload = z.object({
+//   availability: z.array(z.string()).optional(),
+//   subjects: z.array(z.string()).optional(),
+//   positions: z.array(z.string()).optional(),
+//   subPositions: z.array(z.string()).optional(),
+// })
+
+export const searchTeacherQueryPayload = z.object({
+  filters: z.array(
+    z.object({
+      relation: z.string(),
+      value: z.array(z.string()),
+    })
+  ),
+  searchKeyword: z.string()?.optional(),
+})
+
+export type TSearchTeacherQueryPayload = z.infer<
+  typeof searchTeacherQueryPayload
+>

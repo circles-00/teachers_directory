@@ -1,31 +1,20 @@
 import { useState, type FC } from 'react'
 import { FilterItem } from './FilterItem'
-import { type TFilterItem } from '../types'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline'
 
 interface IFilterMenuProps {
-  item: TFilterItem
-  onChange: (item: TFilterItem) => void
-  isSelected: (item: TFilterItem) => boolean
+  item: INode
 }
 
-export const FilterMenu: FC<IFilterMenuProps> = ({
-  item,
-  onChange,
-  isSelected,
-}) => {
+export const FilterMenu: FC<IFilterMenuProps> = ({ item }) => {
   const [areSubItemsOpen, setAreSubItemsOpen] = useState(false)
 
   return (
     <div>
       <div className="flex justify-between gap-2">
-        <FilterItem
-          isSelected={isSelected(item)}
-          item={item}
-          onChange={onChange}
-        />
+        <FilterItem item={item} />
 
-        {item.subItems && (
+        {item.children && (
           <button onClick={() => setAreSubItemsOpen(!areSubItemsOpen)}>
             {areSubItemsOpen ? (
               <ChevronUpIcon className="h-5 w-5 stroke-primary stroke-2" />
@@ -36,15 +25,10 @@ export const FilterMenu: FC<IFilterMenuProps> = ({
         )}
       </div>
       {/* "Recursively" render all the subItems */}
-      {item.subItems && areSubItemsOpen && (
+      {item.children && areSubItemsOpen && (
         <div className="ml-4 mt-3 flex flex-col gap-3">
-          {item.subItems.map((subItem, index) => (
-            <FilterItem
-              isSelected={isSelected(subItem)}
-              key={index}
-              item={subItem}
-              onChange={onChange}
-            />
+          {item.children.map((subItem, index) => (
+            <FilterItem key={index} item={subItem} />
           ))}
         </div>
       )}

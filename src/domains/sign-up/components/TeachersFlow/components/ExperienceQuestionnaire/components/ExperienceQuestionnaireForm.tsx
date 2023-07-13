@@ -11,9 +11,9 @@ import { useUpdate } from '@rounik/react-custom-hooks'
 import { examBoards } from '@domains/sign-up'
 import { teachingTimeOptions } from '@domains/sign-up/components/TeachersFlow/components/ExperienceQuestionnaire/data'
 
-const roles = filterItems[1]?.items.map((item) => ({
-  value: item.title,
-  id: item.value,
+const roles = filterItems[1]?.children?.map((item) => ({
+  value: item.label ?? '',
+  id: item.label ?? '',
 }))
 
 interface ExperienceQuestionnaireFormProps {}
@@ -29,13 +29,13 @@ export const ExperienceQuestionnaireForm: FC<
   const examiner = methods.watch('examiner')
 
   const subCategories = useMemo(() => {
-    const category = filterItems[1]?.items.find(
-      (item) => item.title === memoizedRole
+    const category = filterItems[1]?.children?.find(
+      (item) => item.label === memoizedRole
     )
 
-    return category?.subItems?.map((item) => ({
-      value: item.title,
-      id: item.value,
+    return category?.children?.map((item) => ({
+      value: item.label ?? '',
+      id: item.label ?? '',
     }))
   }, [memoizedRole])
 
