@@ -10,6 +10,7 @@ interface ITeacherInformationProps {
   services: string[]
   isAvailable: boolean
   availabilityDate: string
+  typeOfJob: string
 }
 
 export const TeacherInformation: FC<ITeacherInformationProps> = ({
@@ -20,6 +21,7 @@ export const TeacherInformation: FC<ITeacherInformationProps> = ({
   about,
   isAvailable,
   availabilityDate,
+  typeOfJob,
 }) => {
   return (
     <div className="flex w-full flex-col">
@@ -32,7 +34,7 @@ export const TeacherInformation: FC<ITeacherInformationProps> = ({
 
           <div className="flex flex-col md:flex-row md:gap-3">
             <p className="text-[#797995]">{location}</p>
-            <p className="text-[#797995]">Full-Time</p>
+            <p className="text-[#797995]">{typeOfJob}</p>
           </div>
         </div>
 

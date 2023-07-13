@@ -78,6 +78,7 @@ export const SearchResultCard: FC<ISearchResultCardProps> = ({ teacher }) => {
           profileTitle={teacher?.title}
           isAvailable={!!teacher?.availability?.availableNow}
           availabilityDate={teacher?.availability?.startDate ?? ''}
+          typeOfJob={teacher?.availability?.typeOfJob ?? ''}
         />
       </div>
       <hr className="fill-[#D6DFE5]" />

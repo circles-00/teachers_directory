@@ -8,7 +8,7 @@ import {
   filterItems,
 } from '../domains/search'
 import { api } from '../utils'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 type TFilter = {
   relation: string
@@ -17,11 +17,13 @@ type TFilter = {
 
 export default function Search() {
   const treeMethods = useTreeSelect(filterItems)
+  const [areNodesInitialized, setAreNodesInitialized] = useState(false)
 
   const { nodes, selectNone, simplifiedSelection } = treeMethods
 
   useEffect(() => {
     selectNone()
+    setAreNodesInitialized(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -33,9 +35,24 @@ export default function Search() {
 
       if (filter.parent) {
         if (filter.parent.id === 'other') {
-          valueToPush = {
-            relation: filter.label,
-            value: filter.children?.map((child) => child.label) ?? [],
+          // SPECIFIC LOGIC FOR THESE 2 FILTERS
+          if (
+            filter.label === 'qualificationBadges' ||
+            filter.label === 'dbsBadges'
+          ) {
+            const filterExists = filters.find(
+              (item) => item.relation === 'badges'
+            )
+
+            valueToPush = {
+              relation: 'badges',
+              value: [...(filterExists?.value ?? []), filter.label],
+            }
+          } else {
+            valueToPush = {
+              relation: filter.label,
+              value: filter.children?.map((child) => child.label) ?? [],
+            }
           }
         } else {
           valueToPush = {
@@ -55,7 +72,6 @@ export default function Search() {
       )
 
       if (!!filterExists) {
-        console.log('here')
         filterExists.value = [...filterExists.value, ...valueToPush.value]
 
         return
@@ -67,7 +83,9 @@ export default function Search() {
     return filters
   }, [simplifiedSelection])
 
-  const { data } = api.teachers.searchTeachers.useQuery(selectedFilters)
+  const { data } = api.teachers.searchTeachers.useQuery(selectedFilters, {
+    enabled: areNodesInitialized,
+  })
 
   return (
     <CheckBoxTreeProvider data={treeMethods}>

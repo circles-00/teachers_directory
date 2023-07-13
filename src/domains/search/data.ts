@@ -255,10 +255,12 @@ export const filterItems: INodeLike[] = [
     label: 'other',
     children: [
       {
-        label: 'Qualified Teacher',
+        label: 'qualificationBadges',
+        title: 'Qualified Teacher',
       },
       {
-        label: 'Enhanced DBS',
+        label: 'dbsBadges',
+        title: 'Enhanced DBS',
       },
       {
         label: 'gender',

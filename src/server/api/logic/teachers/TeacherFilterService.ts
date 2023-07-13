@@ -1,4 +1,3 @@
-import { subDays } from 'date-fns'
 import { prisma } from '../../../db'
 import { type TSearchTeacherQueryPayload } from './schema'
 import { defaultProfilePhoto } from './utils/defaultProfilePhoto'
@@ -49,7 +48,6 @@ export const searchTeachers = async (payload: TSearchTeacherQueryPayload) => {
 
         return availabilityWhere
 
-      // !!
       case 'examiner':
       case 'experience':
         return {
@@ -69,7 +67,28 @@ export const searchTeachers = async (payload: TSearchTeacherQueryPayload) => {
                 },
               },
             },
+            {
+              experience: {
+                examBoard: {
+                  hasSome: item.value,
+                },
+              },
+            },
           ],
+        }
+
+      case 'badges':
+        return {
+          ...acc,
+          badges: {
+            files: {
+              some: {
+                fileType: {
+                  in: item.value,
+                },
+              },
+            },
+          },
         }
 
       default:
@@ -90,10 +109,10 @@ export const searchTeachers = async (payload: TSearchTeacherQueryPayload) => {
   const results = await prisma.teacher.findMany({
     where: {
       ...where,
-      activatedAt: {
-        // TODO: Find a way to include subscribed users as well
-        gte: subDays(new Date(), 60),
-      },
+      // activatedAt: {
+      //   // TODO: Find a way to include subscribed users as well
+      //   gte: subDays(new Date(), 60),
+      // },
     },
     include: {
       subjects: true,
@@ -102,6 +121,7 @@ export const searchTeachers = async (payload: TSearchTeacherQueryPayload) => {
       availability: true,
       location: true,
       user: true,
+      badges: true,
     },
   })
 
