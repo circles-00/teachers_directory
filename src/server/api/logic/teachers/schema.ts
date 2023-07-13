@@ -147,12 +147,15 @@ export type TSaveTeacherBadgesPayload = z.infer<typeof saveTeacherBadgesPayload>
 //   subPositions: z.array(z.string()).optional(),
 // })
 
-export const searchTeacherQueryPayload = z.array(
-  z.object({
-    relation: z.string(),
-    value: z.array(z.string()),
-  })
-)
+export const searchTeacherQueryPayload = z.object({
+  filters: z.array(
+    z.object({
+      relation: z.string(),
+      value: z.array(z.string()),
+    })
+  ),
+  searchKeyword: z.string()?.optional(),
+})
 
 export type TSearchTeacherQueryPayload = z.infer<
   typeof searchTeacherQueryPayload

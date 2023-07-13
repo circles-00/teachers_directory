@@ -1,23 +1,32 @@
 import { useTreeSelect } from 'react-tree-select-hook'
 import { TableViewIcon, GridViewIcon } from '../components'
+import { api } from '../utils'
+import { useEffect, useMemo, useState } from 'react'
 import {
   CheckBoxTreeProvider,
   FilterPanel,
   SearchResults,
   SelectedFilter,
   filterItems,
-} from '../domains/search'
-import { api } from '../utils'
-import { useEffect, useMemo, useState } from 'react'
+  SearchBar,
+} from '@domains/search'
 
 type TFilter = {
-  relation: string
   value: string[]
+  relation: string
+}
+
+type TSearchPayload = {
+  filters: TFilter[]
+  searchKeyword?: string
 }
 
 export default function Search() {
   const treeMethods = useTreeSelect(filterItems)
   const [areNodesInitialized, setAreNodesInitialized] = useState(false)
+
+  // TODO: Refactor this
+  const [searchKeywordState, setSearchKeywordState] = useState('')
 
   const { nodes, selectNone, simplifiedSelection } = treeMethods
 
@@ -28,13 +37,21 @@ export default function Search() {
   }, [])
 
   const selectedFilters = useMemo(() => {
-    const filters: TFilter[] = []
+    const { filters, searchKeyword }: TSearchPayload = {
+      searchKeyword: searchKeywordState,
+      filters: [] as TFilter[],
+    }
 
     simplifiedSelection.forEach((filter) => {
       let valueToPush: TFilter | null = null
 
       if (filter.parent) {
-        if (filter.parent.id === 'other') {
+        if (filter?.parent?.parent?.id === 'other') {
+          valueToPush = {
+            relation: filter?.parent?.label,
+            value: [filter.label],
+          }
+        } else if (filter.parent.id === 'other') {
           // SPECIFIC LOGIC FOR THESE 2 FILTERS
           if (
             filter.label === 'qualificationBadges' ||
@@ -56,7 +73,7 @@ export default function Search() {
           }
         } else {
           valueToPush = {
-            relation: filter?.parent?.label,
+            relation: filter?.parent?.parent?.label ?? filter?.parent?.label,
             value: [filter.label],
           }
         }
@@ -80,8 +97,8 @@ export default function Search() {
       filters.push(valueToPush)
     })
 
-    return filters
-  }, [simplifiedSelection])
+    return { searchKeyword, filters }
+  }, [searchKeywordState, simplifiedSelection])
 
   const { data } = api.teachers.searchTeachers.useQuery(selectedFilters, {
     enabled: areNodesInitialized,
@@ -97,6 +114,8 @@ export default function Search() {
         </div>
 
         <div className="flex w-full flex-col md:w-3/4">
+          <SearchBar setSearchKeyword={setSearchKeywordState} />
+
           <h3 className="text-2xl font-bold">
             <span className="text-primary">{`${data?.length ?? 0} `}</span>
             Matching Teachers

@@ -15,7 +15,7 @@ type IWhere = IAvailabilityWhere
 
 export const searchTeachers = async (payload: TSearchTeacherQueryPayload) => {
   // TODO: Careful with filter
-  const where = payload.reduce((acc, item) => {
+  const where = payload.filters.reduce((acc, item) => {
     switch (item.relation) {
       case 'availability':
       case 'typeOfJob':
@@ -109,6 +109,22 @@ export const searchTeachers = async (payload: TSearchTeacherQueryPayload) => {
   const results = await prisma.teacher.findMany({
     where: {
       ...where,
+      user: {
+        OR: [
+          {
+            firstName: {
+              contains: payload.searchKeyword,
+              mode: 'insensitive',
+            },
+          },
+          {
+            lastName: {
+              contains: payload.searchKeyword,
+              mode: 'insensitive',
+            },
+          },
+        ],
+      },
       // activatedAt: {
       //   // TODO: Find a way to include subscribed users as well
       //   gte: subDays(new Date(), 60),

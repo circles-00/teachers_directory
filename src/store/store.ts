@@ -3,8 +3,10 @@ import { devtools, persist, createJSONStorage } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
 import { createCommonSlice, type TCommonSlice } from '~/store/common'
 import { createAuthSlice, type TAuthSlice } from '~/store/auth'
+import { type TSearchSlice } from './search/types'
+import { createSearchSlice } from './search/slice'
 
-export type TState = TCommonSlice & TAuthSlice
+export type TState = TCommonSlice & TAuthSlice & TSearchSlice
 
 export const useStore = create<TState>()(
   devtools(
@@ -12,6 +14,7 @@ export const useStore = create<TState>()(
       immer((...libMethods) => ({
         ...createCommonSlice(...libMethods),
         ...createAuthSlice(...libMethods),
+        ...createSearchSlice(...libMethods),
       })),
       {
         storage: createJSONStorage(() => sessionStorage),
