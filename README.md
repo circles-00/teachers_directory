@@ -1,6 +1,9 @@
 # Teachers Directory
 [Live Demo](https://teachers-directory-demo.vercel.app/)
 
+## Video demo:
+https://github.com/user-attachments/assets/59bed1c6-5db6-4069-90ed-a1ccccef18e3
+
 ## Overview
 Teachers Directory is a web application designed to help users find and connect with teachers. It provides an intuitive interface for browsing and filtering teachers based on various criteria.
 
